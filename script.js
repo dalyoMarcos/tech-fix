@@ -13,12 +13,8 @@ const EMOTION_FRAMES = {
 class BootScene extends Phaser.Scene {
     constructor() { super('BootScene'); }
 
-    preload() {
-        this.load.image('shop_bg', ASSET_SHOP_BG);
-        this.load.spritesheet('male', ASSET_MALE, { frameWidth: 512, frameHeight: 512 });
-        this.load.spritesheet('female', ASSET_FEMALE, { frameWidth: 512, frameHeight: 512 });
-    }
-
+    // The menu does not depend on the image assets.
+    // Assets are loaded only when the player enters the game.
     create() {
         this.scene.start('MenuScene');
     }
@@ -66,6 +62,30 @@ class MenuScene extends Phaser.Scene {
 
 class GameScene extends Phaser.Scene {
     constructor() { super('GameScene'); }
+
+    preload() {
+        // Prefer the generated Base64 assets. If assets.js was not generated
+        // or is unavailable, fall back to the real files in /assets.
+        const shopBg = (typeof ASSET_SHOP_BG !== 'undefined' && ASSET_SHOP_BG)
+            ? ASSET_SHOP_BG
+            : 'assets/shop_bg.jpg';
+
+        const male = (typeof ASSET_MALE !== 'undefined' && ASSET_MALE)
+            ? ASSET_MALE
+            : 'assets/male.png';
+
+        const female = (typeof ASSET_FEMALE !== 'undefined' && ASSET_FEMALE)
+            ? ASSET_FEMALE
+            : 'assets/female.png';
+
+        this.load.image('shop_bg', shopBg);
+        this.load.spritesheet('male', male, { frameWidth: 512, frameHeight: 512 });
+        this.load.spritesheet('female', female, { frameWidth: 512, frameHeight: 512 });
+
+        this.load.on('loaderror', (file) => {
+            console.error('Erro ao carregar o asset:', file.key, file.src);
+        });
+    }
 
     init(data) {
         this.money = data.money;
