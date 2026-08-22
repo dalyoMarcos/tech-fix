@@ -1,10 +1,22 @@
 // --- Phaser Scenes ---
 
+// Mapping emotions to spritesheet frames based on a 2x2 grid
+// 0: Top-Left (Neutral), 1: Top-Right (Happy)
+// 2: Bottom-Left (Angry), 3: Bottom-Right (Sad)
+const EMOTION_FRAMES = {
+    neutral: 0,
+    happy: 1,
+    angry: 2,
+    sad: 3
+};
+
 class BootScene extends Phaser.Scene {
     constructor() { super('BootScene'); }
 
     preload() {
-        this.load.image('shop_bg', 'assets/shop_bg.jpg');
+        this.load.image('shop_bg', ASSET_SHOP_BG);
+        this.load.spritesheet('male', ASSET_MALE, { frameWidth: 512, frameHeight: 512 });
+        this.load.spritesheet('female', ASSET_FEMALE, { frameWidth: 512, frameHeight: 512 });
     }
 
     create() {
@@ -45,10 +57,8 @@ class MenuScene extends Phaser.Scene {
             btnText.setColor('#ffffff');
         });
         btnRect.on('pointerdown', () => {
-            // Embaralha os clientes e pega 7 únicos
             const shuffled = Phaser.Utils.Array.Shuffle([...gameData]);
             const todaysCustomers = shuffled.slice(0, 7);
-            
             this.scene.start('GameScene', { money: 100, reputation: 50, customerIndex: 0, todaysCustomers });
         });
     }
@@ -71,7 +81,7 @@ class GameScene extends Phaser.Scene {
 
         const bg = this.add.image(0, 0, 'shop_bg').setOrigin(0);
         bg.setDisplaySize(width, height);
-        bg.setAlpha(0.5);
+        bg.setAlpha(1);
 
         this.add.rectangle(0, 0, width, 50, 0x2b2b36).setOrigin(0).setStrokeStyle(4, 0x4a4a59);
 
@@ -79,7 +89,6 @@ class GameScene extends Phaser.Scene {
             fontFamily: 'VT323', fontSize: '24px', color: '#ffff55'
         });
         
-        // Counter HUD
         this.counterText = this.add.text(width / 2, 10, `Cliente: ${this.customerIndex + 1}/7`, {
             fontFamily: 'VT323', fontSize: '24px', color: '#ffffff'
         }).setOrigin(0.5, 0);
@@ -88,20 +97,21 @@ class GameScene extends Phaser.Scene {
             fontFamily: 'VT323', fontSize: '24px', color: '#ffff55'
         }).setOrigin(1, 0);
 
-        this.emojiSprite = this.add.text(width / 2, height / 2, this.currentCustomer.spriteEmoji, {
-            fontSize: '120px'
-        }).setOrigin(0.5);
+        // Draw the Stardew Valley style Sprite
+        this.characterGraphic = this.add.sprite(width / 2, height / 2 - 30, this.currentCustomer.gender);
+        this.characterGraphic.setFrame(EMOTION_FRAMES.neutral);
+        this.characterGraphic.setScale(0.6); // Scale down the 512x512 image
 
         this.bobTween = this.tweens.add({
-            targets: this.emojiSprite,
-            y: (height / 2) - 20,
-            duration: 1000,
+            targets: this.characterGraphic,
+            y: this.characterGraphic.y - 15,
+            duration: 1500,
             yoyo: true,
             repeat: -1,
             ease: 'Sine.easeInOut'
         });
 
-        this.add.rectangle(20, height - 250, width - 40, 100, 0x2b2b36).setOrigin(0).setStrokeStyle(4, 0xffffff);
+        this.add.rectangle(20, height - 250, width - 40, 100, 0x000000).setOrigin(0).setAlpha(0.85).setStrokeStyle(4, 0xffffff);
         
         this.add.text(30, height - 240, this.currentCustomer.name, {
             fontFamily: 'VT323', fontSize: '20px', color: '#ff0055'
@@ -123,8 +133,8 @@ class GameScene extends Phaser.Scene {
             const x = 20 + col * (optionWidth + 20);
             const y = row * (optionHeight + 10);
 
-            const btnRect = this.add.rectangle(x, y, optionWidth, optionHeight, 0x333344)
-                .setOrigin(0).setStrokeStyle(2, 0x4a4a59).setInteractive({ useHandCursor: true });
+            const btnRect = this.add.rectangle(x, y, optionWidth, optionHeight, 0x000000)
+                .setOrigin(0).setAlpha(0.9).setStrokeStyle(2, 0x4a4a59).setInteractive({ useHandCursor: true });
 
             const btnText = this.add.text(x + 10, y + 10, `${index + 1}. ${opt.text}`, {
                 fontFamily: 'VT323', fontSize: '18px', color: '#ffffff', wordWrap: { width: optionWidth - 20 }
@@ -132,13 +142,13 @@ class GameScene extends Phaser.Scene {
 
             btnRect.on('pointerover', () => {
                 if (this.waitingForNext) return;
-                btnRect.setFillStyle(0x444455);
+                btnRect.setFillStyle(0x333333);
                 btnRect.setStrokeStyle(2, 0x33ff33);
                 btnText.setColor('#33ff33');
             });
             btnRect.on('pointerout', () => {
                 if (this.waitingForNext) return;
-                btnRect.setFillStyle(0x333344);
+                btnRect.setFillStyle(0x000000);
                 btnRect.setStrokeStyle(2, 0x4a4a59);
                 btnText.setColor('#ffffff');
             });
@@ -162,35 +172,38 @@ class GameScene extends Phaser.Scene {
         this.repText.setText(`⭐ Rep: ${this.reputation}`);
         this.dialogueText.setText(option.outcomeText);
 
-        if (option.reactionEmoji) {
-            this.emojiSprite.setText(option.reactionEmoji);
-        }
+        // Update emotion frame on the Stardew Valley sprite!
+        this.characterGraphic.setFrame(EMOTION_FRAMES[option.emotion]);
 
         if (option.emotion === 'angry') {
             this.cameras.main.shake(300, 0.015);
-            this.bobTween.setTimeScale(4);
-            this.emojiSprite.setTint(0xff5555);
+            this.bobTween.stop();
+            this.tweens.add({
+                targets: this.characterGraphic,
+                y: this.characterGraphic.y - 15,
+                duration: 100,
+                yoyo: true,
+                repeat: -1
+            });
         } else if (option.emotion === 'sad') {
             this.bobTween.stop();
             this.tweens.add({
-                targets: this.emojiSprite,
-                y: this.emojiSprite.y + 100,
-                alpha: 0.5,
-                duration: 2000,
+                targets: this.characterGraphic,
+                y: this.characterGraphic.y + 80,
+                alpha: 0,
+                duration: 2500,
                 ease: 'Power2'
             });
-            this.emojiSprite.setTint(0x5555ff);
         } else if (option.emotion === 'happy') {
             this.bobTween.stop();
             this.tweens.add({
-                targets: this.emojiSprite,
-                y: this.emojiSprite.y - 50,
+                targets: this.characterGraphic,
+                y: this.characterGraphic.y - 30,
                 duration: 300,
                 yoyo: true,
                 repeat: -1,
                 ease: 'Sine.easeInOut'
             });
-            this.emojiSprite.setTint(0x55ff55);
         }
 
         this.time.delayedCall(4000, () => {
@@ -255,7 +268,6 @@ class GameOverScene extends Phaser.Scene {
             btnText.setColor('#ffffff');
         });
         btnRect.on('pointerdown', () => {
-            // Em um novo dia, voltamos pro Menu para embaralhar e sortear novos 7 clientes
             this.scene.start('MenuScene');
         });
     }
