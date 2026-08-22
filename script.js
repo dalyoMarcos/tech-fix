@@ -63,29 +63,10 @@ class MenuScene extends Phaser.Scene {
 class GameScene extends Phaser.Scene {
     constructor() { super('GameScene'); }
 
-    preload() {
-        // Prefer the generated Base64 assets. If assets.js was not generated
-        // or is unavailable, fall back to the real files in /assets.
-        const shopBg = (typeof ASSET_SHOP_BG !== 'undefined' && ASSET_SHOP_BG)
-            ? ASSET_SHOP_BG
-            : 'assets/shop_bg.jpg';
-
-        const male = (typeof ASSET_MALE !== 'undefined' && ASSET_MALE)
-            ? ASSET_MALE
-            : 'assets/male.png';
-
-        const female = (typeof ASSET_FEMALE !== 'undefined' && ASSET_FEMALE)
-            ? ASSET_FEMALE
-            : 'assets/female.png';
-
-        this.load.image('shop_bg', shopBg);
-        this.load.spritesheet('male', male, { frameWidth: 512, frameHeight: 512 });
-        this.load.spritesheet('female', female, { frameWidth: 512, frameHeight: 512 });
-
-        this.load.on('loaderror', (file) => {
-            console.error('Erro ao carregar o asset:', file.key, file.src);
-        });
-    }
+    // Images are loaded directly through HTML Image elements instead of Phaser's
+    // file loader. This keeps the game working when index.html is opened with
+    // file://, while preserving the original gameplay logic.
+    preload() {}
 
     init(data) {
         this.money = data.money;
@@ -96,7 +77,77 @@ class GameScene extends Phaser.Scene {
         this.waitingForNext = false;
     }
 
+    loadImageElement(source, fallback) {
+        return new Promise((resolve, reject) => {
+            const image = new Image();
+            let triedFallback = false;
+
+            image.onload = () => resolve(image);
+            image.onerror = () => {
+                if (!triedFallback && fallback) {
+                    triedFallback = true;
+                    image.src = fallback;
+                } else {
+                    reject(new Error(`Não foi possível carregar a imagem: ${fallback || source}`));
+                }
+            };
+
+            image.src = source;
+        });
+    }
+
+    async ensureGameTextures() {
+        const shopBg = (typeof ASSET_SHOP_BG !== 'undefined' && ASSET_SHOP_BG)
+            ? ASSET_SHOP_BG : 'assets/shop_bg.jpg';
+        const male = (typeof ASSET_MALE !== 'undefined' && ASSET_MALE)
+            ? ASSET_MALE : 'assets/male.png';
+        const female = (typeof ASSET_FEMALE !== 'undefined' && ASSET_FEMALE)
+            ? ASSET_FEMALE : 'assets/female.png';
+
+        const jobs = [];
+
+        if (!this.textures.exists('shop_bg')) {
+            jobs.push(this.loadImageElement(shopBg, 'assets/shop_bg.jpg').then(image => {
+                this.textures.addImage('shop_bg', image);
+            }));
+        }
+
+        if (!this.textures.exists('male')) {
+            jobs.push(this.loadImageElement(male, 'assets/male.png').then(image => {
+                this.textures.addSpriteSheet('male', image, {
+                    frameWidth: 512,
+                    frameHeight: 512
+                });
+            }));
+        }
+
+        if (!this.textures.exists('female')) {
+            jobs.push(this.loadImageElement(female, 'assets/female.png').then(image => {
+                this.textures.addSpriteSheet('female', image, {
+                    frameWidth: 512,
+                    frameHeight: 512
+                });
+            }));
+        }
+
+        await Promise.all(jobs);
+    }
+
     create() {
+        this.ensureGameTextures()
+            .then(() => this.buildGameUI())
+            .catch(error => {
+                console.error('Erro ao carregar as imagens do jogo:', error);
+                this.cameras.main.setBackgroundColor('#000000');
+                this.add.text(this.scale.width / 2, this.scale.height / 2,
+                    'Erro ao carregar as imagens. Veja o Console (F12).', {
+                        fontFamily: 'VT323', fontSize: '24px', color: '#ff5555',
+                        align: 'center'
+                    }).setOrigin(0.5);
+            });
+    }
+
+    buildGameUI() {
         const { width, height } = this.scale;
 
         const bg = this.add.image(0, 0, 'shop_bg').setOrigin(0);
@@ -117,10 +168,9 @@ class GameScene extends Phaser.Scene {
             fontFamily: 'VT323', fontSize: '24px', color: '#ffff55'
         }).setOrigin(1, 0);
 
-        // Draw the Stardew Valley style Sprite
         this.characterGraphic = this.add.sprite(width / 2, height / 2 - 30, this.currentCustomer.gender);
         this.characterGraphic.setFrame(EMOTION_FRAMES.neutral);
-        this.characterGraphic.setScale(0.6); // Scale down the 512x512 image
+        this.characterGraphic.setScale(0.6);
 
         this.bobTween = this.tweens.add({
             targets: this.characterGraphic,
