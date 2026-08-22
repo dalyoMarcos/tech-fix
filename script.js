@@ -1,43 +1,3 @@
-// --- Game Data ---
-const gameData = [
-    {
-      id: "1",
-      name: "Karen",
-      spriteEmoji: "👱‍♀️",
-      dialogue: "Meu computador está muito lento! Eu só baixei 15 barras de ferramentas diferentes para o navegador, deveria estar voando!",
-      options: [
-        { text: "Excluir System32 para liberar espaço", outcomeText: "O computador nunca mais ligou. Ela está processando você.", moneyChange: -50, repChange: -30 },
-        { text: "Desinstalar barras de ferramentas e rodar antivírus", outcomeText: "O PC voltou a ficar rápido. Ela ficou chocada.", moneyChange: 100, repChange: 20 },
-        { text: "Cobrar por 'Otimização Quântica' e só reiniciar", outcomeText: "Ela pagou caro e achou incrível. Mas volta amanhã...", moneyChange: 200, repChange: -5 },
-        { text: "Colocar o PC no arroz", outcomeText: "O arroz secou a pasta térmica e agora o PC ferve.", moneyChange: 0, repChange: -15 }
-      ]
-    },
-    {
-      id: "2",
-      name: "Enzo",
-      spriteEmoji: "👦",
-      dialogue: "Mano, meu PC gamer não tá rodando os jogos. A tela tá toda preta, socorro!",
-      options: [
-        { text: "Trocar placa de vídeo por nova (cobrar caro)", outcomeText: "Funcionou, mas era só o cabo mal encaixado. Ele pagou rindo.", moneyChange: 500, repChange: -10 },
-        { text: "Dar um soco no gabinete estilo The Fonz", outcomeText: "Você quebrou o vidro temperado. Enzo está chorando.", moneyChange: -100, repChange: -40 },
-        { text: "Verificar cabo de energia e monitor", outcomeText: "Você plugou na tomada. Ele te chamou de bruxo.", moneyChange: 50, repChange: 25 },
-        { text: "Instalar mais RGB", outcomeText: "Não consertou, mas ele achou tão bonito que pagou.", moneyChange: 80, repChange: 5 }
-      ]
-    },
-    {
-      id: "3",
-      name: "Dona Maria",
-      spriteEmoji: "👵",
-      dialogue: "Meu neto me mandou um vídeo de bom dia no Zap, mas o celular não tem som de jeito nenhum!",
-      options: [
-        { text: "Aumentar volume no botão lateral", outcomeText: "Era só isso mesmo. Ela te deu um bolo de cenoura.", moneyChange: 20, repChange: 30 },
-        { text: "Falar que o Zap quebrou e instalar outro", outcomeText: "Você deletou o histórico dela. Ela chorou.", moneyChange: 10, repChange: -50 },
-        { text: "Soprar o alto-falante bem forte", outcomeText: "Sua saliva entrou no celular e pifou a tela.", moneyChange: -150, repChange: -30 },
-        { text: "Vender um fone de ouvido superfaturado", outcomeText: "Ela comprou, mas não sabe usar Bluetooth.", moneyChange: 150, repChange: -20 }
-      ]
-    }
-];
-
 // --- Phaser Scenes ---
 
 class BootScene extends Phaser.Scene {
@@ -85,7 +45,11 @@ class MenuScene extends Phaser.Scene {
             btnText.setColor('#ffffff');
         });
         btnRect.on('pointerdown', () => {
-            this.scene.start('GameScene', { money: 100, reputation: 50, customerIndex: 0 });
+            // Embaralha os clientes e pega 7 únicos
+            const shuffled = Phaser.Utils.Array.Shuffle([...gameData]);
+            const todaysCustomers = shuffled.slice(0, 7);
+            
+            this.scene.start('GameScene', { money: 100, reputation: 50, customerIndex: 0, todaysCustomers });
         });
     }
 }
@@ -97,7 +61,8 @@ class GameScene extends Phaser.Scene {
         this.money = data.money;
         this.reputation = data.reputation;
         this.customerIndex = data.customerIndex;
-        this.currentCustomer = gameData[this.customerIndex];
+        this.todaysCustomers = data.todaysCustomers;
+        this.currentCustomer = this.todaysCustomers[this.customerIndex];
         this.waitingForNext = false;
     }
 
@@ -113,16 +78,22 @@ class GameScene extends Phaser.Scene {
         this.moneyText = this.add.text(20, 10, `💰 $${this.money}`, {
             fontFamily: 'VT323', fontSize: '24px', color: '#ffff55'
         });
+        
+        // Counter HUD
+        this.counterText = this.add.text(width / 2, 10, `Cliente: ${this.customerIndex + 1}/7`, {
+            fontFamily: 'VT323', fontSize: '24px', color: '#ffffff'
+        }).setOrigin(0.5, 0);
+
         this.repText = this.add.text(width - 20, 10, `⭐ Rep: ${this.reputation}`, {
             fontFamily: 'VT323', fontSize: '24px', color: '#ffff55'
         }).setOrigin(1, 0);
 
-        const emojiSprite = this.add.text(width / 2, height / 2, this.currentCustomer.spriteEmoji, {
+        this.emojiSprite = this.add.text(width / 2, height / 2, this.currentCustomer.spriteEmoji, {
             fontSize: '120px'
         }).setOrigin(0.5);
 
-        this.tweens.add({
-            targets: emojiSprite,
+        this.bobTween = this.tweens.add({
+            targets: this.emojiSprite,
             y: (height / 2) - 20,
             duration: 1000,
             yoyo: true,
@@ -189,16 +160,51 @@ class GameScene extends Phaser.Scene {
 
         this.moneyText.setText(`💰 $${this.money}`);
         this.repText.setText(`⭐ Rep: ${this.reputation}`);
-
         this.dialogueText.setText(option.outcomeText);
 
-        this.time.delayedCall(3000, () => {
-            if (this.reputation <= 0 || this.money < -50) {
+        if (option.reactionEmoji) {
+            this.emojiSprite.setText(option.reactionEmoji);
+        }
+
+        if (option.emotion === 'angry') {
+            this.cameras.main.shake(300, 0.015);
+            this.bobTween.setTimeScale(4);
+            this.emojiSprite.setTint(0xff5555);
+        } else if (option.emotion === 'sad') {
+            this.bobTween.stop();
+            this.tweens.add({
+                targets: this.emojiSprite,
+                y: this.emojiSprite.y + 100,
+                alpha: 0.5,
+                duration: 2000,
+                ease: 'Power2'
+            });
+            this.emojiSprite.setTint(0x5555ff);
+        } else if (option.emotion === 'happy') {
+            this.bobTween.stop();
+            this.tweens.add({
+                targets: this.emojiSprite,
+                y: this.emojiSprite.y - 50,
+                duration: 300,
+                yoyo: true,
+                repeat: -1,
+                ease: 'Sine.easeInOut'
+            });
+            this.emojiSprite.setTint(0x55ff55);
+        }
+
+        this.time.delayedCall(4000, () => {
+            if (this.reputation <= 0 || this.money <= -100) {
                 this.scene.start('GameOverScene', { money: this.money, reputation: this.reputation });
                 return;
             }
-            if (this.customerIndex + 1 < gameData.length) {
-                this.scene.restart({ money: this.money, reputation: this.reputation, customerIndex: this.customerIndex + 1 });
+            if (this.customerIndex + 1 < this.todaysCustomers.length) {
+                this.scene.restart({ 
+                    money: this.money, 
+                    reputation: this.reputation, 
+                    customerIndex: this.customerIndex + 1,
+                    todaysCustomers: this.todaysCustomers
+                });
             } else {
                 this.scene.start('GameOverScene', { money: this.money, reputation: this.reputation });
             }
@@ -249,7 +255,8 @@ class GameOverScene extends Phaser.Scene {
             btnText.setColor('#ffffff');
         });
         btnRect.on('pointerdown', () => {
-            this.scene.start('GameScene', { money: 100, reputation: 50, customerIndex: 0 });
+            // Em um novo dia, voltamos pro Menu para embaralhar e sortear novos 7 clientes
+            this.scene.start('MenuScene');
         });
     }
 }
