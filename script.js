@@ -1,8 +1,5 @@
 // --- Phaser Scenes ---
 
-// Mapping emotions to spritesheet frames based on a 2x2 grid
-// 0: Top-Left (Neutral), 1: Top-Right (Happy)
-// 2: Bottom-Left (Angry), 3: Bottom-Right (Sad)
 const EMOTION_FRAMES = {
     neutral: 0,
     happy: 1,
@@ -12,9 +9,6 @@ const EMOTION_FRAMES = {
 
 class BootScene extends Phaser.Scene {
     constructor() { super('BootScene'); }
-
-    // The menu does not depend on the image assets.
-    // Assets are loaded only when the player enters the game.
     create() {
         this.scene.start('MenuScene');
     }
@@ -22,7 +16,6 @@ class BootScene extends Phaser.Scene {
 
 class MenuScene extends Phaser.Scene {
     constructor() { super('MenuScene'); }
-
     create() {
         const { width, height } = this.scale;
         this.cameras.main.setBackgroundColor('#000000');
@@ -62,12 +55,6 @@ class MenuScene extends Phaser.Scene {
 
 class GameScene extends Phaser.Scene {
     constructor() { super('GameScene'); }
-
-    // Images are loaded directly through HTML Image elements instead of Phaser's
-    // file loader. This keeps the game working when index.html is opened with
-    // file://, while preserving the original gameplay logic.
-    preload() {}
-
     init(data) {
         this.money = data.money;
         this.reputation = data.reputation;
@@ -76,6 +63,8 @@ class GameScene extends Phaser.Scene {
         this.currentCustomer = this.todaysCustomers[this.customerIndex];
         this.waitingForNext = false;
     }
+    // Keep image loading out of Phaser's file loader so file:// projects work reliably.
+    preload() {}
 
     loadImageElement(source, fallback) {
         return new Promise((resolve, reject) => {
@@ -149,7 +138,7 @@ class GameScene extends Phaser.Scene {
 
     buildGameUI() {
         const { width, height } = this.scale;
-
+        
         const bg = this.add.image(0, 0, 'shop_bg').setOrigin(0);
         bg.setDisplaySize(width, height);
         bg.setAlpha(1);
@@ -191,42 +180,62 @@ class GameScene extends Phaser.Scene {
             fontFamily: 'VT323', fontSize: '22px', color: '#ffffff', wordWrap: { width: width - 60 }
         });
 
+        this.actionsContainer = this.add.container(0, height - 130);
         this.optionsContainer = this.add.container(0, height - 130);
+        this.optionsContainer.setVisible(false);
+
+        // --- ACTIONS CONTAINER (Workbench vs Diagnostic) ---
+        const btnWidth = (width - 60) / 2;
+        const btnHeight = 60;
         
+        const workbenchBtn = this.add.rectangle(20, 0, btnWidth, btnHeight, 0x224422)
+            .setOrigin(0).setStrokeStyle(2, 0x33ff33).setInteractive({ useHandCursor: true });
+        const workbenchText = this.add.text(20 + btnWidth/2, btnHeight/2, '🛠️ Levar para Bancada', {
+            fontFamily: 'VT323', fontSize: '22px', color: '#ffffff'
+        }).setOrigin(0.5);
+        
+        const diagBtn = this.add.rectangle(40 + btnWidth, 0, btnWidth, btnHeight, 0x442222)
+            .setOrigin(0).setStrokeStyle(2, 0xff3333).setInteractive({ useHandCursor: true });
+        const diagText = this.add.text(40 + btnWidth + btnWidth/2, btnHeight/2, '💬 Dar Diagnóstico', {
+            fontFamily: 'VT323', fontSize: '22px', color: '#ffffff'
+        }).setOrigin(0.5);
+
+        workbenchBtn.on('pointerdown', () => {
+            this.scene.start('WorkbenchScene', { 
+                money: this.money, 
+                reputation: this.reputation, 
+                customerIndex: this.customerIndex, 
+                todaysCustomers: this.todaysCustomers 
+            });
+        });
+
+        diagBtn.on('pointerdown', () => {
+            this.actionsContainer.setVisible(false);
+            this.optionsContainer.setVisible(true);
+        });
+
+        this.actionsContainer.add([workbenchBtn, workbenchText, diagBtn, diagText]);
+
+        // --- OPTIONS CONTAINER ---
         const optionWidth = (width - 60) / 2;
         const optionHeight = 50;
 
         this.currentCustomer.options.forEach((opt, index) => {
             const col = index % 2;
             const row = Math.floor(index / 2);
-            
             const x = 20 + col * (optionWidth + 20);
             const y = row * (optionHeight + 10);
 
             const btnRect = this.add.rectangle(x, y, optionWidth, optionHeight, 0x000000)
                 .setOrigin(0).setAlpha(0.9).setStrokeStyle(2, 0x4a4a59).setInteractive({ useHandCursor: true });
-
             const btnText = this.add.text(x + 10, y + 10, `${index + 1}. ${opt.text}`, {
                 fontFamily: 'VT323', fontSize: '18px', color: '#ffffff', wordWrap: { width: optionWidth - 20 }
             });
 
-            btnRect.on('pointerover', () => {
-                if (this.waitingForNext) return;
-                btnRect.setFillStyle(0x333333);
-                btnRect.setStrokeStyle(2, 0x33ff33);
-                btnText.setColor('#33ff33');
-            });
-            btnRect.on('pointerout', () => {
-                if (this.waitingForNext) return;
-                btnRect.setFillStyle(0x000000);
-                btnRect.setStrokeStyle(2, 0x4a4a59);
-                btnText.setColor('#ffffff');
-            });
             btnRect.on('pointerdown', () => {
                 if (this.waitingForNext) return;
                 this.handleChoice(opt);
             });
-
             this.optionsContainer.add([btnRect, btnText]);
         });
     }
@@ -234,46 +243,23 @@ class GameScene extends Phaser.Scene {
     handleChoice(option) {
         this.waitingForNext = true;
         this.optionsContainer.setVisible(false);
-
         this.money += option.moneyChange;
         this.reputation += option.repChange;
-
         this.moneyText.setText(`💰 $${this.money}`);
         this.repText.setText(`⭐ Rep: ${this.reputation}`);
         this.dialogueText.setText(option.outcomeText);
-
-        // Update emotion frame on the Stardew Valley sprite!
         this.characterGraphic.setFrame(EMOTION_FRAMES[option.emotion]);
 
         if (option.emotion === 'angry') {
             this.cameras.main.shake(300, 0.015);
             this.bobTween.stop();
-            this.tweens.add({
-                targets: this.characterGraphic,
-                y: this.characterGraphic.y - 15,
-                duration: 100,
-                yoyo: true,
-                repeat: -1
-            });
+            this.tweens.add({ targets: this.characterGraphic, y: this.characterGraphic.y - 15, duration: 100, yoyo: true, repeat: -1 });
         } else if (option.emotion === 'sad') {
             this.bobTween.stop();
-            this.tweens.add({
-                targets: this.characterGraphic,
-                y: this.characterGraphic.y + 80,
-                alpha: 0,
-                duration: 2500,
-                ease: 'Power2'
-            });
+            this.tweens.add({ targets: this.characterGraphic, y: this.characterGraphic.y + 80, alpha: 0, duration: 2500, ease: 'Power2' });
         } else if (option.emotion === 'happy') {
             this.bobTween.stop();
-            this.tweens.add({
-                targets: this.characterGraphic,
-                y: this.characterGraphic.y - 30,
-                duration: 300,
-                yoyo: true,
-                repeat: -1,
-                ease: 'Sine.easeInOut'
-            });
+            this.tweens.add({ targets: this.characterGraphic, y: this.characterGraphic.y - 30, duration: 300, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
         }
 
         this.time.delayedCall(4000, () => {
@@ -282,12 +268,7 @@ class GameScene extends Phaser.Scene {
                 return;
             }
             if (this.customerIndex + 1 < this.todaysCustomers.length) {
-                this.scene.restart({ 
-                    money: this.money, 
-                    reputation: this.reputation, 
-                    customerIndex: this.customerIndex + 1,
-                    todaysCustomers: this.todaysCustomers
-                });
+                this.scene.restart({ money: this.money, reputation: this.reputation, customerIndex: this.customerIndex + 1, todaysCustomers: this.todaysCustomers });
             } else {
                 this.scene.start('GameOverScene', { money: this.money, reputation: this.reputation });
             }
@@ -295,66 +276,188 @@ class GameScene extends Phaser.Scene {
     }
 }
 
+class WorkbenchScene extends Phaser.Scene {
+    constructor() { super('WorkbenchScene'); }
+
+    init(data) {
+        this.money = data.money;
+        this.reputation = data.reputation;
+        this.customerIndex = data.customerIndex;
+        this.todaysCustomers = data.todaysCustomers;
+        this.currentCustomer = this.todaysCustomers[this.customerIndex];
+    }
+
+    // Keep hardware loading out of Phaser's file loader so local file:// projects work reliably.
+    preload() {}
+
+    loadHardwareImage(source, fallback) {
+        return new Promise((resolve, reject) => {
+            const image = new Image();
+            let triedFallback = false;
+
+            image.onload = () => resolve(image);
+            image.onerror = () => {
+                if (!triedFallback && fallback) {
+                    triedFallback = true;
+                    image.src = fallback;
+                } else {
+                    reject(new Error(`Não foi possível carregar a imagem da bancada: ${fallback || source}`));
+                }
+            };
+
+            image.src = source;
+        });
+    }
+
+    async ensureWorkbenchTexture() {
+        if (this.textures.exists('hardware')) return;
+
+        const hardware = (typeof ASSET_HARDWARE !== 'undefined' && ASSET_HARDWARE)
+            ? ASSET_HARDWARE
+            : 'assets/hardware.png';
+
+        const image = await this.loadHardwareImage(hardware, 'assets/hardware.png');
+        this.textures.addImage('hardware', image);
+    }
+
+    create() {
+        this.ensureWorkbenchTexture()
+            .then(() => this.buildWorkbenchUI())
+            .catch(error => {
+                console.error('Erro ao carregar a imagem da bancada:', error);
+                this.cameras.main.setBackgroundColor('#1a1a24');
+                this.add.text(this.scale.width / 2, this.scale.height / 2,
+                    'Erro ao carregar a imagem da bancada. Veja o Console (F12).', {
+                        fontFamily: 'VT323', fontSize: '24px', color: '#ff5555',
+                        align: 'center', wordWrap: { width: this.scale.width - 80 }
+                    }).setOrigin(0.5);
+            });
+    }
+
+    buildWorkbenchUI() {
+            const { width, height } = this.scale;
+            this.cameras.main.setBackgroundColor('#1a1a24');
+        
+            // Main Title
+            this.add.text(width / 2, 30, 'BANCADA DE DIAGNÓSTICO', {
+                fontFamily: 'VT323', fontSize: '40px', color: '#33ff33'
+            }).setOrigin(0.5);
+        
+            const cx = width / 2;
+            const cy = height / 2 - 20;
+            
+            // Draw the uploaded hardware image as the background of the workbench
+            const bgSprite = this.add.sprite(cx, cy, 'hardware');
+            bgSprite.setScale(0.73); // Scale to fit nicely on the screen
+        
+            // Component Hitboxes (x, y offsets from center)
+            // Ordered from background (Motherboard) to foreground so clicks register correctly
+            const components = [
+                { id: 'Placa-Mãe', name: 'Placa-Mãe', x: cx - 30, y: cy + 10, w: 340, h: 360 }, // Fundo
+                { id: 'CPU', name: 'Processador (CPU)', x: cx - 60, y: cy - 70, w: 100, h: 120 },
+                { id: 'RAM', name: 'Memória (RAM)', x: cx + 35, y: cy - 70, w: 40, h: 140 },
+                { id: 'GPU', name: 'Placa de Vídeo (GPU)', x: cx - 40, y: cy + 40, w: 260, h: 45 },
+                { id: 'HDD', name: 'Disco Rígido (SSD/HDD)', x: cx + 115, y: cy + 160, w: 130, h: 90 },
+                { id: 'Fonte', name: 'Fonte de Alimentação', x: cx - 110, y: cy + 160, w: 140, h: 90 },
+                { id: 'Drive', name: 'Leitor de Disco', x: cx + 115, y: cy - 130, w: 120, h: 110 },
+                { id: 'Software', name: 'Análise de Software', isButton: true, x: cx - 290, y: cy },
+                { id: 'Monitor', name: 'Testar Monitor', isButton: true, x: cx + 290, y: cy }
+            ];
+        
+            // Diagnostic Text Area
+            const diagBg = this.add.rectangle(cx, height - 60, width - 40, 80, 0x000000).setStrokeStyle(2, 0xffffff);
+            const diagText = this.add.text(cx, height - 60, "Selecione um componente para investigar...", {
+                fontFamily: 'VT323', fontSize: '20px', color: '#aaaaaa', wordWrap: { width: width - 80 }
+            }).setOrigin(0.5);
+        
+            components.forEach(comp => {
+                let hitArea;
+                
+                if (comp.isButton) {
+                    // External buttons (Software, Monitor)
+                    hitArea = this.add.rectangle(comp.x, comp.y, 140, 50, 0x333344)
+                        .setInteractive({ useHandCursor: true }).setStrokeStyle(2, 0xffffff);
+                    this.add.text(comp.x, comp.y, comp.name, {
+                        fontFamily: 'VT323', fontSize: '18px', color: '#ffffff', wordWrap: { width: 130 }, align: 'center'
+                    }).setOrigin(0.5);
+                } else {
+                    // Invisible interactive zones over the PC image
+                    hitArea = this.add.rectangle(comp.x, comp.y, comp.w, comp.h, 0x000000, 0)
+                        .setInteractive({ useHandCursor: true });
+                    
+                    // Border glow on hover for feedback
+                    const border = this.add.rectangle(comp.x, comp.y, comp.w, comp.h)
+                        .setStrokeStyle(3, 0xffff00).setVisible(false);
+                        
+                    hitArea.on('pointerover', () => { border.setVisible(true); });
+                    hitArea.on('pointerout', () => { border.setVisible(false); });
+                }
+        
+                hitArea.on('pointerdown', (pointer, localX, localY, event) => {
+                    event.stopPropagation(); // Prevent clicks passing through to Motherboard underneath
+                    let report = "";
+                    
+                    // Matching logic based on the parts in customers.js
+                    const isBroken = this.currentCustomer.brokenPart.includes(comp.id) || 
+                                     this.currentCustomer.brokenPart === comp.id || 
+                                     (comp.id === 'Monitor' && this.currentCustomer.brokenPart.includes('Cabo de Vídeo')) ||
+                                     (comp.id === 'CPU' && this.currentCustomer.brokenPart.includes('Cooling')) ||
+                                     (comp.id === 'Placa-Mãe' && this.currentCustomer.brokenPart === 'Geral');
+        
+                    if (isBroken) {
+                        report = `⚠️ [PROBLEMA ENCONTRADO no ${comp.name}]: ${this.currentCustomer.diagnosticText}`;
+                        diagText.setColor('#ff3333');
+                        this.cameras.main.shake(100, 0.005);
+                    } else {
+                        report = `✅ [${comp.name}]: O componente aparenta estar funcionando perfeitamente.`;
+                        diagText.setColor('#33ff33');
+                    }
+                    diagText.setText(report);
+                });
+            });
+        
+            // Back Button
+            const backBtn = this.add.rectangle(100, 40, 150, 40, 0x444444).setInteractive({ useHandCursor: true }).setStrokeStyle(2, 0xffffff);
+            this.add.text(100, 40, '⬅ Voltar', { fontFamily: 'VT323', fontSize: '20px', color: '#ffffff' }).setOrigin(0.5);
+        
+            backBtn.on('pointerdown', () => {
+                this.scene.start('GameScene', { 
+                    money: this.money, 
+                    reputation: this.reputation, 
+                    customerIndex: this.customerIndex, 
+                    todaysCustomers: this.todaysCustomers 
+                });
+            });
+    }
+}
 class GameOverScene extends Phaser.Scene {
     constructor() { super('GameOverScene'); }
-
     init(data) {
         this.finalMoney = data.money;
         this.finalReputation = data.reputation;
     }
-
     create() {
         const { width, height } = this.scale;
         this.cameras.main.setBackgroundColor('#000000');
-
-        this.add.text(width / 2, height / 2 - 100, 'FIM DE EXPEDIENTE', {
-            fontFamily: 'VT323', fontSize: '60px', color: '#33ff33'
-        }).setOrigin(0.5);
-
-        this.add.text(width / 2, height / 2, `Dinheiro final: $${this.finalMoney}`, {
-            fontFamily: 'VT323', fontSize: '24px', color: '#ffffff'
-        }).setOrigin(0.5);
-
+        this.add.text(width / 2, height / 2 - 100, 'FIM DE EXPEDIENTE', { fontFamily: 'VT323', fontSize: '60px', color: '#33ff33' }).setOrigin(0.5);
+        this.add.text(width / 2, height / 2, `Dinheiro final: $${this.finalMoney}`, { fontFamily: 'VT323', fontSize: '24px', color: '#ffffff' }).setOrigin(0.5);
         const repMsg = this.finalReputation > 0 ? this.finalReputation.toString() : 'Falência';
-        this.add.text(width / 2, height / 2 + 40, `Reputação: ${repMsg}`, {
-            fontFamily: 'VT323', fontSize: '24px', color: '#ffffff'
-        }).setOrigin(0.5);
-
-        const btnRect = this.add.rectangle(width / 2, height / 2 + 120, 200, 60, 0x333344)
-            .setStrokeStyle(2, 0x4a4a59).setInteractive({ useHandCursor: true });
-
-        const btnText = this.add.text(width / 2, height / 2 + 120, 'NOVO DIA', {
-            fontFamily: 'VT323', fontSize: '24px', color: '#ffffff'
-        }).setOrigin(0.5);
-
-        btnRect.on('pointerover', () => {
-            btnRect.setFillStyle(0x444455);
-            btnRect.setStrokeStyle(2, 0x33ff33);
-            btnText.setColor('#33ff33');
-        });
-        btnRect.on('pointerout', () => {
-            btnRect.setFillStyle(0x333344);
-            btnRect.setStrokeStyle(2, 0x4a4a59);
-            btnText.setColor('#ffffff');
-        });
-        btnRect.on('pointerdown', () => {
-            this.scene.start('MenuScene');
-        });
+        this.add.text(width / 2, height / 2 + 40, `Reputação: ${repMsg}`, { fontFamily: 'VT323', fontSize: '24px', color: '#ffffff' }).setOrigin(0.5);
+        
+        const btnRect = this.add.rectangle(width / 2, height / 2 + 120, 200, 60, 0x333344).setStrokeStyle(2, 0x4a4a59).setInteractive({ useHandCursor: true });
+        const btnText = this.add.text(width / 2, height / 2 + 120, 'NOVO DIA', { fontFamily: 'VT323', fontSize: '24px', color: '#ffffff' }).setOrigin(0.5);
+        
+        btnRect.on('pointerdown', () => { this.scene.start('MenuScene'); });
     }
 }
 
-// --- Game Initialization ---
 const config = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
     parent: 'game-container',
     pixelArt: true,
-    scale: {
-        mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH
-    },
-    scene: [BootScene, MenuScene, GameScene, GameOverScene]
+    scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
+    scene: [BootScene, MenuScene, GameScene, WorkbenchScene, GameOverScene]
 };
-
 const game = new Phaser.Game(config);

@@ -1,6 +1,8 @@
 const gameData = [
     {
       id: "1", name: "Karen", gender: "female",
+      brokenPart: "Bateria", 
+      diagnosticText: "O notebook da Karen está completamente sem carga e o cabo do carregador parece não transmitir energia.",
       dialogue: "Meu notebook não liga de jeito nenhum! Tenho planilhas importantíssimas, resolva isso AGORA!",
       options: [
         { text: "Formatar o HD", outcomeText: "O PC ligou, mas as planilhas sumiram. Processo a caminho.", moneyChange: -50, repChange: -40, emotion: "angry" },
@@ -11,6 +13,8 @@ const gameData = [
     },
     {
       id: "2", name: "Enzo", gender: "male",
+      brokenPart: "Cabo de Vídeo",
+      diagnosticText: "A Placa de Vídeo (GPU) está enviando sinal, mas o cabo do monitor está plugado na placa-mãe.",
       dialogue: "Mano, meu PC gamer não tá dando vídeo! Eu preciso jogar meu ranqueado urgente!",
       options: [
         { text: "Trocar placa de vídeo", outcomeText: "Era só o cabo mal encaixado, mas você cobrou a placa.", moneyChange: 500, repChange: -10, emotion: "happy" },
@@ -21,6 +25,8 @@ const gameData = [
     },
     {
       id: "3", name: "Dona Maria", gender: "female",
+      brokenPart: "Cooler/CPU",
+      diagnosticText: "O processador está atingindo 95°C. A pasta térmica secou e o dissipador está entupido de poeira.",
       dialogue: "Meu netinho montou esse computador gigante, mas ele faz barulho de avião e desliga do nada!",
       options: [
         { text: "Limpar poeira e trocar pasta", outcomeText: "O PC ficou frio e silencioso. Ganhou bolo de cenoura.", moneyChange: 100, repChange: 40, emotion: "happy" },
@@ -31,6 +37,8 @@ const gameData = [
     },
     {
       id: "4", name: "Lucas Dev", gender: "male",
+      brokenPart: "RAM",
+      diagnosticText: "Monitoramento de sistema indica 100% de uso de RAM e gargalo constante de memória.",
       dialogue: "Fui rodar Docker, 5 abas de Chrome, 3 VSCode e meu PC travou na tela azul!",
       options: [
         { text: "Fechar um pouco de aba", outcomeText: "Problema óbvio demais. Ele não quis aceitar e foi embora.", moneyChange: 0, repChange: -10, emotion: "sad" },
@@ -41,6 +49,8 @@ const gameData = [
     },
     {
       id: "5", name: "Sr. Silva", gender: "male",
+      brokenPart: "Software/OS",
+      diagnosticText: "O sistema operacional foi criptografado por um ransomware. Os arquivos estão bloqueados.",
       dialogue: "Moço, sumiu tudo do meu computador! Tem uma caveira vermelha pedindo Bitcoin!",
       options: [
         { text: "Pagar o resgate", outcomeText: "Você perdeu o dinheiro dele e o hacker não liberou nada.", moneyChange: -500, repChange: -50, emotion: "sad" },
@@ -51,6 +61,8 @@ const gameData = [
     },
     {
       id: "6", name: "Paty Blogger", gender: "female",
+      brokenPart: "Software/Rede",
+      diagnosticText: "O adaptador Wi-Fi do MacBook está perfeitamente bem. Não há sinal de roteador por perto.",
       dialogue: "Meu MacBook Rosa parou de pegar o Wi-Fi! Como vou postar meus recebidos?",
       options: [
         { text: "Reiniciar o Roteador", outcomeText: "Nem olhou pro Mac, era só a internet. Resolvido.", moneyChange: 100, repChange: 30, emotion: "happy" },
@@ -61,6 +73,8 @@ const gameData = [
     },
     {
       id: "7", name: "Beto Bitcoin", gender: "male",
+      brokenPart: "Cooling/Ambiente",
+      diagnosticText: "As GPUs estão fritando a 105°C devido ao acúmulo de ar quente no ambiente fechado.",
       dialogue: "Minha rig de mineração tá fervendo! Coloquei no freezer de casa mas estragou a carne!",
       options: [
         { text: "Comprar ar-condicionado", outcomeText: "Excelente refrigeração, as moedas estão fluindo.", moneyChange: 100, repChange: 25, emotion: "happy" },
@@ -71,6 +85,8 @@ const gameData = [
     },
     {
       id: "8", name: "Letícia Designer", gender: "female",
+      brokenPart: "Monitor",
+      diagnosticText: "As configurações RGB do monitor estão totalmente desreguladas via hardware.",
       dialogue: "As cores do meu monitor tão estranhas... O amarelo tá verde! O logo do cliente estragou!",
       options: [
         { text: "Calibrar cores", outcomeText: "As cores voltaram ao normal 100% fiéis.", moneyChange: 100, repChange: 40, emotion: "happy" },
@@ -81,6 +97,8 @@ const gameData = [
     },
     {
       id: "9", name: "Jorge da TI", gender: "male",
+      brokenPart: "Teclado",
+      diagnosticText: "Análise visual revela um objeto estranho (migalha) travando fisicamente as chaves do teclado.",
       dialogue: "Cara, o teclado desse notebook não funciona! Já reinstalei até os drivers do mouse!",
       options: [
         { text: "Tirar a migalha de pão", outcomeText: "Uma única migalha resolvia. Vergonhoso para ele.", moneyChange: 100, repChange: 20, emotion: "happy" },
@@ -91,6 +109,8 @@ const gameData = [
     },
     {
       id: "10", name: "Criança Birrenta", gender: "male",
+      brokenPart: "HDD",
+      diagnosticText: "O HD original do notebook é de 4200RPM (muito antigo e lento), engasgando o sistema inteiro.",
       dialogue: "Meu Roblox tá travando muito nesse notebook que era do meu avô de 2005!",
       options: [
         { text: "Colocar um SSD", outcomeText: "O PC velho respirou aparelhos e até rodou o Roblox.", moneyChange: 100, repChange: 30, emotion: "happy" },
@@ -101,6 +121,8 @@ const gameData = [
     },
     {
       id: "11", name: "Vó Zilda", gender: "female",
+      brokenPart: "Software/Malware",
+      diagnosticText: "O navegador está infestado de toolbars e extensões maliciosas de adware.",
       dialogue: "Moço, eu cliquei num link de viagem e agora a tela tá cheia de propagandas de panela!",
       options: [
         { text: "Usar AdBlock e limpar", outcomeText: "Sumiram os pop-ups! Ela ficou super feliz.", moneyChange: 100, repChange: 40, emotion: "happy" },
@@ -111,6 +133,8 @@ const gameData = [
     },
     {
       id: "12", name: "Gamer Furioso", gender: "male",
+      brokenPart: "Monitor",
+      diagnosticText: "O painel LCD sofreu trauma físico irreversível na matriz de pixels.",
       dialogue: "Dei um soco no meu monitor porque perdi no LoL e agora tem uma linha preta na tela!",
       options: [
         { text: "Trocar o display LED", outcomeText: "Saiu o preço de um novo, mas arrumou.", moneyChange: 100, repChange: 20, emotion: "happy" },
@@ -121,6 +145,8 @@ const gameData = [
     },
     {
       id: "13", name: "Atendente de Caixa", gender: "female",
+      brokenPart: "Cabo SATA/HDD",
+      diagnosticText: "O Disco Rígido está sem comunicação porque o cabo SATA de dados soltou com a trepidação.",
       dialogue: "O PC do caixa deu tela preta 'No Bootable Device'. A fila tá enorme!",
       options: [
         { text: "Reconectar o cabo SATA", outcomeText: "O HD estava solto. Voltou pro caixa rapidinho.", moneyChange: 100, repChange: 40, emotion: "happy" },
@@ -131,6 +157,8 @@ const gameData = [
     },
     {
       id: "14", name: "Estudante", gender: "male",
+      brokenPart: "Pendrive/Software",
+      diagnosticText: "O pendrive foi infectado por um vírus que apenas esconde as pastas (attrib +h).",
       dialogue: "Meu TCC é amanhã, e o pendrive sumiu meus arquivos. Só tem atalhos!",
       options: [
         { text: "Mostrar arquivos ocultos", outcomeText: "O TCC estava lá! Salvo da reprovação.", moneyChange: 100, repChange: 50, emotion: "happy" },
@@ -141,6 +169,8 @@ const gameData = [
     },
     {
       id: "15", name: "Tiozão", gender: "male",
+      brokenPart: "RAM",
+      diagnosticText: "A Memória RAM física é de apenas 4GB. O 'download' de RAM foi apenas um vírus disfarçado.",
       dialogue: "Comprei 1 Tera de RAM na internet mas o PC não reconhece!",
       options: [
         { text: "Explicar golpe e por RAM real", outcomeText: "Ele aceitou a derrota e pagou pela RAM.", moneyChange: 100, repChange: 20, emotion: "happy" },
@@ -151,6 +181,8 @@ const gameData = [
     },
     {
       id: "16", name: "Cineasta Indie", gender: "male",
+      brokenPart: "Cooling/CPU",
+      diagnosticText: "O processador está dando Thermal Throttling severo. A ventoinha está morta.",
       dialogue: "Tô renderizando vídeo 8K e meu MacBook frita, parece um Boeing!",
       options: [
         { text: "Limpar e trocar pasta", outcomeText: "Agora roda renderizações 8K sem fazer barulho.", moneyChange: 100, repChange: 35, emotion: "happy" },
@@ -161,6 +193,8 @@ const gameData = [
     },
     {
       id: "17", name: "Padre", gender: "male",
+      brokenPart: "Cabo de Vídeo",
+      diagnosticText: "O cabo VGA está com pinos dobrados causando falta de imagem.",
       dialogue: "O projetor da igreja pifou na missa de domingo. Não dá imagem!",
       options: [
         { text: "Trocar o cabo VGA", outcomeText: "Foi rápido e o cântico pôde continuar. Amém.", moneyChange: 100, repChange: 50, emotion: "happy" },
@@ -171,6 +205,8 @@ const gameData = [
     },
     {
       id: "18", name: "Hacker", gender: "male",
+      brokenPart: "Software/Terminal",
+      diagnosticText: "O sistema está apenas rodando um loop infinito no Prompt de Comando.",
       dialogue: "Fui hackear o vizinho e meu PC travou numa tela CMD verde!",
       options: [
         { text: "Dar Ctrl+C no script", outcomeText: "O garoto nem sabia atalhos. Vergonha.", moneyChange: 100, repChange: 20, emotion: "happy" },
@@ -181,6 +217,8 @@ const gameData = [
     },
     {
       id: "19", name: "Fã da Apple", gender: "male",
+      brokenPart: "Placa-Mãe",
+      diagnosticText: "Resíduos de café provocaram oxidação na placa-mãe. Precisa de desoxidação química rápida.",
       dialogue: "Derramei meu café importado no teclado do MacBook de 20 mil!",
       options: [
         { text: "Banho químico", outcomeText: "Salvo pela química! Teclado e placa perfeitos.", moneyChange: 100, repChange: 40, emotion: "happy" },
@@ -191,6 +229,8 @@ const gameData = [
     },
     {
       id: "20", name: "Secretária", gender: "female",
+      brokenPart: "Periféricos",
+      diagnosticText: "O sensor óptico do mouse foi obstruído intencionalmente com um pedaço de fita adesiva.",
       dialogue: "O mouse do PC não mexe! A setinha não vai!",
       options: [
         { text: "Tirar o adesivo do sensor", outcomeText: "Pegadinha de colega de trabalho. Resolvido.", moneyChange: 100, repChange: 30, emotion: "happy" },
@@ -201,6 +241,8 @@ const gameData = [
     },
     {
       id: "21", name: "Youtuber", gender: "male",
+      brokenPart: "HDD",
+      diagnosticText: "O disco rígido magnético apresenta cabeça de leitura presa. Precisa de software de recuperação profunda.",
       dialogue: "O HD externo caiu da mesa e meu gameplay sumiu!",
       options: [
         { text: "Recuperação profunda", outcomeText: "Demorou 2 dias, mas salvou o vídeo!", moneyChange: 100, repChange: 50, emotion: "happy" },
@@ -211,6 +253,8 @@ const gameData = [
     },
     {
       id: "22", name: "Médico", gender: "male",
+      brokenPart: "Software/OS",
+      diagnosticText: "Um processo fantasma está travando toda a memória da máquina. O hardware está ok.",
       dialogue: "O software de laudos travou no meio do exame!",
       options: [
         { text: "Task Manager", outcomeText: "O software destravou sem perder dados! Herói.", moneyChange: 100, repChange: 50, emotion: "happy" },
@@ -221,6 +265,8 @@ const gameData = [
     },
     {
       id: "23", name: "Marcão Músico", gender: "male",
+      brokenPart: "Fonte",
+      diagnosticText: "A Fonte de Alimentação (PSU) está com fuga de corrente, eletrificando o chassi e os cabos USB.",
       dialogue: "O fone USB tá dando choque nas orelhas no meio da gravação!",
       options: [
         { text: "Isolar o terra da fonte", outcomeText: "Acabou os choques e gravou um hit.", moneyChange: 100, repChange: 40, emotion: "happy" },
@@ -231,6 +277,8 @@ const gameData = [
     },
     {
       id: "24", name: "Padeiro", gender: "male",
+      brokenPart: "Teclado",
+      diagnosticText: "Resíduos sólidos endurecidos de trigo bloqueiam o mecanismo de mola (switch) da tecla.",
       dialogue: "Caiu farinha no teclado mecânico e o botão 'Enter' não volta!",
       options: [
         { text: "Limpeza com isopropílico", outcomeText: "Teclado limpinho e cheiroso. Ganhou pão.", moneyChange: 100, repChange: 35, emotion: "happy" },
@@ -241,6 +289,8 @@ const gameData = [
     },
     {
       id: "25", name: "Primo Chato", gender: "male",
+      brokenPart: "Geral",
+      diagnosticText: "Todas as peças estão normais. O usuário é apenas preguiçoso e quer explorar seu trabalho.",
       dialogue: "Ei primo, formata pra mim e baixa jogos de graça, valeu?",
       options: [
         { text: "Cobrar R$100", outcomeText: "Ele pagou os 100 reais resmungando.", moneyChange: 100, repChange: 10, emotion: "happy" },
@@ -251,6 +301,8 @@ const gameData = [
     },
     {
       id: "26", name: "Corretor", gender: "male",
+      brokenPart: "Teclado",
+      diagnosticText: "O indicador luminoso de CAPS LOCK está aceso. Senhas são sensíveis a maiúsculas.",
       dialogue: "Botei a senha do Windows mas tá errado. Juro que é '123456'!",
       options: [
         { text: "Desligar o Caps Lock", outcomeText: "Logou na hora. Ele se sentiu um completo idiota.", moneyChange: 100, repChange: 20, emotion: "happy" },
@@ -261,6 +313,8 @@ const gameData = [
     },
     {
       id: "27", name: "Fitness", gender: "male",
+      brokenPart: "Placa-Mãe",
+      diagnosticText: "Um líquido pastoso bloqueou os contatos da placa mãe e colou as ventoinhas.",
       dialogue: "Derramei Whey Protein no gabinete! Tá fedendo e travado!",
       options: [
         { text: "Banho de isopropílico", outcomeText: "Sem cheiro e rodando 100%. Shape mantido.", moneyChange: 100, repChange: 40, emotion: "happy" },
@@ -271,6 +325,8 @@ const gameData = [
     },
     {
       id: "28", name: "Professor", gender: "male",
+      brokenPart: "Software/Malware",
+      diagnosticText: "O Pendrive está infectado com um verme (worm) que converte arquivos reais em atalhos .exe falsos.",
       dialogue: "Meu pen drive tem a prova! Botei no PC da escola e virou .exe!",
       options: [
         { text: "Passar antivírus", outcomeText: "Vírus shortcut removido, provas salvas!", moneyChange: 100, repChange: 50, emotion: "happy" },
