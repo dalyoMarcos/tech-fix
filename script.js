@@ -16,6 +16,12 @@ class BootScene extends Phaser.Scene {
 
 class MenuScene extends Phaser.Scene {
     constructor() { super('MenuScene'); }
+    init(data = {}) {
+        // The menu can be opened directly by BootScene, so it must not
+        // depend on customer/gameplay data being passed to it.
+        this.money = data.money !== undefined ? data.money : 100;
+        this.reputation = data.reputation !== undefined ? data.reputation : 50;
+    }
     create() {
         const { width, height } = this.scale;
         this.cameras.main.setBackgroundColor('#000000');
@@ -27,6 +33,12 @@ class MenuScene extends Phaser.Scene {
         this.add.text(width / 2, height / 2, 'Sua assistência técnica duvidosa', {
             fontFamily: 'VT323', fontSize: '24px', color: '#ffffff'
         }).setOrigin(0.5);
+
+        if (this.money !== 100 || this.reputation !== 50) {
+            this.add.text(width / 2, height / 2 + 40, `Caixa: $${this.money} | Reputação: ${this.reputation}`, {
+                fontFamily: 'VT323', fontSize: '20px', color: '#ffff55'
+            }).setOrigin(0.5);
+        }
 
         const btnRect = this.add.rectangle(width / 2, height / 2 + 100, 250, 60, 0x333344)
             .setStrokeStyle(2, 0x4a4a59).setInteractive({ useHandCursor: true });
@@ -48,7 +60,7 @@ class MenuScene extends Phaser.Scene {
         btnRect.on('pointerdown', () => {
             const shuffled = Phaser.Utils.Array.Shuffle([...gameData]);
             const todaysCustomers = shuffled.slice(0, 7);
-            this.scene.start('GameScene', { money: 100, reputation: 50, customerIndex: 0, todaysCustomers });
+            this.scene.start('GameScene', { money: this.money, reputation: this.reputation, customerIndex: 0, todaysCustomers });
         });
     }
 }
@@ -136,6 +148,18 @@ class GameScene extends Phaser.Scene {
             });
     }
 
+    
+    updateStats() {
+        this.moneyText.setText(`💰 $${this.money}`);
+        this.repText.setText(`⭐ Rep: ${this.reputation}`);
+    }
+
+    updateBuffIcons() {
+        let buffs = "";
+        if (this.buffCoffee) buffs += "☕ ";
+        if (this.buffExtraLife) buffs += "❤️ ";
+        if (this.buffText) this.buffText.setText(buffs);
+    }
     buildGameUI() {
         const { width, height } = this.scale;
         
@@ -204,6 +228,10 @@ class GameScene extends Phaser.Scene {
             this.scene.start('WorkbenchScene', { 
                 money: this.money, 
                 reputation: this.reputation, 
+                buffCoffee: this.buffCoffee, 
+                buffExtraLife: this.buffExtraLife, 
+                manualUsed: this.manualUsed, 
+                startInDiagnostic: true, 
                 customerIndex: this.customerIndex, 
                 todaysCustomers: this.todaysCustomers 
             });
@@ -220,6 +248,66 @@ class GameScene extends Phaser.Scene {
         const optionWidth = (width - 60) / 2;
         const optionHeight = 50;
 
+        
+        this.buffText = this.add.text(width / 2, 40, '', { fontFamily: 'VT323', fontSize: '24px', color: '#ffffff' }).setOrigin(0.5);
+        this.updateBuffIcons();
+
+        // --- SHOP UI ---
+        this.shopBtn = this.add.rectangle(width - 60, 50, 80, 30, 0x333344).setStrokeStyle(2, 0x33ff33).setInteractive({useHandCursor: true});
+        this.shopBtnText = this.add.text(width - 60, 50, '🛒 LOJA', { fontFamily: 'VT323', fontSize: '18px', color: '#ffffff' }).setOrigin(0.5);
+
+        this.shopModal = this.add.container(0, 0);
+        this.shopModal.setVisible(false);
+        this.shopModal.setDepth(100);
+
+        const fullscreenBlocker = this.add.rectangle(width/2, height/2, width, height, 0x000000, 0.7).setInteractive();
+        const shopBg = this.add.rectangle(width/2, height/2, 500, 350, 0x11111a).setStrokeStyle(4, 0x33ff33);
+        const shopTitle = this.add.text(width/2, height/2 - 140, 'LOJA DE SUPRIMENTOS', { fontFamily: 'VT323', fontSize: '30px', color: '#33ff33' }).setOrigin(0.5);
+        
+        const closeShopBtn = this.add.rectangle(width/2 + 210, height/2 - 140, 30, 30, 0x552222).setInteractive({useHandCursor: true});
+        const closeShopText = this.add.text(width/2 + 210, height/2 - 140, 'X', { fontFamily: 'VT323', fontSize: '20px', color: '#ffffff' }).setOrigin(0.5);
+        
+        closeShopBtn.on('pointerdown', () => this.shopModal.setVisible(false));
+        this.shopModal.add([fullscreenBlocker, shopBg, shopTitle, closeShopBtn, closeShopText]);
+
+        const items = [
+            { id: 'coffee', name: 'Café Starbucks', price: 50, desc: 'Dobra o dinheiro da próxima resposta correta.' },
+            { id: 'life', name: 'Vida Extra', price: 150, desc: 'Uma segunda chance caso você erre a resposta.' },
+            { id: 'manual', name: 'Manual do PC', price: 80, desc: 'Elimina 2 respostas incorretas.' }
+        ];
+
+        items.forEach((item, idx) => {
+            const y = height/2 - 60 + (idx * 80);
+            const btn = this.add.rectangle(width/2 - 150, y, 120, 40, 0x224422).setInteractive({useHandCursor: true}).setStrokeStyle(2, 0x33ff33);
+            const nameText = this.add.text(width/2 - 150, y, `Comprar ($${item.price})`, { fontFamily: 'VT323', fontSize: '16px', color: '#ffffff' }).setOrigin(0.5);
+            const descText = this.add.text(width/2 - 70, y - 15, item.name + '\n' + item.desc, { fontFamily: 'VT323', fontSize: '16px', color: '#aaaaaa', wordWrap: {width: 300} });
+            
+            btn.on('pointerdown', () => {
+                if (this.money < item.price) {
+                    this.cameras.main.shake(100, 0.01);
+                    return;
+                }
+                if (item.id === 'coffee' && this.buffCoffee) return;
+                if (item.id === 'life' && this.buffExtraLife) return;
+                if (item.id === 'manual' && this.manualUsed) return;
+                
+                this.money -= item.price;
+                this.updateStats();
+
+                if (item.id === 'coffee') this.buffCoffee = true;
+                if (item.id === 'life') this.buffExtraLife = true;
+                if (item.id === 'manual') {
+                    this.manualUsed = true;
+                    this.applyManual();
+                }
+                this.updateBuffIcons();
+            });
+            this.shopModal.add([btn, nameText, descText]);
+        });
+
+        this.shopBtn.on('pointerdown', () => this.shopModal.setVisible(true));
+
+        this.optionButtons = [];
         this.currentCustomer.options.forEach((opt, index) => {
             const col = index % 2;
             const row = Math.floor(index / 2);
@@ -237,17 +325,67 @@ class GameScene extends Phaser.Scene {
                 this.handleChoice(opt);
             });
             this.optionsContainer.add([btnRect, btnText]);
+            this.optionButtons.push({ rect: btnRect, text: btnText, option: opt });
         });
+
+        if (this.manualUsed) this.applyManual();
+        if (this.startInDiagnostic) {
+            this.actionsContainer.setVisible(false);
+            this.optionsContainer.setVisible(true);
+        }
+    
     }
 
+    
+    applyManual() {
+        if (!this.manualUsed) return;
+        let hidden = 0;
+        this.optionButtons.forEach(btn => {
+            if (btn.option.emotion !== 'happy' && hidden < 2) {
+                btn.rect.setVisible(false);
+                btn.text.setVisible(false);
+                hidden++;
+            }
+        });
+    }
     handleChoice(option) {
+        if (this.waitingForNext) return;
+        
+        const isWrong = option.emotion === 'angry' || option.emotion === 'sad';
+        
+        if (isWrong && this.buffExtraLife) {
+            this.buffExtraLife = false;
+            this.updateBuffIcons();
+            this.dialogueText.setText("O cliente ficou irritado, mas você tem uma Vida Extra! Tente outra resposta!");
+            this.characterGraphic.setFrame(EMOTION_FRAMES[option.emotion]);
+            this.cameras.main.shake(200, 0.01);
+            
+            // Esconde a opção errada
+            const btn = this.optionButtons.find(b => b.option === option);
+            if (btn) {
+                btn.rect.setVisible(false);
+                btn.text.setVisible(false);
+            }
+            return;
+        }
+
         this.waitingForNext = true;
         this.optionsContainer.setVisible(false);
-        this.money += option.moneyChange;
+        this.shopBtn.setVisible(false);
+        this.shopBtnText.setVisible(false);
+
+        let finalMoneyChange = option.moneyChange;
+        if (option.emotion === 'happy' && this.buffCoffee) {
+            if (finalMoneyChange > 0) finalMoneyChange *= 2;
+            this.buffCoffee = false;
+            this.updateBuffIcons();
+        }
+
+        this.money += finalMoneyChange;
         this.reputation += option.repChange;
-        this.moneyText.setText(`💰 $${this.money}`);
-        this.repText.setText(`⭐ Rep: ${this.reputation}`);
-        this.dialogueText.setText(option.outcomeText);
+        this.updateStats();
+
+        this.dialogueText.setText(option.outcomeText + (finalMoneyChange > option.moneyChange ? " (Dinheiro em Dobro!)" : ""));
         this.characterGraphic.setFrame(EMOTION_FRAMES[option.emotion]);
 
         if (option.emotion === 'angry') {
@@ -268,7 +406,14 @@ class GameScene extends Phaser.Scene {
                 return;
             }
             if (this.customerIndex + 1 < this.todaysCustomers.length) {
-                this.scene.restart({ money: this.money, reputation: this.reputation, customerIndex: this.customerIndex + 1, todaysCustomers: this.todaysCustomers });
+                this.scene.restart({ 
+                    money: this.money, 
+                    reputation: this.reputation, 
+                    customerIndex: this.customerIndex + 1, 
+                    todaysCustomers: this.todaysCustomers,
+                    buffCoffee: this.buffCoffee,
+                    buffExtraLife: this.buffExtraLife
+                });
             } else {
                 this.scene.start('GameOverScene', { money: this.money, reputation: this.reputation });
             }
@@ -285,6 +430,10 @@ class WorkbenchScene extends Phaser.Scene {
         this.customerIndex = data.customerIndex;
         this.todaysCustomers = data.todaysCustomers;
         this.currentCustomer = this.todaysCustomers[this.customerIndex];
+        
+        this.buffCoffee = data.buffCoffee;
+        this.buffExtraLife = data.buffExtraLife;
+        this.manualUsed = data.manualUsed;
     }
 
     // Keep hardware loading out of Phaser's file loader so local file:// projects work reliably.
@@ -314,9 +463,9 @@ class WorkbenchScene extends Phaser.Scene {
 
         const hardware = (typeof ASSET_HARDWARE !== 'undefined' && ASSET_HARDWARE)
             ? ASSET_HARDWARE
-            : 'assets/hardware.png';
+            : 'assets/hardware.jpg';
 
-        const image = await this.loadHardwareImage(hardware, 'assets/hardware.png');
+        const image = await this.loadHardwareImage(hardware, 'assets/hardware.jpg');
         this.textures.addImage('hardware', image);
     }
 
@@ -445,9 +594,19 @@ class GameOverScene extends Phaser.Scene {
         this.add.text(width / 2, height / 2 + 40, `Reputação: ${repMsg}`, { fontFamily: 'VT323', fontSize: '24px', color: '#ffffff' }).setOrigin(0.5);
         
         const btnRect = this.add.rectangle(width / 2, height / 2 + 120, 200, 60, 0x333344).setStrokeStyle(2, 0x4a4a59).setInteractive({ useHandCursor: true });
-        const btnText = this.add.text(width / 2, height / 2 + 120, 'NOVO DIA', { fontFamily: 'VT323', fontSize: '24px', color: '#ffffff' }).setOrigin(0.5);
         
-        btnRect.on('pointerdown', () => { this.scene.start('MenuScene'); });
+        const isBankrupt = this.finalReputation <= 0 || this.finalMoney <= -100;
+        const btnTextStr = isBankrupt ? 'RECOMEÇAR DO ZERO' : 'NOVO DIA';
+        
+        const btnText = this.add.text(width / 2, height / 2 + 120, btnTextStr, { fontFamily: 'VT323', fontSize: '24px', color: '#ffffff' }).setOrigin(0.5);
+        
+        btnRect.on('pointerdown', () => { 
+            if (isBankrupt) {
+                this.scene.start('MenuScene', { money: 100, reputation: 50 });
+            } else {
+                this.scene.start('MenuScene', { money: this.finalMoney, reputation: this.finalReputation });
+            }
+        });
     }
 }
 
