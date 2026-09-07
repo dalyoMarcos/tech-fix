@@ -181,46 +181,40 @@ class GameScene extends Phaser.Scene {
             fontFamily: 'VT323', fontSize: '24px', color: '#ffff55'
         }).setOrigin(1, 0);
 
-        this.characterGraphic = this.add.sprite(width / 2, height / 2 - 30, this.currentCustomer.gender);
+        // Alinha o personagem na parte inferior da tela, ancorado pela base (y=1)
+        this.characterGraphic = this.add.sprite(width / 2, height - 10, this.currentCustomer.gender);
+        this.characterGraphic.setOrigin(0.5, 1); 
         this.characterGraphic.setFrame(EMOTION_FRAMES.neutral);
-        this.characterGraphic.setScale(0.6);
+        this.characterGraphic.setScale(0.8); // Um pouco maior para preencher melhor a tela
 
-        this.bobTween = this.tweens.add({
-            targets: this.characterGraphic,
-            y: this.characterGraphic.y - 15,
-            duration: 1500,
-            yoyo: true,
-            repeat: -1,
-            ease: 'Sine.easeInOut'
-        });
-
-        this.add.rectangle(20, height - 250, width - 40, 100, 0x000000).setOrigin(0).setAlpha(0.85).setStrokeStyle(4, 0xffffff);
+        const diagWidth = width * 0.82; const diagX = width / 2;
+        this.add.rectangle(diagX, height - 180, diagWidth, 80, 0x000000).setOrigin(0.5, 0).setAlpha(0.85).setStrokeStyle(4, 0xffffff);
         
-        this.add.text(30, height - 240, this.currentCustomer.name, {
-            fontFamily: 'VT323', fontSize: '20px', color: '#ff0055'
+        this.add.text(diagX - diagWidth / 2 + 15, height - 175, this.currentCustomer.name, {
+            fontFamily: 'VT323', fontSize: '18px', color: '#ff0055'
         });
 
-        this.dialogueText = this.add.text(30, height - 210, this.currentCustomer.dialogue, {
-            fontFamily: 'VT323', fontSize: '22px', color: '#ffffff', wordWrap: { width: width - 60 }
+        this.dialogueText = this.add.text(diagX - diagWidth / 2 + 15, height - 150, this.currentCustomer.dialogue, {
+            fontFamily: 'VT323', fontSize: '20px', color: '#ffffff', wordWrap: { width: diagWidth - 30 }
         });
 
-        this.actionsContainer = this.add.container(0, height - 130);
-        this.optionsContainer = this.add.container(0, height - 130);
+        this.actionsContainer = this.add.container(0, height - 90);
+        this.optionsContainer = this.add.container(0, height - 90);
         this.optionsContainer.setVisible(false);
 
         // --- ACTIONS CONTAINER (Workbench vs Diagnostic) ---
-        const btnWidth = (width - 60) / 2;
-        const btnHeight = 60;
+        const btnWidth = (diagWidth - 20) / 2;
+        const btnHeight = 50;
         
-        const workbenchBtn = this.add.rectangle(20, 0, btnWidth, btnHeight, 0x224422)
+        const workbenchBtn = this.add.rectangle(diagX - diagWidth / 2, 0, btnWidth, btnHeight, 0x224422)
             .setOrigin(0).setStrokeStyle(2, 0x33ff33).setInteractive({ useHandCursor: true });
-        const workbenchText = this.add.text(20 + btnWidth/2, btnHeight/2, '🛠️ Levar para Bancada', {
+        const workbenchText = this.add.text(diagX - diagWidth / 2 + btnWidth/2, btnHeight/2, '🛠️ Levar para Bancada', {
             fontFamily: 'VT323', fontSize: '22px', color: '#ffffff'
         }).setOrigin(0.5);
         
-        const diagBtn = this.add.rectangle(40 + btnWidth, 0, btnWidth, btnHeight, 0x442222)
+        const diagBtn = this.add.rectangle(diagX + 10, 0, btnWidth, btnHeight, 0x442222)
             .setOrigin(0).setStrokeStyle(2, 0xff3333).setInteractive({ useHandCursor: true });
-        const diagText = this.add.text(40 + btnWidth + btnWidth/2, btnHeight/2, '💬 Dar Diagnóstico', {
+        const diagText = this.add.text(diagX + 10 + btnWidth/2, btnHeight/2, '💬 Dar Diagnóstico', {
             fontFamily: 'VT323', fontSize: '22px', color: '#ffffff'
         }).setOrigin(0.5);
 
@@ -245,8 +239,8 @@ class GameScene extends Phaser.Scene {
         this.actionsContainer.add([workbenchBtn, workbenchText, diagBtn, diagText]);
 
         // --- OPTIONS CONTAINER ---
-        const optionWidth = (width - 60) / 2;
-        const optionHeight = 50;
+        const optionWidth = (diagWidth - 20) / 2;
+        const optionHeight = 40;
 
         
         this.buffText = this.add.text(width / 2, 40, '', { fontFamily: 'VT323', fontSize: '24px', color: '#ffffff' }).setOrigin(0.5);
@@ -311,12 +305,12 @@ class GameScene extends Phaser.Scene {
         this.currentCustomer.options.forEach((opt, index) => {
             const col = index % 2;
             const row = Math.floor(index / 2);
-            const x = 20 + col * (optionWidth + 20);
-            const y = row * (optionHeight + 10);
+            const x = col === 0 ? diagX - diagWidth / 2 : diagX + 10;
+            const y = row * (optionHeight + 5);
 
             const btnRect = this.add.rectangle(x, y, optionWidth, optionHeight, 0x000000)
                 .setOrigin(0).setAlpha(0.9).setStrokeStyle(2, 0x4a4a59).setInteractive({ useHandCursor: true });
-            const btnText = this.add.text(x + 10, y + 10, `${index + 1}. ${opt.text}`, {
+            const btnText = this.add.text(x + 10, y + 8, `${index + 1}. ${opt.text}`, {
                 fontFamily: 'VT323', fontSize: '18px', color: '#ffffff', wordWrap: { width: optionWidth - 20 }
             });
 
@@ -390,13 +384,13 @@ class GameScene extends Phaser.Scene {
 
         if (option.emotion === 'angry') {
             this.cameras.main.shake(300, 0.015);
-            this.bobTween.stop();
+            
             this.tweens.add({ targets: this.characterGraphic, y: this.characterGraphic.y - 15, duration: 100, yoyo: true, repeat: -1 });
         } else if (option.emotion === 'sad') {
-            this.bobTween.stop();
+            
             this.tweens.add({ targets: this.characterGraphic, y: this.characterGraphic.y + 80, alpha: 0, duration: 2500, ease: 'Power2' });
         } else if (option.emotion === 'happy') {
-            this.bobTween.stop();
+            
             this.tweens.add({ targets: this.characterGraphic, y: this.characterGraphic.y - 30, duration: 300, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
         }
 
@@ -612,7 +606,7 @@ class GameOverScene extends Phaser.Scene {
 
 const config = {
     type: Phaser.AUTO,
-    width: 800,
+    width: 1066,
     height: 600,
     parent: 'game-container',
     pixelArt: true,
