@@ -1,0 +1,40 @@
+1. B) Multímetro — O multímetro permite medir tensão, resistência e continuidade, ajudando a identificar possíveis curtos na placa.
+2. B) Resistência entre a linha e o GND — A medição de resistência entre uma linha de alimentação e o GND pode indicar se existe um possível curto.
+3. A) A conexão elétrica da trilha — É necessário verificar se a trilha realmente está interrompida e se a conexão elétrica pode ser restaurada.
+4. B) A especificação do capacitor — Antes de substituir, é preciso identificar corretamente suas características, como capacitância e tensão.
+5. A) Saber o valor correto do resistor — O resistor substituto deve possuir a especificação adequada para funcionar corretamente no circuito.
+6. B) Estação de solda — A estação de solda é uma ferramenta apropriada para remover e instalar componentes eletrônicos, inclusive SMD.
+7. B) Verificar e, se necessário, regravar a BIOS — Uma BIOS corrompida pode impedir o computador de iniciar e, em alguns casos, pode ser necessário regravá-la.
+8. A) Regravador de EEPROM/SPI — Esse equipamento pode ser utilizado para regravar chips de BIOS compatíveis com esse processo.
+9. B) VRM — O VRM é responsável por fornecer e regular a alimentação adequada do processador.
+10. B) Regular a alimentação do processador — O VRM converte e regula a energia para fornecer ao processador uma tensão adequada.
+11. A) O computador pode não iniciar — Sem uma alimentação adequada do processador, a placa-mãe pode não conseguir completar o processo de inicialização.
+12. A) Continuidade — A função de continuidade do multímetro ajuda a verificar se existe passagem elétrica entre dois pontos.
+13. A) Fazer medições com o multímetro — As medições ajudam o técnico a localizar possíveis pontos de curto e analisar o circuito.
+14. A) Para colocar outro com a especificação correta — Identificar o componente evita instalar uma peça incompatível com o circuito.
+15. A) Sim, uma trilha rompida pode interromper um circuito — Uma trilha faz parte da conexão elétrica da placa e sua ruptura pode impedir a passagem do sinal ou da alimentação.
+16. B) Não, deve diagnosticar antes — A aparência de um componente não é suficiente para determinar a causa do defeito. Primeiro é necessário realizar um diagnóstico.
+17. A) VRM e linhas de alimentação — Como a suspeita está relacionada à alimentação do processador, essas partes devem ser verificadas.
+18. B) Não, deve ter a especificação correta — Um resistor precisa ter o valor adequado para que o circuito funcione corretamente.
+19. A) Pode ficar baixa ou ausente — Um curto em uma linha de alimentação pode fazer a tensão cair ou impedir que ela apareça corretamente.
+20. B) Fazem medições e seguem um diagnóstico — O reparo eletrônico deve ser baseado em testes e medições, e não na troca aleatória de componentes.
+21. A) Drivers, temperatura e hardware — Travamentos ou fechamentos de jogos podem estar relacionados a drivers, superaquecimento ou problemas de hardware.
+22. A) Artefato gráfico — Riscos, quadrados ou outras deformações inesperadas na imagem são exemplos de artefatos gráficos.
+23. A) GPU, VRAM, temperatura ou driver — Esses elementos podem causar falhas gráficas quando apresentam problemas ou incompatibilidades.
+24. A) Problema na placa de vídeo — Riscos e deformações durante jogos podem indicar problemas relacionados à GPU, VRAM, temperatura ou alimentação.
+25. A) GPU — A GPU é o componente responsável pelo processamento dos gráficos.
+26. A) Armazenar temporariamente dados gráficos — A VRAM armazena temporariamente informações usadas pela GPU, como texturas e outros dados gráficos.
+27. A) Atualização e compatibilidade do driver — Drivers desatualizados ou incompatíveis podem causar erros e problemas de desempenho nos jogos.
+28. A) Incompatibilidade ou problema no driver — Uma atualização pode apresentar incompatibilidade com determinado jogo, sistema ou configuração de hardware.
+29. A) Temperatura da GPU — Se os problemas aparecem depois de muito tempo jogando, é importante verificar se a GPU está atingindo temperaturas elevadas.
+30. A) Programa de monitoramento de hardware — Softwares de monitoramento conseguem mostrar informações como temperatura, uso e frequência da GPU.
+31. A) Configuração ou compatibilidade do jogo — Se apenas um jogo apresenta problemas, pode haver alguma configuração, atualização ou incompatibilidade específica.
+32. A) Hardware da placa de vídeo — Quando vários jogos apresentam os mesmos artefatos, é importante investigar a própria placa de vídeo.
+33. A) Taxa de atualização da imagem — 144 Hz significa que o monitor pode atualizar a imagem até 144 vezes por segundo, dependendo das condições e configurações.
+34. A) A placa de vídeo pode trabalhar mais — Resoluções maiores exigem que a GPU processe mais pixels, aumentando a carga sobre a placa.
+35. A) Alimentação da placa — Uma alimentação inadequada ou instável pode causar falhas durante o funcionamento da placa de vídeo.
+36. A) VRAM — A memória de vídeo é utilizada para armazenar temporariamente dados gráficos, incluindo texturas utilizadas nos jogos.
+37. A) Em quais situações o problema aparece — Saber quando e em quais condições o defeito acontece ajuda o técnico a reproduzir o problema e encontrar sua causa.
+38. A) O driver — Como o problema começou logo após a instalação, o driver é uma das primeiras coisas que devem ser investigadas.
+39. A) Temperatura da GPU — Se a placa funciona normalmente no início e apresenta falhas depois, o aumento da temperatura pode estar relacionado ao problema.
+40. B) Fazer testes de driver, temperatura, alimentação e hardware — Antes de substituir a placa, é necessário realizar testes para confirmar se ela realmente está com defeito.

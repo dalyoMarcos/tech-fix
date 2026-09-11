@@ -60,6 +60,9 @@ class MenuScene extends Phaser.Scene {
         btnRect.on('pointerdown', () => {
             const shuffled = Phaser.Utils.Array.Shuffle([...gameData]);
             const todaysCustomers = shuffled.slice(0, 7);
+            todaysCustomers.forEach(c => {
+                c.spriteId = Phaser.Math.Between(1, 4);
+            });
             this.scene.start('GameScene', { money: this.money, reputation: this.reputation, customerIndex: 0, todaysCustomers });
         });
     }
@@ -74,6 +77,9 @@ class GameScene extends Phaser.Scene {
         this.todaysCustomers = data.todaysCustomers;
         this.currentCustomer = this.todaysCustomers[this.customerIndex];
         this.waitingForNext = false;
+        this.buffCoffee = data.buffCoffee || false;
+        this.buffExtraLife = data.buffExtraLife || false;
+        this.manualUsed = data.manualUsed || false;
     }
     // Keep image loading out of Phaser's file loader so file:// projects work reliably.
     preload() {}
@@ -100,10 +106,11 @@ class GameScene extends Phaser.Scene {
     async ensureGameTextures() {
         const shopBg = (typeof ASSET_SHOP_BG !== 'undefined' && ASSET_SHOP_BG)
             ? ASSET_SHOP_BG : 'assets/shop_bg.jpg';
-        const male = (typeof ASSET_MALE !== 'undefined' && ASSET_MALE)
-            ? ASSET_MALE : 'assets/male.png';
-        const female = (typeof ASSET_FEMALE !== 'undefined' && ASSET_FEMALE)
-            ? ASSET_FEMALE : 'assets/female.png';
+            
+        const char1 = (typeof ASSET_CHAR1 !== 'undefined' && ASSET_CHAR1) ? ASSET_CHAR1 : '';
+        const char2 = (typeof ASSET_CHAR2 !== 'undefined' && ASSET_CHAR2) ? ASSET_CHAR2 : '';
+        const char3 = (typeof ASSET_CHAR3 !== 'undefined' && ASSET_CHAR3) ? ASSET_CHAR3 : '';
+        const char4 = (typeof ASSET_CHAR4 !== 'undefined' && ASSET_CHAR4) ? ASSET_CHAR4 : '';
 
         const jobs = [];
 
@@ -113,21 +120,24 @@ class GameScene extends Phaser.Scene {
             }));
         }
 
-        if (!this.textures.exists('male')) {
-            jobs.push(this.loadImageElement(male, 'assets/male.png').then(image => {
-                this.textures.addSpriteSheet('male', image, {
-                    frameWidth: 512,
-                    frameHeight: 512
-                });
+        if (!this.textures.exists('char_1') && char1) {
+            jobs.push(this.loadImageElement(char1, '').then(image => {
+                this.textures.addSpriteSheet('char_1', image, { frameWidth: 512, frameHeight: 512 });
             }));
         }
-
-        if (!this.textures.exists('female')) {
-            jobs.push(this.loadImageElement(female, 'assets/female.png').then(image => {
-                this.textures.addSpriteSheet('female', image, {
-                    frameWidth: 512,
-                    frameHeight: 512
-                });
+        if (!this.textures.exists('char_2') && char2) {
+            jobs.push(this.loadImageElement(char2, '').then(image => {
+                this.textures.addSpriteSheet('char_2', image, { frameWidth: 512, frameHeight: 512 });
+            }));
+        }
+        if (!this.textures.exists('char_3') && char3) {
+            jobs.push(this.loadImageElement(char3, '').then(image => {
+                this.textures.addSpriteSheet('char_3', image, { frameWidth: 512, frameHeight: 512 });
+            }));
+        }
+        if (!this.textures.exists('char_4') && char4) {
+            jobs.push(this.loadImageElement(char4, '').then(image => {
+                this.textures.addSpriteSheet('char_4', image, { frameWidth: 512, frameHeight: 512 });
             }));
         }
 
@@ -182,10 +192,12 @@ class GameScene extends Phaser.Scene {
         }).setOrigin(1, 0);
 
         // Alinha o personagem na parte inferior da tela, ancorado pela base (y=1)
-        this.characterGraphic = this.add.sprite(width / 2, height - 10, this.currentCustomer.gender);
+        const charKey = 'char_' + this.currentCustomer.spriteId;
+        console.log('DEBUG: Carregando textura:', charKey, ' | Existe?', this.textures.exists(charKey));
+        this.characterGraphic = this.add.sprite(width / 2, height - 10, charKey);
         this.characterGraphic.setOrigin(0.5, 1); 
         this.characterGraphic.setFrame(EMOTION_FRAMES.neutral);
-        this.characterGraphic.setScale(0.8); // Um pouco maior para preencher melhor a tela
+        this.characterGraphic.setScale(0.85); // Um pouco maior para preencher melhor a tela
 
         const diagWidth = width * 0.82; const diagX = width / 2;
         this.add.rectangle(diagX, height - 180, diagWidth, 80, 0x000000).setOrigin(0.5, 0).setAlpha(0.85).setStrokeStyle(4, 0xffffff);
@@ -227,8 +239,11 @@ class GameScene extends Phaser.Scene {
                 manualUsed: this.manualUsed, 
                 startInDiagnostic: true, 
                 customerIndex: this.customerIndex, 
-                todaysCustomers: this.todaysCustomers 
-            });
+                todaysCustomers: this.todaysCustomers,
+                      buffCoffee: this.buffCoffee,
+                      buffExtraLife: this.buffExtraLife,
+                      manualUsed: this.manualUsed
+                  });
         });
 
         diagBtn.on('pointerdown', () => {
@@ -568,8 +583,11 @@ class WorkbenchScene extends Phaser.Scene {
                     money: this.money, 
                     reputation: this.reputation, 
                     customerIndex: this.customerIndex, 
-                    todaysCustomers: this.todaysCustomers 
-                });
+                    todaysCustomers: this.todaysCustomers,
+                      buffCoffee: this.buffCoffee,
+                      buffExtraLife: this.buffExtraLife,
+                      manualUsed: this.manualUsed
+                  });
             });
     }
 }
