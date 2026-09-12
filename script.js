@@ -214,18 +214,18 @@ class GameScene extends Phaser.Scene {
         this.characterGraphic.setScale(0.85); // Um pouco maior para preencher melhor a tela
 
         const diagWidth = width * 0.82; const diagX = width / 2;
-        this.add.rectangle(diagX, height - 180, diagWidth, 80, 0x000000).setOrigin(0.5, 0).setAlpha(0.85).setStrokeStyle(4, 0xffffff);
+        this.add.rectangle(diagX, height - 210, diagWidth, 120, 0x000000).setOrigin(0.5, 0).setAlpha(0.85).setStrokeStyle(4, 0xffffff);
         
-        this.add.text(diagX - diagWidth / 2 + 15, height - 175, this.currentCustomer.name, {
+        this.add.text(diagX - diagWidth / 2 + 15, height - 205, this.currentCustomer.name, {
             fontFamily: 'VT323', fontSize: '18px', color: '#ff0055'
         });
 
-        this.dialogueText = this.add.text(diagX - diagWidth / 2 + 15, height - 150, this.currentCustomer.dialogue, {
+        this.dialogueText = this.add.text(diagX - diagWidth / 2 + 15, height - 180, this.currentCustomer.dialogue, {
             fontFamily: 'VT323', fontSize: '20px', color: '#ffffff', wordWrap: { width: diagWidth - 30 }
         });
 
-        this.actionsContainer = this.add.container(0, height - 90);
-        this.optionsContainer = this.add.container(0, height - 90);
+        this.actionsContainer = this.add.container(0, height - 80);
+        this.optionsContainer = this.add.container(0, height - 440);
         this.optionsContainer.setVisible(false);
 
         // --- ACTIONS CONTAINER (Workbench vs Diagnostic) ---
@@ -331,24 +331,35 @@ class GameScene extends Phaser.Scene {
         this.shopBtn.on('pointerdown', () => this.shopModal.setVisible(true));
 
         this.optionButtons = [];
+        let currentY = 0;
+        
         this.currentCustomer.options.forEach((opt, index) => {
-            const col = index % 2;
-            const row = Math.floor(index / 2);
-            const x = col === 0 ? diagX - diagWidth / 2 : diagX + 10;
-            const y = row * (optionHeight + 5);
-
-            const btnRect = this.add.rectangle(x, y, optionWidth, optionHeight, 0x000000)
-                .setOrigin(0).setAlpha(0.9).setStrokeStyle(2, 0x4a4a59).setInteractive({ useHandCursor: true });
-            const btnText = this.add.text(x + 10, y + 8, `${index + 1}. ${opt.text}`, {
-                fontFamily: 'VT323', fontSize: '18px', color: '#ffffff', wordWrap: { width: optionWidth - 20 }
+            const x = diagX - diagWidth / 2;
+            
+            // Create text first to measure it
+            const btnText = this.add.text(x + 10, currentY + 8, `${index + 1}. ${opt.text}`, {
+                fontFamily: 'VT323', fontSize: '18px', color: '#ffffff', wordWrap: { width: diagWidth - 20 }
             });
-
+            
+            // Calculate dynamic height
+            const textHeight = btnText.height;
+            const btnHeight = Math.max(40, textHeight + 16);
+            
+            // Create background rectangle
+            const btnRect = this.add.rectangle(x, currentY, diagWidth, btnHeight, 0x000000)
+                .setOrigin(0).setAlpha(0.9).setStrokeStyle(2, 0x4a4a59).setInteractive({ useHandCursor: true });
+            
             btnRect.on('pointerdown', () => {
                 if (this.waitingForNext) return;
                 this.handleChoice(opt);
             });
+            
+            // Add rect first, then text so text is on top
             this.optionsContainer.add([btnRect, btnText]);
             this.optionButtons.push({ rect: btnRect, text: btnText, option: opt });
+            
+            // Advance Y for the next option
+            currentY += btnHeight + 5;
         });
 
         if (this.manualUsed) this.applyManual();
