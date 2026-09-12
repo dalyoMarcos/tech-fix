@@ -60,8 +60,9 @@ class MenuScene extends Phaser.Scene {
         btnRect.on('pointerdown', () => {
             const shuffled = Phaser.Utils.Array.Shuffle([...gameData]);
             const todaysCustomers = shuffled.slice(0, 7);
+            // Associa um sprite aleatório para cada cliente (de 1 a 6)
             todaysCustomers.forEach(c => {
-                c.spriteId = Phaser.Math.Between(1, 4);
+                c.spriteId = Phaser.Math.Between(1, 6);
             });
             this.scene.start('GameScene', { money: this.money, reputation: this.reputation, customerIndex: 0, todaysCustomers });
         });
@@ -107,11 +108,6 @@ class GameScene extends Phaser.Scene {
         const shopBg = (typeof ASSET_SHOP_BG !== 'undefined' && ASSET_SHOP_BG)
             ? ASSET_SHOP_BG : 'assets/shop_bg.jpg';
             
-        const char1 = (typeof ASSET_CHAR1 !== 'undefined' && ASSET_CHAR1) ? ASSET_CHAR1 : '';
-        const char2 = (typeof ASSET_CHAR2 !== 'undefined' && ASSET_CHAR2) ? ASSET_CHAR2 : '';
-        const char3 = (typeof ASSET_CHAR3 !== 'undefined' && ASSET_CHAR3) ? ASSET_CHAR3 : '';
-        const char4 = (typeof ASSET_CHAR4 !== 'undefined' && ASSET_CHAR4) ? ASSET_CHAR4 : '';
-
         const jobs = [];
 
         if (!this.textures.exists('shop_bg')) {
@@ -119,6 +115,14 @@ class GameScene extends Phaser.Scene {
                 this.textures.addImage('shop_bg', image);
             }));
         }
+
+        // Se o ASSET_CHAR1 (novo) estiver disponível, carrega as 6 bases
+        const char1 = typeof ASSET_CHAR1 !== 'undefined' ? ASSET_CHAR1 : null;
+        const char2 = typeof ASSET_CHAR2 !== 'undefined' ? ASSET_CHAR2 : null;
+        const char3 = typeof ASSET_CHAR3 !== 'undefined' ? ASSET_CHAR3 : null;
+        const char4 = typeof ASSET_CHAR4 !== 'undefined' ? ASSET_CHAR4 : null;
+        const char5 = typeof ASSET_CHAR5 !== 'undefined' ? ASSET_CHAR5 : null;
+        const char6 = typeof ASSET_CHAR6 !== 'undefined' ? ASSET_CHAR6 : null;
 
         if (!this.textures.exists('char_1') && char1) {
             jobs.push(this.loadImageElement(char1, '').then(image => {
@@ -138,6 +142,16 @@ class GameScene extends Phaser.Scene {
         if (!this.textures.exists('char_4') && char4) {
             jobs.push(this.loadImageElement(char4, '').then(image => {
                 this.textures.addSpriteSheet('char_4', image, { frameWidth: 512, frameHeight: 512 });
+            }));
+        }
+        if (!this.textures.exists('char_5') && char5) {
+            jobs.push(this.loadImageElement(char5, '').then(image => {
+                this.textures.addSpriteSheet('char_5', image, { frameWidth: 512, frameHeight: 512 });
+            }));
+        }
+        if (!this.textures.exists('char_6') && char6) {
+            jobs.push(this.loadImageElement(char6, '').then(image => {
+                this.textures.addSpriteSheet('char_6', image, { frameWidth: 512, frameHeight: 512 });
             }));
         }
 

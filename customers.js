@@ -1,5 +1,391 @@
 const gameData = [
     {
+      id: "151", name: "Pedro", gender: "male",
+      brokenPart: "Geral", diagnosticText: "O primeiro passo na triagem \u00e9 sempre verificar os perif\u00e9ricos mais b\u00e1sicos. Cabos partidos ou\ntomadas com defeito s\u00e3o os vil\u00f5es mais comuns e f\u00e1ceis de diagnosticar.",
+      dialogue: "\"Meu notebook n\u00e3o liga de jeito nenhum depois de uma queda de energia aqui em casa.\" \nAtendente: \"Entendi o susto. Qual \u00e9 o nosso primeiro passo l\u00f3gico e seguro antes de abrir o  equipamento?",
+      options: [
+        { text: "Abrir o notebook imediatamente para testar a placa-m\u00e3e com u...", outcomeText: "Erro na manuten\u00e7\u00e3o! O primeiro passo na triagem \u00e9 sempre verificar os perif\u00e9ricos mais b\u00e1sicos. Cabos partidos ou\ntomadas com defeito s\u00e3o os vil\u00f5es mais comuns e f\u00e1ceis de diagnosticar.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Conectar o carregador em outra tomada e testar com um carreg...", outcomeText: "O primeiro passo na triagem \u00e9 sempre verificar os perif\u00e9ricos mais b\u00e1sicos. Cabos partidos ou\ntomadas com defeito s\u00e3o os vil\u00f5es mais comuns e f\u00e1ceis de diagnosticar.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "Dizer ao cliente que a placa-m\u00e3e queimou e cobrar o valor ma...", outcomeText: "Erro na manuten\u00e7\u00e3o! O primeiro passo na triagem \u00e9 sempre verificar os perif\u00e9ricos mais b\u00e1sicos. Cabos partidos ou\ntomadas com defeito s\u00e3o os vil\u00f5es mais comuns e f\u00e1ceis de diagnosticar.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Pedir para o cliente deixar o notebook e voltar em uma seman...", outcomeText: "Erro na manuten\u00e7\u00e3o! O primeiro passo na triagem \u00e9 sempre verificar os perif\u00e9ricos mais b\u00e1sicos. Cabos partidos ou\ntomadas com defeito s\u00e3o os vil\u00f5es mais comuns e f\u00e1ceis de diagnosticar.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "152", name: "Julia", gender: "male",
+      brokenPart: "Geral", diagnosticText: "A seguran\u00e7a vem em primeiro lugar. A fonte sofreu um curto-circuito e deve ser substitu\u00edda \npara evitar danos catastr\u00f3ficos ao restante do hardware.",
+      dialogue: "\"Meu computador de mesa est\u00e1 com um cheiro estranho de queimado e n\u00e3o d\u00e1 v\u00eddeo.\" \nAtendente: \"Abri o seu gabinete e encontrei uma lagartixa alojada dentro da fonte, causando um curto.  O que eu devo fazer agora?\"",
+      options: [
+        { text: "Retirar o animal com uma pin\u00e7a, limpar a fonte com \u00e1lcool is...", outcomeText: "Erro na manuten\u00e7\u00e3o! A seguran\u00e7a vem em primeiro lugar. A fonte sofreu um curto-circuito e deve ser substitu\u00edda \npara evitar danos catastr\u00f3ficos ao restante do hardware.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Desligar o PC da tomada, descartar a fonte danificada e veri...", outcomeText: "A seguran\u00e7a vem em primeiro lugar. A fonte sofreu um curto-circuito e deve ser substitu\u00edda \npara evitar danos catastr\u00f3ficos ao restante do hardware.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "Continuar os testes com a fonte para ver se o cheiro de quei...", outcomeText: "Erro na manuten\u00e7\u00e3o! A seguran\u00e7a vem em primeiro lugar. A fonte sofreu um curto-circuito e deve ser substitu\u00edda \npara evitar danos catastr\u00f3ficos ao restante do hardware.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Colocar a fonte no sol para secar antes de voltar a utilizar...", outcomeText: "Erro na manuten\u00e7\u00e3o! A seguran\u00e7a vem em primeiro lugar. A fonte sofreu um curto-circuito e deve ser substitu\u00edda \npara evitar danos catastr\u00f3ficos ao restante do hardware.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "153", name: "Fernanda", gender: "male",
+      brokenPart: "Geral", diagnosticText: "O atendimento emp\u00e1tico \u00e9 t\u00e3o importante quanto a t\u00e9cnica. Aplicar m\u00e9todos que n\u00e3o \nsobrescrevam os dados \u00e9 o caminho correto para recuperar os arquivos.",
+      dialogue: "\"Meu HD externo n\u00e3o \u00e9 reconhecido e ele tem todas as fotos da minha fam\u00edlia! Estou  desesperado.\" \nAtendente: \"Por favor, acalme-se, faremos o poss\u00edvel. Qual \u00e9 a conduta t\u00e9cnica imediata para tentar  resgatar esses dados?\"",
+      options: [
+        { text: "Formatar o HD rapidamente para ver se ele volta a funcionar ...", outcomeText: "Erro na manuten\u00e7\u00e3o! O atendimento emp\u00e1tico \u00e9 t\u00e3o importante quanto a t\u00e9cnica. Aplicar m\u00e9todos que n\u00e3o \nsobrescrevam os dados \u00e9 o caminho correto para recuperar os arquivos.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Dizer que ele perdeu tudo e que voc\u00ea n\u00e3o pode fazer absoluta...", outcomeText: "Erro na manuten\u00e7\u00e3o! O atendimento emp\u00e1tico \u00e9 t\u00e3o importante quanto a t\u00e9cnica. Aplicar m\u00e9todos que n\u00e3o \nsobrescrevam os dados \u00e9 o caminho correto para recuperar os arquivos.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Conectar o HD a um ambiente seguro (live-cd/dock) e tentar s...", outcomeText: "O atendimento emp\u00e1tico \u00e9 t\u00e3o importante quanto a t\u00e9cnica. Aplicar m\u00e9todos que n\u00e3o \nsobrescrevam os dados \u00e9 o caminho correto para recuperar os arquivos.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "Abrir o HD no meio da loja para ver o disco por dentro e ten...", outcomeText: "Erro na manuten\u00e7\u00e3o! O atendimento emp\u00e1tico \u00e9 t\u00e3o importante quanto a t\u00e9cnica. Aplicar m\u00e9todos que n\u00e3o \nsobrescrevam os dados \u00e9 o caminho correto para recuperar os arquivos.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "154", name: "Marcos", gender: "male",
+      brokenPart: "Geral", diagnosticText: "Processadores modernos possuem prote\u00e7\u00e3o t\u00e9rmica e desligam o PC para n\u00e3o queimar \nquando atingem temperaturas cr\u00edticas devido \u00e0 dissipa\u00e7\u00e3o ineficiente.",
+      dialogue: "\"Meu computador de jogos trava e reinicia sozinho sempre que eu come\u00e7o uma partida  pesada.\" \nAtendente: \"Monitorei as taxas do sistema e notei que o processador atinge 100\u00b0C rapidamente. Qual \u00e9  a causa e a a\u00e7\u00e3o corretiva?\"",
+      options: [
+        { text: "O sistema operacional Windows est\u00e1 corrompido; \u00e9 necess\u00e1rio ...", outcomeText: "Erro na manuten\u00e7\u00e3o! Processadores modernos possuem prote\u00e7\u00e3o t\u00e9rmica e desligam o PC para n\u00e3o queimar \nquando atingem temperaturas cr\u00edticas devido \u00e0 dissipa\u00e7\u00e3o ineficiente.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "A placa de v\u00eddeo est\u00e1 com defeito de f\u00e1brica; voc\u00ea deve acon...", outcomeText: "Erro na manuten\u00e7\u00e3o! Processadores modernos possuem prote\u00e7\u00e3o t\u00e9rmica e desligam o PC para n\u00e3o queimar \nquando atingem temperaturas cr\u00edticas devido \u00e0 dissipa\u00e7\u00e3o ineficiente.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Falha no sistema de refrigera\u00e7\u00e3o (cooler solto ou pasta seca...", outcomeText: "Processadores modernos possuem prote\u00e7\u00e3o t\u00e9rmica e desligam o PC para n\u00e3o queimar \nquando atingem temperaturas cr\u00edticas devido \u00e0 dissipa\u00e7\u00e3o ineficiente.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "O monitor do cliente n\u00e3o suporta a taxa de atualiza\u00e7\u00e3o do jo...", outcomeText: "Erro na manuten\u00e7\u00e3o! Processadores modernos possuem prote\u00e7\u00e3o t\u00e9rmica e desligam o PC para n\u00e3o queimar \nquando atingem temperaturas cr\u00edticas devido \u00e0 dissipa\u00e7\u00e3o ineficiente.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "155", name: "Marcos", gender: "male",
+      brokenPart: "Geral", diagnosticText: "Ligar um equipamento com res\u00edduos de l\u00edquido condutivo (como caf\u00e9 com a\u00e7\u00facar) pode \ncausar um curto imediato, fritando componentes que poderiam ser salvos.",
+      dialogue: "\"Derrubei um copo de caf\u00e9 no teclado do meu MacBook! Desliguei ele na hora e trouxe  correndo.\" \nAtendente: \"\u00d3timo que desligou r\u00e1pido. O que eu N\u00c3O posso fazer de forma alguma ao receb\u00ea-lo na  bancada?\"",
+      options: [
+        { text: "Desconectar a bateria imediatamente ao abrir o equipamento.", outcomeText: "Erro na manuten\u00e7\u00e3o! Ligar um equipamento com res\u00edduos de l\u00edquido condutivo (como caf\u00e9 com a\u00e7\u00facar) pode \ncausar um curto imediato, fritando componentes que poderiam ser salvos.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Limpar a placa com \u00e1lcool isoprop\u00edlico e escova antiest\u00e1tica...", outcomeText: "Erro na manuten\u00e7\u00e3o! Ligar um equipamento com res\u00edduos de l\u00edquido condutivo (como caf\u00e9 com a\u00e7\u00facar) pode \ncausar um curto imediato, fritando componentes que poderiam ser salvos.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Ligar o notebook na tomada ou pressionar o bot\u00e3o de ligar pa...", outcomeText: "Ligar um equipamento com res\u00edduos de l\u00edquido condutivo (como caf\u00e9 com a\u00e7\u00facar) pode \ncausar um curto imediato, fritando componentes que poderiam ser salvos.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "Colocar a placa-m\u00e3e em uma cuba ultrass\u00f4nica com solu\u00e7\u00e3o de ...", outcomeText: "Erro na manuten\u00e7\u00e3o! Ligar um equipamento com res\u00edduos de l\u00edquido condutivo (como caf\u00e9 com a\u00e7\u00facar) pode \ncausar um curto imediato, fritando componentes que poderiam ser salvos.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "156", name: "Carlos", gender: "male",
+      brokenPart: "Geral", diagnosticText: "Resist\u00eancia tendendo a zero significa que a linha de alimenta\u00e7\u00e3o est\u00e1 em contato direto com o\nterra. MOSFETs em curto s\u00e3o os maiores suspeitos nessas situa\u00e7\u00f5es.",
+      dialogue: "\"Minha placa-m\u00e3e de desktop n\u00e3o d\u00e1 nenhum sinal de vida, nem acende leds.\" \nAtendente: \"Ao medir a resist\u00eancia na linha principal de 12V do conector ATX com o mult\u00edmetro,  encontrei 0 ohms em rela\u00e7\u00e3o ao terra. O que isso aponta?\"",
+      options: [
+        { text: "Um curto-circuito severo na linha de 12V, muito provavelment...", outcomeText: "Resist\u00eancia tendendo a zero significa que a linha de alimenta\u00e7\u00e3o est\u00e1 em contato direto com o\nterra. MOSFETs em curto s\u00e3o os maiores suspeitos nessas situa\u00e7\u00f5es.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "A fonte de alimenta\u00e7\u00e3o est\u00e1 em modo de prote\u00e7\u00e3o (standby) e ...", outcomeText: "Erro na manuten\u00e7\u00e3o! Resist\u00eancia tendendo a zero significa que a linha de alimenta\u00e7\u00e3o est\u00e1 em contato direto com o\nterra. MOSFETs em curto s\u00e3o os maiores suspeitos nessas situa\u00e7\u00f5es.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "A mem\u00f3ria RAM est\u00e1 em curto, o que desarmou a placa e zerou ...", outcomeText: "Erro na manuten\u00e7\u00e3o! Resist\u00eancia tendendo a zero significa que a linha de alimenta\u00e7\u00e3o est\u00e1 em contato direto com o\nterra. MOSFETs em curto s\u00e3o os maiores suspeitos nessas situa\u00e7\u00f5es.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "O processador est\u00e1 funcionando em seu modo de economia de en...", outcomeText: "Erro na manuten\u00e7\u00e3o! Resist\u00eancia tendendo a zero significa que a linha de alimenta\u00e7\u00e3o est\u00e1 em contato direto com o\nterra. MOSFETs em curto s\u00e3o os maiores suspeitos nessas situa\u00e7\u00f5es.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "157", name: "Beatriz", gender: "male",
+      brokenPart: "Geral", diagnosticText: "A comunica\u00e7\u00e3o entre a RAM e o processador exige tens\u00f5es espec\u00edficas. Se o circuito \nregulador local falhou, a placa n\u00e3o reconhecer\u00e1 a mem\u00f3ria por mais que voc\u00ea a limpe.",
+      dialogue: "\"Meu computador liga, os coolers rodam r\u00e1pidos, mas a tela fica preta e ele fica apitando.\" \nAtendente: \"Identifiquei que \u00e9 erro de mem\u00f3ria. J\u00e1 limpei os contatos e slots, testei outros pentes bons  e continua igual. Qual o pr\u00f3ximo passo?\"",
+      options: [
+        { text: "Injetar tens\u00e3o na linha de alimenta\u00e7\u00e3o principal ou de termi...", outcomeText: "A comunica\u00e7\u00e3o entre a RAM e o processador exige tens\u00f5es espec\u00edficas. Se o circuito \nregulador local falhou, a placa n\u00e3o reconhecer\u00e1 a mem\u00f3ria por mais que voc\u00ea a limpe.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "Realizar a atualiza\u00e7\u00e3o do BIOS da placa-m\u00e3e atrav\u00e9s de um gr...", outcomeText: "Erro na manuten\u00e7\u00e3o! A comunica\u00e7\u00e3o entre a RAM e o processador exige tens\u00f5es espec\u00edficas. Se o circuito \nregulador local falhou, a placa n\u00e3o reconhecer\u00e1 a mem\u00f3ria por mais que voc\u00ea a limpe.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Substituir a bateria da CMOS por uma nova.", outcomeText: "Erro na manuten\u00e7\u00e3o! A comunica\u00e7\u00e3o entre a RAM e o processador exige tens\u00f5es espec\u00edficas. Se o circuito \nregulador local falhou, a placa n\u00e3o reconhecer\u00e1 a mem\u00f3ria por mais que voc\u00ea a limpe.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Trocar a placa de v\u00eddeo dedicada.", outcomeText: "Erro na manuten\u00e7\u00e3o! A comunica\u00e7\u00e3o entre a RAM e o processador exige tens\u00f5es espec\u00edficas. Se o circuito \nregulador local falhou, a placa n\u00e3o reconhecer\u00e1 a mem\u00f3ria por mais que voc\u00ea a limpe.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "158", name: "Marcos", gender: "male",
+      brokenPart: "Geral", diagnosticText: "O circuito regulador de tens\u00e3o superaquece ao entregar corrente ao processador. Os \ncomponentes de pot\u00eancia t\u00eam perda de efici\u00eancia t\u00e9rmica que faz a placa reduzir o clock para esfriar.",
+      dialogue: "\"Sinto que meu PC perde rendimento e d\u00e1 umas travadas do nada no meio do uso.\" \nAtendente: \"O processador est\u00e1 reduzindo o clock por seguran\u00e7a (throttling), mas ele pr\u00f3prio est\u00e1 frio.  O term\u00f4metro mostrou os VRMs fervendo. O que ocorre?\"",
+      options: [
+        { text: "Os MOSFETs est\u00e3o sofrendo perda de efici\u00eancia (thermal runaw...", outcomeText: "O circuito regulador de tens\u00e3o superaquece ao entregar corrente ao processador. Os \ncomponentes de pot\u00eancia t\u00eam perda de efici\u00eancia t\u00e9rmica que faz a placa reduzir o clock para esfriar.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "A pasta t\u00e9rmica do processador ressecou e o calor est\u00e1 escap...", outcomeText: "Erro na manuten\u00e7\u00e3o! O circuito regulador de tens\u00e3o superaquece ao entregar corrente ao processador. Os \ncomponentes de pot\u00eancia t\u00eam perda de efici\u00eancia t\u00e9rmica que faz a placa reduzir o clock para esfriar.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "A placa-m\u00e3e est\u00e1 em curto-circuito devido a um parafuso solt...", outcomeText: "Erro na manuten\u00e7\u00e3o! O circuito regulador de tens\u00e3o superaquece ao entregar corrente ao processador. Os \ncomponentes de pot\u00eancia t\u00eam perda de efici\u00eancia t\u00e9rmica que faz a placa reduzir o clock para esfriar.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Os capacitores do VRM est\u00e3o explodindo, o que causa uma qued...", outcomeText: "Erro na manuten\u00e7\u00e3o! O circuito regulador de tens\u00e3o superaquece ao entregar corrente ao processador. Os \ncomponentes de pot\u00eancia t\u00eam perda de efici\u00eancia t\u00e9rmica que faz a placa reduzir o clock para esfriar.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "159", name: "Ana", gender: "male",
+      brokenPart: "Geral", diagnosticText: "O acoplamento AC filtra a tens\u00e3o cont\u00ednua (DC) e permite focar apenas na varia\u00e7\u00e3o \n(ondula\u00e7\u00e3o/ru\u00eddo) da tens\u00e3o, o que \u00e9 ideal para analisar a qualidade da energia.",
+      dialogue: "\"Quero uma an\u00e1lise exata se a energia que alimenta meus componentes est\u00e1 limpa e sem  oscila\u00e7\u00f5es perigosas.\" \nAtendente: \"Perfeito. Para medir com precis\u00e3o a ondula\u00e7\u00e3o (ripple) de alta frequ\u00eancia nas linhas  reguladas da placa-m\u00e3e, o que devo usar?\"",
+      options: [
+        { text: "Um oscilosc\u00f3pio configurado em acoplamento AC (Alternate Cur...", outcomeText: "O acoplamento AC filtra a tens\u00e3o cont\u00ednua (DC) e permite focar apenas na varia\u00e7\u00e3o \n(ondula\u00e7\u00e3o/ru\u00eddo) da tens\u00e3o, o que \u00e9 ideal para analisar a qualidade da energia.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "Um mult\u00edmetro digital configurado para medir tens\u00e3o cont\u00ednua...", outcomeText: "Erro na manuten\u00e7\u00e3o! O acoplamento AC filtra a tens\u00e3o cont\u00ednua (DC) e permite focar apenas na varia\u00e7\u00e3o \n(ondula\u00e7\u00e3o/ru\u00eddo) da tens\u00e3o, o que \u00e9 ideal para analisar a qualidade da energia.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Um testador de fonte ATX ligado diretamente nos pinos do cab...", outcomeText: "Erro na manuten\u00e7\u00e3o! O acoplamento AC filtra a tens\u00e3o cont\u00ednua (DC) e permite focar apenas na varia\u00e7\u00e3o \n(ondula\u00e7\u00e3o/ru\u00eddo) da tens\u00e3o, o que \u00e9 ideal para analisar a qualidade da energia.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Uma placa de diagn\u00f3stico POST PCI-Express inserida no slot.", outcomeText: "Erro na manuten\u00e7\u00e3o! O acoplamento AC filtra a tens\u00e3o cont\u00ednua (DC) e permite focar apenas na varia\u00e7\u00e3o \n(ondula\u00e7\u00e3o/ru\u00eddo) da tens\u00e3o, o que \u00e9 ideal para analisar a qualidade da energia.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "160", name: "Marcos", gender: "male",
+      brokenPart: "Geral", diagnosticText: "Os c\u00f3digos 00 ou CO costumam ser os primeiros da inicializa\u00e7\u00e3o. Geralmente significam que\no processador est\u00e1 morto, sem alimenta\u00e7\u00e3o, ou o chip da BIOS est\u00e1 corrompido e n\u00e3o inicializa.",
+      dialogue: "\"Levei meu PC em outro lugar, disseram que era a BIOS, mas ele continua sem dar v\u00eddeo.\" \nAtendente: \"Coloquei uma placa de diagn\u00f3stico na sua placa-m\u00e3e e ela trava direto no c\u00f3digo inicial  '00' (ou 'CO'). O que esse c\u00f3digo costuma indicar?\"",
+      options: [
+        { text: "Falha fatal antes ou durante o in\u00edcio do POST, frequentement...", outcomeText: "Os c\u00f3digos 00 ou CO costumam ser os primeiros da inicializa\u00e7\u00e3o. Geralmente significam que\no processador est\u00e1 morto, sem alimenta\u00e7\u00e3o, ou o chip da BIOS est\u00e1 corrompido e n\u00e3o inicializa.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "O sistema concluiu o POST com sucesso e est\u00e1 pronto para ini...", outcomeText: "Erro na manuten\u00e7\u00e3o! Os c\u00f3digos 00 ou CO costumam ser os primeiros da inicializa\u00e7\u00e3o. Geralmente significam que\no processador est\u00e1 morto, sem alimenta\u00e7\u00e3o, ou o chip da BIOS est\u00e1 corrompido e n\u00e3o inicializa.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Erro claro na placa de v\u00eddeo, indicando que ela foi desconec...", outcomeText: "Erro na manuten\u00e7\u00e3o! Os c\u00f3digos 00 ou CO costumam ser os primeiros da inicializa\u00e7\u00e3o. Geralmente significam que\no processador est\u00e1 morto, sem alimenta\u00e7\u00e3o, ou o chip da BIOS est\u00e1 corrompido e n\u00e3o inicializa.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "A bateria da CMOS est\u00e1 descarregada, exigindo apenas a troca...", outcomeText: "Erro na manuten\u00e7\u00e3o! Os c\u00f3digos 00 ou CO costumam ser os primeiros da inicializa\u00e7\u00e3o. Geralmente significam que\no processador est\u00e1 morto, sem alimenta\u00e7\u00e3o, ou o chip da BIOS est\u00e1 corrompido e n\u00e3o inicializa.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "161", name: "Julia", gender: "male",
+      brokenPart: "Geral", diagnosticText: "O sinal do bot\u00e3o precisa chegar ao pino do SIO e ir a n\u00edvel l\u00f3gico baixo (OV) quando \npressionado, indicando ao chip que o usu\u00e1rio solicitou a inicializa\u00e7\u00e3o da placa.",
+      dialogue: "\"Fui tentar ligar meu computador hoje de manh\u00e3 e ele n\u00e3o d\u00e1 nenhum sinal de vida. Ontem desligou normal.\" \nAtendente: \"As tens\u00f5es prim\u00e1rias de 3.3V e 5V est\u00e3o na placa, mas ela n\u00e3o starta. Qual sinal no Super  I/O monitoramos para ver se o bot\u00e3o power funciona?\"",
+      options: [
+        { text: "A tens\u00e3o VCORE do processador, pois sem ela o Super I/O entr...", outcomeText: "Erro na manuten\u00e7\u00e3o! O sinal do bot\u00e3o precisa chegar ao pino do SIO e ir a n\u00edvel l\u00f3gico baixo (OV) quando \npressionado, indicando ao chip que o usu\u00e1rio solicitou a inicializa\u00e7\u00e3o da placa.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "O sinal de Clock gerado pelo cristal de 32kHz, que se estive...", outcomeText: "Erro na manuten\u00e7\u00e3o! O sinal do bot\u00e3o precisa chegar ao pino do SIO e ir a n\u00edvel l\u00f3gico baixo (OV) quando \npressionado, indicando ao chip que o usu\u00e1rio solicitou a inicializa\u00e7\u00e3o da placa.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "O sinal de Power Button (ON_OFF#) chegando ao pino do SIO e ...", outcomeText: "O sinal do bot\u00e3o precisa chegar ao pino do SIO e ir a n\u00edvel l\u00f3gico baixo (OV) quando \npressionado, indicando ao chip que o usu\u00e1rio solicitou a inicializa\u00e7\u00e3o da placa.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "A tens\u00e3o da bateria da CMOS, visto que o SIO requer 12V para...", outcomeText: "Erro na manuten\u00e7\u00e3o! O sinal do bot\u00e3o precisa chegar ao pino do SIO e ir a n\u00edvel l\u00f3gico baixo (OV) quando \npressionado, indicando ao chip que o usu\u00e1rio solicitou a inicializa\u00e7\u00e3o da placa.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "162", name: "Julia", gender: "male",
+      brokenPart: "Geral", diagnosticText: "Injetar uma tens\u00e3o baixa e segura com limita\u00e7\u00e3o de corrente permite que apenas o \ncomponente em curto dissipe energia em forma de calor, revelando sua exata localiza\u00e7\u00e3o.",
+      dialogue: "\"Estava usando meu notebook e de repente deu um estalo e ele apagou tudo. Agora o LED da fonte original fica piscando quando plugo nele.\" \nAtendente: \"Isso acontece porque a linha principal (19V) entrou em curto. Qual \u00e9 a t\u00e9cnica mais segura para achar o componente culpado sem queimar a placa?\"",
+      options: [
+        { text: "Substituir o fus\u00edvel de entrada por um de maior amperagem pa...", outcomeText: "Erro na manuten\u00e7\u00e3o! Injetar uma tens\u00e3o baixa e segura com limita\u00e7\u00e3o de corrente permite que apenas o \ncomponente em curto dissipe energia em forma de calor, revelando sua exata localiza\u00e7\u00e3o.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Injetar uma tens\u00e3o baixa (1V a 2V) com limita\u00e7\u00e3o de corrente...", outcomeText: "Injetar uma tens\u00e3o baixa e segura com limita\u00e7\u00e3o de corrente permite que apenas o \ncomponente em curto dissipe energia em forma de calor, revelando sua exata localiza\u00e7\u00e3o.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "Medir a continuidade de todos os capacitores da placa-m\u00e3e us...", outcomeText: "Erro na manuten\u00e7\u00e3o! Injetar uma tens\u00e3o baixa e segura com limita\u00e7\u00e3o de corrente permite que apenas o \ncomponente em curto dissipe energia em forma de calor, revelando sua exata localiza\u00e7\u00e3o.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Aplicar solda em todos os terminais dos MOSFETs da linha de ...", outcomeText: "Erro na manuten\u00e7\u00e3o! Injetar uma tens\u00e3o baixa e segura com limita\u00e7\u00e3o de corrente permite que apenas o \ncomponente em curto dissipe energia em forma de calor, revelando sua exata localiza\u00e7\u00e3o.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "163", name: "Ana", gender: "male",
+      brokenPart: "Geral", diagnosticText: "O backup \u00e9 crucial em qualquer manuten\u00e7\u00e3o de firmware. Se o arquivo novo n\u00e3o funcionar \nou n\u00e3o for o correto do modelo da placa, voc\u00ea consegue restaurar o chip ao estado original.",
+      dialogue: "\"Meu computador liga e gira os coolers bem r\u00e1pido, mas a tela fica preta. Um amigo me  disse que pode ser a BIOS corrompida.\" \nAtendente: \"Pode ser sim. Vou usar um gravador externo (CH341A) para regravar o chip de BIOS SPI.  Qual procedimento eu NUNCA posso esquecer antes de gravar o arquivo novo?\"",
+      options: [
+        { text: "Ligar a placa em curto nos pinos do Clear CMOS enquanto o gr...", outcomeText: "Erro na manuten\u00e7\u00e3o! O backup \u00e9 crucial em qualquer manuten\u00e7\u00e3o de firmware. Se o arquivo novo n\u00e3o funcionar \nou n\u00e3o for o correto do modelo da placa, voc\u00ea consegue restaurar o chip ao estado original.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Fazer o backup (leitura e salvamento no computador) do conte...", outcomeText: "O backup \u00e9 crucial em qualquer manuten\u00e7\u00e3o de firmware. Se o arquivo novo n\u00e3o funcionar \nou n\u00e3o for o correto do modelo da placa, voc\u00ea consegue restaurar o chip ao estado original.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "Injetar 5V diretamente no pino 8 (VCC) para apagar a mem\u00f3ria...", outcomeText: "Erro na manuten\u00e7\u00e3o! O backup \u00e9 crucial em qualquer manuten\u00e7\u00e3o de firmware. Se o arquivo novo n\u00e3o funcionar \nou n\u00e3o for o correto do modelo da placa, voc\u00ea consegue restaurar o chip ao estado original.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Remover o chip da placa-m\u00e3e e banh\u00e1-lo em \u00e1lcool isoprop\u00edlic...", outcomeText: "Erro na manuten\u00e7\u00e3o! O backup \u00e9 crucial em qualquer manuten\u00e7\u00e3o de firmware. Se o arquivo novo n\u00e3o funcionar \nou n\u00e3o for o correto do modelo da placa, voc\u00ea consegue restaurar o chip ao estado original.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "164", name: "Beatriz", gender: "male",
+      brokenPart: "Geral", diagnosticText: "O MOSFET em curto perde sua capacidade de chaveamento el\u00e9trico e vira um \"fio\" direto, \npermitindo que a tens\u00e3o passe sem controle, gerando o curto detectado pelo mult\u00edmetro.",
+      dialogue: "\"Minha placa-m\u00e3e est\u00e1 desarmando a fonte assim que eu tento ligar o PC. O que pode ser?\" \nAtendente: \"Suspeito de um MOSFET de alta (High-Side) em curto no VRM do processador. Ao tirar  ele da placa e medir com o mult\u00edmetro, o que confirma o defeito?\"",
+      options: [
+        { text: "Uma resist\u00eancia pr\u00f3xima a O ohms (continuidade acusando curt...", outcomeText: "O MOSFET em curto perde sua capacidade de chaveamento el\u00e9trico e vira um \"fio\" direto, \npermitindo que a tens\u00e3o passe sem controle, gerando o curto detectado pelo mult\u00edmetro.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "Uma queda de tensionamento de 0.5V (escala de diodo) se a po...", outcomeText: "Erro na manuten\u00e7\u00e3o! O MOSFET em curto perde sua capacidade de chaveamento el\u00e9trico e vira um \"fio\" direto, \npermitindo que a tens\u00e3o passe sem controle, gerando o curto detectado pelo mult\u00edmetro.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Resist\u00eancia infinita (circuito aberto) nos dois sentidos de ...", outcomeText: "Erro na manuten\u00e7\u00e3o! O MOSFET em curto perde sua capacidade de chaveamento el\u00e9trico e vira um \"fio\" direto, \npermitindo que a tens\u00e3o passe sem controle, gerando o curto detectado pelo mult\u00edmetro.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Uma resist\u00eancia de 10 Megaohms, pois a queima de semiconduto...", outcomeText: "Erro na manuten\u00e7\u00e3o! O MOSFET em curto perde sua capacidade de chaveamento el\u00e9trico e vira um \"fio\" direto, \npermitindo que a tens\u00e3o passe sem controle, gerando o curto detectado pelo mult\u00edmetro.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "165", name: "Julia", gender: "male",
+      brokenPart: "Geral", diagnosticText: "Como a alimenta\u00e7\u00e3o de 3V chega perfeitamente mas a frequ\u00eancia de tempo n\u00e3o \u00e9 gerada para\no Chipset (PCH), o cristal ressonador ou seus componentes de filtro falharam.",
+      dialogue: "\"Meu computador liga, mas n\u00e3o d\u00e1 v\u00eddeo nenhum. J\u00e1 troquei mem\u00f3ria, placa de v\u00eddeo,  processador e nada resolve.\" \nAtendente: \"A bateria de 3V est\u00e1 boa, mas notei com o oscilosc\u00f3pio que o cristal de 32.768 kHz do  circuito RTC n\u00e3o est\u00e1 oscilando. Qual \u00e9 o diagn\u00f3stico prov\u00e1vel?\"",
+      options: [
+        { text: "O processador est\u00e1 com defeito de f\u00e1brica e deve ser substit...", outcomeText: "Erro na manuten\u00e7\u00e3o! Como a alimenta\u00e7\u00e3o de 3V chega perfeitamente mas a frequ\u00eancia de tempo n\u00e3o \u00e9 gerada para\no Chipset (PCH), o cristal ressonador ou seus componentes de filtro falharam.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "O pr\u00f3prio cristal de 32.768 kHz est\u00e1 defeituoso ou h\u00e1 falha ...", outcomeText: "Como a alimenta\u00e7\u00e3o de 3V chega perfeitamente mas a frequ\u00eancia de tempo n\u00e3o \u00e9 gerada para\no Chipset (PCH), o cristal ressonador ou seus componentes de filtro falharam.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "A bateria da CMOS est\u00e1 invertida, bloqueando o envio de dado...", outcomeText: "Erro na manuten\u00e7\u00e3o! Como a alimenta\u00e7\u00e3o de 3V chega perfeitamente mas a frequ\u00eancia de tempo n\u00e3o \u00e9 gerada para\no Chipset (PCH), o cristal ressonador ou seus componentes de filtro falharam.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "O circuito regulador de tens\u00e3o (VRM) da placa de v\u00eddeo dedic...", outcomeText: "Erro na manuten\u00e7\u00e3o! Como a alimenta\u00e7\u00e3o de 3V chega perfeitamente mas a frequ\u00eancia de tempo n\u00e3o \u00e9 gerada para\no Chipset (PCH), o cristal ressonador ou seus componentes de filtro falharam.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "166", name: "Marcos", gender: "male",
+      brokenPart: "Geral", diagnosticText: "Quando a fonte de alimenta\u00e7\u00e3o est\u00e1 defeituosa ou n\u00e3o entrega a pot\u00eancia necess\u00e1ria \n(especialmente durante o pico de inicializa\u00e7\u00e3o), o PC liga os LEDs e ventiladores, mas falha no \nprocesso de POST e desliga.",
+      dialogue: "\"Meu computador liga as luzes, os coolers giram, mas n\u00e3o d\u00e1 v\u00eddeo e desliga sozinho ap\u00f3s  alguns segundos.\" \nAtendente: \"Esse comportamento indica uma falha no sistema de inicializa\u00e7\u00e3o por falta de energia  est\u00e1vel. Qual \u00e9 a a\u00e7\u00e3o recomendada para resolver esse problema?\"",
+      options: [
+        { text: "Testar e substituir a fonte de alimenta\u00e7\u00e3o por uma de qualid...", outcomeText: "Quando a fonte de alimenta\u00e7\u00e3o est\u00e1 defeituosa ou n\u00e3o entrega a pot\u00eancia necess\u00e1ria \n(especialmente durante o pico de inicializa\u00e7\u00e3o), o PC liga os LEDs e ventiladores, mas falha no \nprocesso de POST e desliga.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "Limpar a poeira da placa de v\u00eddeo.", outcomeText: "Erro na manuten\u00e7\u00e3o! Quando a fonte de alimenta\u00e7\u00e3o est\u00e1 defeituosa ou n\u00e3o entrega a pot\u00eancia necess\u00e1ria \n(especialmente durante o pico de inicializa\u00e7\u00e3o), o PC liga os LEDs e ventiladores, mas falha no \nprocesso de POST e desliga.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Formatar o disco r\u00edgido (HD).", outcomeText: "Erro na manuten\u00e7\u00e3o! Quando a fonte de alimenta\u00e7\u00e3o est\u00e1 defeituosa ou n\u00e3o entrega a pot\u00eancia necess\u00e1ria \n(especialmente durante o pico de inicializa\u00e7\u00e3o), o PC liga os LEDs e ventiladores, mas falha no \nprocesso de POST e desliga.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Trocar a mem\u00f3ria RAM.", outcomeText: "Erro na manuten\u00e7\u00e3o! Quando a fonte de alimenta\u00e7\u00e3o est\u00e1 defeituosa ou n\u00e3o entrega a pot\u00eancia necess\u00e1ria \n(especialmente durante o pico de inicializa\u00e7\u00e3o), o PC liga os LEDs e ventiladores, mas falha no \nprocesso de POST e desliga.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "167", name: "Julia", gender: "male",
+      brokenPart: "Geral", diagnosticText: "A placa-m\u00e3e utiliza sequ\u00eancias de bipes para alertar sobre falhas de hardware cr\u00edtico. Bipes \ncont\u00ednuos ou m\u00faltiplos bipes curtos costumam indicar que a mem\u00f3ria RAM est\u00e1 mal encaixada ou com\nos contatos sujos.",
+      dialogue: "\"O computador emite uma s\u00e9rie de bipes cont\u00ednuos ao ser ligado, a tela fica preta e nada  acontece.\" \nAtendente: \"Esses bipes s\u00e3o c\u00f3digos de erro emitidos pela placa-m\u00e3e. Qual \u00e9 o diagn\u00f3stico mais  prov\u00e1vel e a primeira interven\u00e7\u00e3o?\"",
+      options: [
+        { text: "O processador est\u00e1 queimado.", outcomeText: "Erro na manuten\u00e7\u00e3o! A placa-m\u00e3e utiliza sequ\u00eancias de bipes para alertar sobre falhas de hardware cr\u00edtico. Bipes \ncont\u00ednuos ou m\u00faltiplos bipes curtos costumam indicar que a mem\u00f3ria RAM est\u00e1 mal encaixada ou com\nos contatos sujos.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Problema na mem\u00f3ria RAM. Desligue o PC, retire os m\u00f3dulos, l...", outcomeText: "A placa-m\u00e3e utiliza sequ\u00eancias de bipes para alertar sobre falhas de hardware cr\u00edtico. Bipes \ncont\u00ednuos ou m\u00faltiplos bipes curtos costumam indicar que a mem\u00f3ria RAM est\u00e1 mal encaixada ou com\nos contatos sujos.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "O monitor est\u00e1 desligado ou com defeito.", outcomeText: "Erro na manuten\u00e7\u00e3o! A placa-m\u00e3e utiliza sequ\u00eancias de bipes para alertar sobre falhas de hardware cr\u00edtico. Bipes \ncont\u00ednuos ou m\u00faltiplos bipes curtos costumam indicar que a mem\u00f3ria RAM est\u00e1 mal encaixada ou com\nos contatos sujos.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "A bateria da placa-m\u00e3e est\u00e1 descarregada.", outcomeText: "Erro na manuten\u00e7\u00e3o! A placa-m\u00e3e utiliza sequ\u00eancias de bipes para alertar sobre falhas de hardware cr\u00edtico. Bipes \ncont\u00ednuos ou m\u00faltiplos bipes curtos costumam indicar que a mem\u00f3ria RAM est\u00e1 mal encaixada ou com\nos contatos sujos.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "168", name: "Julia", gender: "male",
+      brokenPart: "Geral", diagnosticText: "Os discos r\u00edgidos tradicionais (HDs) possuem partes mec\u00e2nicas limitadas e costumam ficar \nmuito lentos com o tempo. Um SSD (Solid State Drive) \u00e9 muito mais r\u00e1pido, reduzindo o tempo de \nboot e abertura de programas.",
+      dialogue: "\"Meu computador demora mais de 5 minutos para ligar, e quando abro os programas, eles  travam e demoram muito para responder.\" \nAtendente: \"Essa lentid\u00e3o generalizada \u00e9 t\u00edpica de um  componente de armazenamento desgastado. O que voc\u00ea recomenda para resolver definitivamente esse  problema?\"",
+      options: [
+        { text: "Substituir o HD antigo por um SSD e instalar o sistema opera...", outcomeText: "Os discos r\u00edgidos tradicionais (HDs) possuem partes mec\u00e2nicas limitadas e costumam ficar \nmuito lentos com o tempo. Um SSD (Solid State Drive) \u00e9 muito mais r\u00e1pido, reduzindo o tempo de \nboot e abertura de programas.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "Trocar a mem\u00f3ria RAM por uma de menor frequ\u00eancia.", outcomeText: "Erro na manuten\u00e7\u00e3o! Os discos r\u00edgidos tradicionais (HDs) possuem partes mec\u00e2nicas limitadas e costumam ficar \nmuito lentos com o tempo. Um SSD (Solid State Drive) \u00e9 muito mais r\u00e1pido, reduzindo o tempo de \nboot e abertura de programas.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Desconectar a placa de v\u00eddeo.", outcomeText: "Erro na manuten\u00e7\u00e3o! Os discos r\u00edgidos tradicionais (HDs) possuem partes mec\u00e2nicas limitadas e costumam ficar \nmuito lentos com o tempo. Um SSD (Solid State Drive) \u00e9 muito mais r\u00e1pido, reduzindo o tempo de \nboot e abertura de programas.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Limpar os coolers e substituir a pasta t\u00e9rmica.", outcomeText: "Erro na manuten\u00e7\u00e3o! Os discos r\u00edgidos tradicionais (HDs) possuem partes mec\u00e2nicas limitadas e costumam ficar \nmuito lentos com o tempo. Um SSD (Solid State Drive) \u00e9 muito mais r\u00e1pido, reduzindo o tempo de \nboot e abertura de programas.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "169", name: "Rafael", gender: "male",
+      brokenPart: "Geral", diagnosticText: "Quando o processador aquece acima do limite seguro, a placa-m\u00e3e desliga o PC \nimediatamente para evitar a queima do componente. Isso \u00e9 resolvido limpando o cooler e trocando a \npasta t\u00e9rmica.",
+      dialogue: "\"Meu computador funciona bem por algumas horas, mas depois desliga sozinho do nada,  especialmente quando estou jogando.\" \nAtendente: \"Esses desligamentos em momentos de uso intenso  s\u00e3o um mecanismo de prote\u00e7\u00e3o. Qual \u00e9 a causa raiz mais comum?\"",
+      options: [
+        { text: "Corrup\u00e7\u00e3o do sistema operacional Windows.", outcomeText: "Erro na manuten\u00e7\u00e3o! Quando o processador aquece acima do limite seguro, a placa-m\u00e3e desliga o PC \nimediatamente para evitar a queima do componente. Isso \u00e9 resolvido limpando o cooler e trocando a \npasta t\u00e9rmica.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Superaquecimento do processador por ac\u00famulo de poeira ou pas...", outcomeText: "Quando o processador aquece acima do limite seguro, a placa-m\u00e3e desliga o PC \nimediatamente para evitar a queima do componente. Isso \u00e9 resolvido limpando o cooler e trocando a \npasta t\u00e9rmica.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "Falha no mouse ou teclado.", outcomeText: "Erro na manuten\u00e7\u00e3o! Quando o processador aquece acima do limite seguro, a placa-m\u00e3e desliga o PC \nimediatamente para evitar a queima do componente. Isso \u00e9 resolvido limpando o cooler e trocando a \npasta t\u00e9rmica.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Conex\u00e3o incorreta do cabo de rede.", outcomeText: "Erro na manuten\u00e7\u00e3o! Quando o processador aquece acima do limite seguro, a placa-m\u00e3e desliga o PC \nimediatamente para evitar a queima do componente. Isso \u00e9 resolvido limpando o cooler e trocando a \npasta t\u00e9rmica.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "170", name: "Fernanda", gender: "male",
+      brokenPart: "Geral", diagnosticText: "Linhas na tela, chuviscos e quadriculados s\u00e3o os sintomas cl\u00e1ssicos de defeito f\u00edsico ou \nsuperaquecimento na placa de v\u00eddeo (processador gr\u00e1fico ou seus m\u00f3dulos de mem\u00f3ria).",
+      dialogue: "\"Quando ligo meu PC, a tela fica cheia de linhas verticais estranhas, quadriculados  coloridos e chuviscos.\" \nAtendente: \"Esses padr\u00f5es incorretos na tela s\u00e3o conhecidos como artefatos visuais. Qual componente  \u00e9 o principal suspeito desse defeito?\"",
+      options: [
+        { text: "O processador (CPU).", outcomeText: "Erro na manuten\u00e7\u00e3o! Linhas na tela, chuviscos e quadriculados s\u00e3o os sintomas cl\u00e1ssicos de defeito f\u00edsico ou \nsuperaquecimento na placa de v\u00eddeo (processador gr\u00e1fico ou seus m\u00f3dulos de mem\u00f3ria).", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "A bateria da placa-m\u00e3e.", outcomeText: "Erro na manuten\u00e7\u00e3o! Linhas na tela, chuviscos e quadriculados s\u00e3o os sintomas cl\u00e1ssicos de defeito f\u00edsico ou \nsuperaquecimento na placa de v\u00eddeo (processador gr\u00e1fico ou seus m\u00f3dulos de mem\u00f3ria).", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "A placa de v\u00eddeo (GPU) ou suas mem\u00f3rias.", outcomeText: "Linhas na tela, chuviscos e quadriculados s\u00e3o os sintomas cl\u00e1ssicos de defeito f\u00edsico ou \nsuperaquecimento na placa de v\u00eddeo (processador gr\u00e1fico ou seus m\u00f3dulos de mem\u00f3ria).", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "O monitor.", outcomeText: "Erro na manuten\u00e7\u00e3o! Linhas na tela, chuviscos e quadriculados s\u00e3o os sintomas cl\u00e1ssicos de defeito f\u00edsico ou \nsuperaquecimento na placa de v\u00eddeo (processador gr\u00e1fico ou seus m\u00f3dulos de mem\u00f3ria).", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "171", name: "Beatriz", gender: "male",
+      brokenPart: "Geral", diagnosticText: "Existe uma pequena pilha redonda instalada na placa-m\u00e3e. A sua \u00fanica fun\u00e7\u00e3o \u00e9 fornecer \nenergia para manter as configura\u00e7\u00f5es da BIOS e o rel\u00f3gio ativos quando o PC \u00e9 desligado da tomada.",
+      dialogue: "\"Toda vez que eu tiro o computador da tomada, ele perde a data e a hora, e eu preciso  configurar a BIOS novamente.\" \nAtendente: \"O rel\u00f3gio interno e as configura\u00e7\u00f5es b\u00e1sicas precisam de energia constante. O que est\u00e1  causando essa perda de mem\u00f3ria?\"",
+      options: [
+        { text: "O sistema operacional Windows corrompido.", outcomeText: "Erro na manuten\u00e7\u00e3o! Existe uma pequena pilha redonda instalada na placa-m\u00e3e. A sua \u00fanica fun\u00e7\u00e3o \u00e9 fornecer \nenergia para manter as configura\u00e7\u00f5es da BIOS e o rel\u00f3gio ativos quando o PC \u00e9 desligado da tomada.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Os cabos SATA do HD danificados.", outcomeText: "Erro na manuten\u00e7\u00e3o! Existe uma pequena pilha redonda instalada na placa-m\u00e3e. A sua \u00fanica fun\u00e7\u00e3o \u00e9 fornecer \nenergia para manter as configura\u00e7\u00f5es da BIOS e o rel\u00f3gio ativos quando o PC \u00e9 desligado da tomada.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "A fonte de alimenta\u00e7\u00e3o perdendo pot\u00eancia.", outcomeText: "Erro na manuten\u00e7\u00e3o! Existe uma pequena pilha redonda instalada na placa-m\u00e3e. A sua \u00fanica fun\u00e7\u00e3o \u00e9 fornecer \nenergia para manter as configura\u00e7\u00f5es da BIOS e o rel\u00f3gio ativos quando o PC \u00e9 desligado da tomada.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "A bateria da placa-m\u00e3e (modelo CR2032) est\u00e1 descarregada.", outcomeText: "Existe uma pequena pilha redonda instalada na placa-m\u00e3e. A sua \u00fanica fun\u00e7\u00e3o \u00e9 fornecer \nenergia para manter as configura\u00e7\u00f5es da BIOS e o rel\u00f3gio ativos quando o PC \u00e9 desligado da tomada.", moneyChange: 150, repChange: 20, emotion: "happy" },
+      ]
+    },
+    {
+      id: "172", name: "Pedro", gender: "male",
+      brokenPart: "Geral", diagnosticText: "A BIOS/UEFI \u00e9 o sistema b\u00e1sico da placa-m\u00e3e. Ao pressionar a tecla correta (geralmente \nDelete ou F2) antes do Windows carregar, voc\u00ea pode definir qual disco o computador vai ler primeiro.",
+      dialogue: "\"Instalei um SSD novinho no meu computador, mas ele continua inicializando pelo HD  antigo.\" \nAtendente: \"O computador est\u00e1 dando prioridade para o HD antigo. Onde e como voc\u00ea deve alterar  isso?\"",
+      options: [
+        { text: "Nas configura\u00e7\u00f5es de \"Personaliza\u00e7\u00e3o\" do Windows.", outcomeText: "Erro na manuten\u00e7\u00e3o! A BIOS/UEFI \u00e9 o sistema b\u00e1sico da placa-m\u00e3e. Ao pressionar a tecla correta (geralmente \nDelete ou F2) antes do Windows carregar, voc\u00ea pode definir qual disco o computador vai ler primeiro.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "No Gerenciador de Dispositivos.", outcomeText: "Erro na manuten\u00e7\u00e3o! A BIOS/UEFI \u00e9 o sistema b\u00e1sico da placa-m\u00e3e. Ao pressionar a tecla correta (geralmente \nDelete ou F2) antes do Windows carregar, voc\u00ea pode definir qual disco o computador vai ler primeiro.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Acessar a BIOS/UEFI pressionando a tecla correspondente ao l...", outcomeText: "A BIOS/UEFI \u00e9 o sistema b\u00e1sico da placa-m\u00e3e. Ao pressionar a tecla correta (geralmente \nDelete ou F2) antes do Windows carregar, voc\u00ea pode definir qual disco o computador vai ler primeiro.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "Desconectar o cabo de v\u00eddeo.", outcomeText: "Erro na manuten\u00e7\u00e3o! A BIOS/UEFI \u00e9 o sistema b\u00e1sico da placa-m\u00e3e. Ao pressionar a tecla correta (geralmente \nDelete ou F2) antes do Windows carregar, voc\u00ea pode definir qual disco o computador vai ler primeiro.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "173", name: "Marcos", gender: "male",
+      brokenPart: "Geral", diagnosticText: "A falta de sinal no monitor pode ser causada por um cabo de v\u00eddeo solto ou mal encaixado, \nou por falhas de comunica\u00e7\u00e3o interna, como mau contato nos m\u00f3dulos de mem\u00f3ria RAM.",
+      dialogue: "\"O computador liga, os coolers giram, os LEDs acendem, mas o monitor diz 'Sem sinal' e  no aparece imagem.\" \nAtendente: \"Esse \u00e9 um problema cl\u00e1ssico de falta de v\u00eddeo. Qual destas a\u00e7\u00f5es \u00e9 a mais indicada para  come\u00e7ar o diagn\u00f3stico?\"",
+      options: [
+        { text: "Verificar se o cabo de v\u00eddeo est\u00e1 bem conectado ao monitor e...", outcomeText: "A falta de sinal no monitor pode ser causada por um cabo de v\u00eddeo solto ou mal encaixado, \nou por falhas de comunica\u00e7\u00e3o interna, como mau contato nos m\u00f3dulos de mem\u00f3ria RAM.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "Substituir o processador.", outcomeText: "Erro na manuten\u00e7\u00e3o! A falta de sinal no monitor pode ser causada por um cabo de v\u00eddeo solto ou mal encaixado, \nou por falhas de comunica\u00e7\u00e3o interna, como mau contato nos m\u00f3dulos de mem\u00f3ria RAM.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Desinstalar a placa de rede.", outcomeText: "Erro na manuten\u00e7\u00e3o! A falta de sinal no monitor pode ser causada por um cabo de v\u00eddeo solto ou mal encaixado, \nou por falhas de comunica\u00e7\u00e3o interna, como mau contato nos m\u00f3dulos de mem\u00f3ria RAM.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Formatar o SSD.", outcomeText: "Erro na manuten\u00e7\u00e3o! A falta de sinal no monitor pode ser causada por um cabo de v\u00eddeo solto ou mal encaixado, \nou por falhas de comunica\u00e7\u00e3o interna, como mau contato nos m\u00f3dulos de mem\u00f3ria RAM.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "174", name: "Pedro", gender: "male",
+      brokenPart: "Geral", diagnosticText: "A melhor abordagem \u00e9 transparente e consultiva. Voc\u00ea explica o defeito (capacitores), mostra\na pe\u00e7a danificada para gerar confian\u00e7a, e negocia a substitui\u00e7\u00e3o da placa-m\u00e3e, avaliando se as outras \npe\u00e7as ainda podem ser aproveitadas.",
+      dialogue: "\"Meu PC simplesmente n\u00e3o liga nada, n\u00e3o acende nenhuma luz e sinto um leve cheiro de  queimado.\" Como t\u00e9cnico, ap\u00f3s abrir o gabinete, voc\u00ea identifica capacitores estufados e vazando na placa-m\u00e3e.  Qual abordagem t\u00e9cnica e comercial voc\u00ea deve utilizar com o cliente?",
+      options: [
+        { text: "Dizer que o problema \u00e9 na tomada e sugerir trocar o estabili...", outcomeText: "Erro na manuten\u00e7\u00e3o! A melhor abordagem \u00e9 transparente e consultiva. Voc\u00ea explica o defeito (capacitores), mostra\na pe\u00e7a danificada para gerar confian\u00e7a, e negocia a substitui\u00e7\u00e3o da placa-m\u00e3e, avaliando se as outras \npe\u00e7as ainda podem ser aproveitadas.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Informar que a placa-m\u00e3e est\u00e1 em curto, mas como \u00e9 uma pe\u00e7a ...", outcomeText: "Erro na manuten\u00e7\u00e3o! A melhor abordagem \u00e9 transparente e consultiva. Voc\u00ea explica o defeito (capacitores), mostra\na pe\u00e7a danificada para gerar confian\u00e7a, e negocia a substitui\u00e7\u00e3o da placa-m\u00e3e, avaliando se as outras \npe\u00e7as ainda podem ser aproveitadas.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Explicar o defeito dos capacitores, propor a substitui\u00e7\u00e3o da...", outcomeText: "A melhor abordagem \u00e9 transparente e consultiva. Voc\u00ea explica o defeito (capacitores), mostra\na pe\u00e7a danificada para gerar confian\u00e7a, e negocia a substitui\u00e7\u00e3o da placa-m\u00e3e, avaliando se as outras \npe\u00e7as ainda podem ser aproveitadas.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "Afirmar que o defeito \u00e9 apenas no processador e tentar vend\u00ea...", outcomeText: "Erro na manuten\u00e7\u00e3o! A melhor abordagem \u00e9 transparente e consultiva. Voc\u00ea explica o defeito (capacitores), mostra\na pe\u00e7a danificada para gerar confian\u00e7a, e negocia a substitui\u00e7\u00e3o da placa-m\u00e3e, avaliando se as outras \npe\u00e7as ainda podem ser aproveitadas.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "175", name: "Julia", gender: "male",
+      brokenPart: "Geral", diagnosticText: "A seguran\u00e7a do equipamento deve vir em primeiro lugar. Voc\u00ea educa o cliente sobre a \nimport\u00e2ncia de uma fonte de qualidade (PFC Ativo) para proteger o investimento dele na placa de \nv\u00eddeo, garantindo uma venda com maior valor agregado.",
+      dialogue: "\"Quero colocar uma placa de v\u00eddeo gamer super moderna, mas meu computador tem uma  fonte de 400W gen\u00e9rica.\" Como t\u00e9cnico, qual deve ser o seu posicionamento na negocia\u00e7\u00e3o?",
+      options: [
+        { text: "Dizer que a fonte de 400W aguenta tranquilamente a nova plac...", outcomeText: "Erro na manuten\u00e7\u00e3o! A seguran\u00e7a do equipamento deve vir em primeiro lugar. Voc\u00ea educa o cliente sobre a \nimport\u00e2ncia de uma fonte de qualidade (PFC Ativo) para proteger o investimento dele na placa de \nv\u00eddeo, garantindo uma venda com maior valor agregado.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Explicar o risco de usar a fonte atual, calcular o consumo d...", outcomeText: "A seguran\u00e7a do equipamento deve vir em primeiro lugar. Voc\u00ea educa o cliente sobre a \nimport\u00e2ncia de uma fonte de qualidade (PFC Ativo) para proteger o investimento dele na placa de \nv\u00eddeo, garantindo uma venda com maior valor agregado.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "Recusar a instala\u00e7\u00e3o da placa de v\u00eddeo e dizer que ele deve ...", outcomeText: "Erro na manuten\u00e7\u00e3o! A seguran\u00e7a do equipamento deve vir em primeiro lugar. Voc\u00ea educa o cliente sobre a \nimport\u00e2ncia de uma fonte de qualidade (PFC Ativo) para proteger o investimento dele na placa de \nv\u00eddeo, garantindo uma venda com maior valor agregado.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Sugerir que ele compre apenas mais mem\u00f3ria RAM para compensa...", outcomeText: "Erro na manuten\u00e7\u00e3o! A seguran\u00e7a do equipamento deve vir em primeiro lugar. Voc\u00ea educa o cliente sobre a \nimport\u00e2ncia de uma fonte de qualidade (PFC Ativo) para proteger o investimento dele na placa de \nv\u00eddeo, garantindo uma venda com maior valor agregado.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "176", name: "Carlos", gender: "male",
+      brokenPart: "Geral", diagnosticText: "Voc\u00ea resolve o problema imediato do cliente (o defeito) e oferece uma solu\u00e7\u00e3o de melhoria de\nperformance (Dual Channel), agregando valor ao atendimento t\u00e9cnico com uma sugest\u00e3o construtiva e \nvantajosa.",
+      dialogue: "\"Meu computador congela enquanto jogo e apresenta uma tela azul. O diagn\u00f3stico mostrou que um dos pentes de Mem\u00f3ria RAM est\u00e1 com defeito.\" O cliente pediu para trocar apenas o pente defeituoso, mas voc\u00ea percebe que ele tem um pente de 8GB  operando sozinho. O que propor?",
+      options: [
+        { text: "Trocar apenas o pente defeituoso por um id\u00eantico e ignorar o...", outcomeText: "Erro na manuten\u00e7\u00e3o! Voc\u00ea resolve o problema imediato do cliente (o defeito) e oferece uma solu\u00e7\u00e3o de melhoria de\nperformance (Dual Channel), agregando valor ao atendimento t\u00e9cnico com uma sugest\u00e3o construtiva e \nvantajosa.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Dizer que o computador vai queimar se ele n\u00e3o comprar 32GB d...", outcomeText: "Erro na manuten\u00e7\u00e3o! Voc\u00ea resolve o problema imediato do cliente (o defeito) e oferece uma solu\u00e7\u00e3o de melhoria de\nperformance (Dual Channel), agregando valor ao atendimento t\u00e9cnico com uma sugest\u00e3o construtiva e \nvantajosa.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Substituir o pente defeituoso por garantia/pe\u00e7a nova e suger...", outcomeText: "Voc\u00ea resolve o problema imediato do cliente (o defeito) e oferece uma solu\u00e7\u00e3o de melhoria de\nperformance (Dual Channel), agregando valor ao atendimento t\u00e9cnico com uma sugest\u00e3o construtiva e \nvantajosa.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "Informar que a tela azul indica problema no HD e ignorar o p...", outcomeText: "Erro na manuten\u00e7\u00e3o! Voc\u00ea resolve o problema imediato do cliente (o defeito) e oferece uma solu\u00e7\u00e3o de melhoria de\nperformance (Dual Channel), agregando valor ao atendimento t\u00e9cnico com uma sugest\u00e3o construtiva e \nvantajosa.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "177", name: "Carlos", gender: "male",
+      brokenPart: "Geral", diagnosticText: "A clonagem de disco transfere o sistema e todos os arquivos exatamente como estavam. \nOferecer essa garantia acalma o cliente, valoriza o seu servi\u00e7o e garante a venda do SSD com a m\u00e3o de \nobra embutida.",
+      dialogue: "\"Meu PC demora uns 10 minutos para ligar, e o HD fica sempre em 100%. Quero trocar  por um SSD, mas tenho muito medo de perder meus arquivos e fotos de familia.\" Como voc\u00ea conduz a negocia\u00e7\u00e3o e o servi\u00e7o de migra\u00e7\u00e3o de dados?",
+      options: [
+        { text: "Explicar o processo de clonagem do HD para o SSD, garantindo...", outcomeText: "A clonagem de disco transfere o sistema e todos os arquivos exatamente como estavam. \nOferecer essa garantia acalma o cliente, valoriza o seu servi\u00e7o e garante a venda do SSD com a m\u00e3o de \nobra embutida.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "Avisar que \u00e9 um processo perigoso, recusar o servi\u00e7o e suger...", outcomeText: "Erro na manuten\u00e7\u00e3o! A clonagem de disco transfere o sistema e todos os arquivos exatamente como estavam. \nOferecer essa garantia acalma o cliente, valoriza o seu servi\u00e7o e garante a venda do SSD com a m\u00e3o de \nobra embutida.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Vender o SSD, apagando o HD antigo para garantir velocidade ...", outcomeText: "Erro na manuten\u00e7\u00e3o! A clonagem de disco transfere o sistema e todos os arquivos exatamente como estavam. \nOferecer essa garantia acalma o cliente, valoriza o seu servi\u00e7o e garante a venda do SSD com a m\u00e3o de \nobra embutida.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Dizer que HDs de 100% n\u00e3o tem conserto, remover o HD e insta...", outcomeText: "Erro na manuten\u00e7\u00e3o! A clonagem de disco transfere o sistema e todos os arquivos exatamente como estavam. \nOferecer essa garantia acalma o cliente, valoriza o seu servi\u00e7o e garante a venda do SSD com a m\u00e3o de \nobra embutida.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "178", name: "Julia", gender: "male",
+      brokenPart: "Geral", diagnosticText: "A fonte est\u00e1 falhando em manter os n\u00edveis de tens\u00e3o est\u00e1veis, o que causa os \ndesligamentos repentinos. A solu\u00e7\u00e3o correta \u00e9 apresentar o defeito e vender uma nova fonte.",
+      dialogue: "\"O meu computador desliga sozinho do nada. \u00c0s vezes \u00e9 enquanto estou jogando, outras  vezes quando s\u00f3 estou navegando na internet.\" Ap\u00f3s analisar na bancada, voc\u00ea descobre que a fonte de alimenta\u00e7\u00e3o est\u00e1 entregando tens\u00f5es incorretas  (como 11.2V na linha de 12V). Qual \u00e9 o diagn\u00f3stico e negocia\u00e7\u00e3o?",
+      options: [
+        { text: "O problema \u00e9 a Mem\u00f3ria RAM, deve-se limpar os contatos e cob...", outcomeText: "Erro na manuten\u00e7\u00e3o! A fonte est\u00e1 falhando em manter os n\u00edveis de tens\u00e3o est\u00e1veis, o que causa os \ndesligamentos repentinos. A solu\u00e7\u00e3o correta \u00e9 apresentar o defeito e vender uma nova fonte.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Diagnosticar falha na fonte (incapaz de segurar a tens\u00e3o) e ...", outcomeText: "A fonte est\u00e1 falhando em manter os n\u00edveis de tens\u00e3o est\u00e1veis, o que causa os \ndesligamentos repentinos. A solu\u00e7\u00e3o correta \u00e9 apresentar o defeito e vender uma nova fonte.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "Diagnosticar problema na placa de v\u00eddeo, pois ela \u00e9 a \u00fanica ...", outcomeText: "Erro na manuten\u00e7\u00e3o! A fonte est\u00e1 falhando em manter os n\u00edveis de tens\u00e3o est\u00e1veis, o que causa os \ndesligamentos repentinos. A solu\u00e7\u00e3o correta \u00e9 apresentar o defeito e vender uma nova fonte.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Dizer que a vida \u00fatil do gabinete chegou ao fim e que ele de...", outcomeText: "Erro na manuten\u00e7\u00e3o! A fonte est\u00e1 falhando em manter os n\u00edveis de tens\u00e3o est\u00e1veis, o que causa os \ndesligamentos repentinos. A solu\u00e7\u00e3o correta \u00e9 apresentar o defeito e vender uma nova fonte.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "179", name: "Beatriz", gender: "male",
+      brokenPart: "Geral", diagnosticText: "A placa-m\u00e3e avisa sobre falhas de hardware cr\u00edtico atrav\u00e9s de bipes sonoros. Bipes \ncont\u00ednuos geralmente apontam para aus\u00eancia, mau contato ou defeito na mem\u00f3ria RAM ou placa de \nv\u00eddeo.",
+      dialogue: "\"Liguei o computador hoje e ele come\u00e7ou a emitir uma s\u00e9rie de bipes cont\u00ednuos, a tela  ficou preta e n\u00e3o iniciou.\" O cliente est\u00e1 preocupado que o PC tenha morrido. Qual \u00e9 o diagn\u00f3stico para esse caso na bancada?",
+      options: [
+        { text: "A placa-m\u00e3e descarregou e precisa apenas de uma nova bateria...", outcomeText: "Erro na manuten\u00e7\u00e3o! A placa-m\u00e3e avisa sobre falhas de hardware cr\u00edtico atrav\u00e9s de bipes sonoros. Bipes \ncont\u00ednuos geralmente apontam para aus\u00eancia, mau contato ou defeito na mem\u00f3ria RAM ou placa de \nv\u00eddeo.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Os bipes s\u00e3o c\u00f3digos de erro da BIOS. Isso costuma indicar p...", outcomeText: "A placa-m\u00e3e avisa sobre falhas de hardware cr\u00edtico atrav\u00e9s de bipes sonoros. Bipes \ncont\u00ednuos geralmente apontam para aus\u00eancia, mau contato ou defeito na mem\u00f3ria RAM ou placa de \nv\u00eddeo.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "A fonte de alimenta\u00e7\u00e3o queimou a placa de rede e a placa de ...", outcomeText: "Erro na manuten\u00e7\u00e3o! A placa-m\u00e3e avisa sobre falhas de hardware cr\u00edtico atrav\u00e9s de bipes sonoros. Bipes \ncont\u00ednuos geralmente apontam para aus\u00eancia, mau contato ou defeito na mem\u00f3ria RAM ou placa de \nv\u00eddeo.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "O processador superaqueceu antes de ligar e est\u00e1 travando o ...", outcomeText: "Erro na manuten\u00e7\u00e3o! A placa-m\u00e3e avisa sobre falhas de hardware cr\u00edtico atrav\u00e9s de bipes sonoros. Bipes \ncont\u00ednuos geralmente apontam para aus\u00eancia, mau contato ou defeito na mem\u00f3ria RAM ou placa de \nv\u00eddeo.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "180", name: "Marcos", gender: "male",
+      brokenPart: "Geral", diagnosticText: "Em muitos casos, o m\u00f3dulo fica sem ser lido simplesmente por mau contato ou por n\u00e3o ter \nsido encaixado corretamente. Orientar o cliente e realizar o teste de limpeza e encaixe resolve o \nproblema sem custo adicional.",
+      dialogue: "\"Comprei um pente de mem\u00f3ria novo de 8GB, id\u00eantico ao que eu j\u00e1 tinha, e instalei no PC  sozinho. Por\u00e9m, o Windows mostra que s\u00f3 tenho 8GB dispon\u00edveis no total.\" O cliente acha que foi enganado pela loja onde comprou a mem\u00f3ria. O que voc\u00ea deve verificar e  explicar?",
+      options: [
+        { text: "Dizer que a placa-m\u00e3e queimou e que ele precisa comprar outr...", outcomeText: "Erro na manuten\u00e7\u00e3o! Em muitos casos, o m\u00f3dulo fica sem ser lido simplesmente por mau contato ou por n\u00e3o ter \nsido encaixado corretamente. Orientar o cliente e realizar o teste de limpeza e encaixe resolve o \nproblema sem custo adicional.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Confirmar que o pente de 8GB est\u00e1 com defeito e cobrar pelo ...", outcomeText: "Erro na manuten\u00e7\u00e3o! Em muitos casos, o m\u00f3dulo fica sem ser lido simplesmente por mau contato ou por n\u00e3o ter \nsido encaixado corretamente. Orientar o cliente e realizar o teste de limpeza e encaixe resolve o \nproblema sem custo adicional.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Explicar que pode ser mau contato no slot, sujeira, ou que a...", outcomeText: "Em muitos casos, o m\u00f3dulo fica sem ser lido simplesmente por mau contato ou por n\u00e3o ter \nsido encaixado corretamente. Orientar o cliente e realizar o teste de limpeza e encaixe resolve o \nproblema sem custo adicional.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "Dizer que a fonte de alimenta\u00e7\u00e3o est\u00e1 fraca e por isso n\u00e3o c...", outcomeText: "Erro na manuten\u00e7\u00e3o! Em muitos casos, o m\u00f3dulo fica sem ser lido simplesmente por mau contato ou por n\u00e3o ter \nsido encaixado corretamente. Orientar o cliente e realizar o teste de limpeza e encaixe resolve o \nproblema sem custo adicional.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "181", name: "Pedro", gender: "male",
+      brokenPart: "Geral", diagnosticText: "Esse \u00e9 um erro de compatibilidade comum. Existem slots M.2 nas placas-m\u00e3e que operam\napenas sob o protocolo SATA, enquanto os SSDs NVMe exigem canais PCle. Ofere\u00e7a a troca do SSD \nou a adapta\u00e7\u00e3o com adaptador Pcle.",
+      dialogue: "\"Instalei um SSD M.2 NVMe super r\u00e1pido na minha placa-m\u00e3e, instalei no slot correto,  mas o Windows n\u00e3o o reconhece de jeito nenhum.\" Como t\u00e9cnico, qual \u00e9 o poss\u00edvel diagn\u00f3stico para esse conflito de hardware?",
+      options: [
+        { text: "Explicar que o slot M.2 da placa-m\u00e3e pode suportar apenas o ...", outcomeText: "Esse \u00e9 um erro de compatibilidade comum. Existem slots M.2 nas placas-m\u00e3e que operam\napenas sob o protocolo SATA, enquanto os SSDs NVMe exigem canais PCle. Ofere\u00e7a a troca do SSD \nou a adapta\u00e7\u00e3o com adaptador Pcle.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "Informar que a fonte precisa ser mais potente para reconhece...", outcomeText: "Erro na manuten\u00e7\u00e3o! Esse \u00e9 um erro de compatibilidade comum. Existem slots M.2 nas placas-m\u00e3e que operam\napenas sob o protocolo SATA, enquanto os SSDs NVMe exigem canais PCle. Ofere\u00e7a a troca do SSD \nou a adapta\u00e7\u00e3o com adaptador Pcle.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Dizer que \u00e9 necess\u00e1rio formatar o processador na BIOS para h...", outcomeText: "Erro na manuten\u00e7\u00e3o! Esse \u00e9 um erro de compatibilidade comum. Existem slots M.2 nas placas-m\u00e3e que operam\napenas sob o protocolo SATA, enquanto os SSDs NVMe exigem canais PCle. Ofere\u00e7a a troca do SSD \nou a adapta\u00e7\u00e3o com adaptador Pcle.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Afirmar que o Windows precisa ser desinstalado e reinstalado...", outcomeText: "Erro na manuten\u00e7\u00e3o! Esse \u00e9 um erro de compatibilidade comum. Existem slots M.2 nas placas-m\u00e3e que operam\napenas sob o protocolo SATA, enquanto os SSDs NVMe exigem canais PCle. Ofere\u00e7a a troca do SSD \nou a adapta\u00e7\u00e3o com adaptador Pcle.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "182", name: "Pedro", gender: "male",
+      brokenPart: "Geral", diagnosticText: "Quando o HD ou SSD est\u00e1 com problemas f\u00edsicos ou grande desgaste, o sistema demora \nmuito para acessar os dados (leitura) ou para salv\u00e1-los (escrita), causando congelamentos severos.",
+      dialogue: "\"Meu PC est\u00e1 muito lento para abrir pastas, copiar arquivos e, \u00e0s vezes, trava  completamente ao tentar salvar um documento.\" \nT\u00e9cnico: \"Essa lentid\u00e3o extrema associada a travamentos ao ler/escrever dados nos leva a suspeitar de  qual pe\u00e7a?\"",
+      options: [
+        { text: "Setores defeituosos (bad blocks) no disco r\u00edgido ou falha de...", outcomeText: "Quando o HD ou SSD est\u00e1 com problemas f\u00edsicos ou grande desgaste, o sistema demora \nmuito para acessar os dados (leitura) ou para salv\u00e1-los (escrita), causando congelamentos severos.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "Teclado travando o sistema", outcomeText: "Erro na manuten\u00e7\u00e3o! Quando o HD ou SSD est\u00e1 com problemas f\u00edsicos ou grande desgaste, o sistema demora \nmuito para acessar os dados (leitura) ou para salv\u00e1-los (escrita), causando congelamentos severos.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "BIOS desatualizada.", outcomeText: "Erro na manuten\u00e7\u00e3o! Quando o HD ou SSD est\u00e1 com problemas f\u00edsicos ou grande desgaste, o sistema demora \nmuito para acessar os dados (leitura) ou para salv\u00e1-los (escrita), causando congelamentos severos.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Cooler do processador em alta rota\u00e7\u00e3o.", outcomeText: "Erro na manuten\u00e7\u00e3o! Quando o HD ou SSD est\u00e1 com problemas f\u00edsicos ou grande desgaste, o sistema demora \nmuito para acessar os dados (leitura) ou para salv\u00e1-los (escrita), causando congelamentos severos.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "183", name: "Pedro", gender: "male",
+      brokenPart: "Geral", diagnosticText: "Quando h\u00e1 aus\u00eancia total de energia combinada com cheiro de queimado, a falha \ngeralmente est\u00e1 no circuito regulador de tens\u00e3o (VRM) da placa-m\u00e3e ou no rompimento/queima de \ncapacitores.",
+      dialogue: "\"O computador n\u00e3o liga nada, nem os coolers giram. Abri o gabinete e sinto um leve cheiro de queimado.\" \nT\u00e9cnico: \"Entendo. Em situa\u00e7\u00f5es de pane el\u00e9trica total com odor de queimado, qual pe\u00e7a costuma ser a  principal suspeita?\"",
+      options: [
+        { text: "Falha no sistema operacional.", outcomeText: "Erro na manuten\u00e7\u00e3o! Quando h\u00e1 aus\u00eancia total de energia combinada com cheiro de queimado, a falha \ngeralmente est\u00e1 no circuito regulador de tens\u00e3o (VRM) da placa-m\u00e3e ou no rompimento/queima de \ncapacitores.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Falta de atualiza\u00e7\u00e3o de drivers.", outcomeText: "Erro na manuten\u00e7\u00e3o! Quando h\u00e1 aus\u00eancia total de energia combinada com cheiro de queimado, a falha \ngeralmente est\u00e1 no circuito regulador de tens\u00e3o (VRM) da placa-m\u00e3e ou no rompimento/queima de \ncapacitores.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Mouse em curto-circuito.", outcomeText: "Erro na manuten\u00e7\u00e3o! Quando h\u00e1 aus\u00eancia total de energia combinada com cheiro de queimado, a falha \ngeralmente est\u00e1 no circuito regulador de tens\u00e3o (VRM) da placa-m\u00e3e ou no rompimento/queima de \ncapacitores.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Curto-circuito na placa-m\u00e3e, possivelmente devido a capacito...", outcomeText: "Quando h\u00e1 aus\u00eancia total de energia combinada com cheiro de queimado, a falha \ngeralmente est\u00e1 no circuito regulador de tens\u00e3o (VRM) da placa-m\u00e3e ou no rompimento/queima de \ncapacitores.", moneyChange: 150, repChange: 20, emotion: "happy" },
+      ]
+    },
+    {
+      id: "184", name: "Rafael", gender: "male",
+      brokenPart: "Geral", diagnosticText: "Quando a BIOS n\u00e3o encontra nenhum dispositivo de boot, os cabos de dados/energia \npodem estar soltos, ou o disco pode estar com defeito.",
+      dialogue: "\"Meu PC est\u00e1 dando a mensagem 'Reboot and Select proper Boot device' e n\u00e3o entra no  Windows.\" O atendente verifica os cabos, entra na BIOS e nota que nenhum disco de armazenamento \u00e9 reconhecido. Qual interven\u00e7\u00e3o deve ser feita?",
+      options: [
+        { text: "Atualizar a placa de v\u00eddeo para reconhecer o disco.", outcomeText: "Erro na manuten\u00e7\u00e3o! Quando a BIOS n\u00e3o encontra nenhum dispositivo de boot, os cabos de dados/energia \npodem estar soltos, ou o disco pode estar com defeito.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Checar se o HD ou SSD est\u00e1 desconectado e verificar a ordem ...", outcomeText: "Quando a BIOS n\u00e3o encontra nenhum dispositivo de boot, os cabos de dados/energia \npodem estar soltos, ou o disco pode estar com defeito.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "Limpar os coolers para resfriar o sistema e permitir o boot.", outcomeText: "Erro na manuten\u00e7\u00e3o! Quando a BIOS n\u00e3o encontra nenhum dispositivo de boot, os cabos de dados/energia \npodem estar soltos, ou o disco pode estar com defeito.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Trocar a fonte de alimenta\u00e7\u00e3o, pois ela bloqueia o reconheci...", outcomeText: "Erro na manuten\u00e7\u00e3o! Quando a BIOS n\u00e3o encontra nenhum dispositivo de boot, os cabos de dados/energia \npodem estar soltos, ou o disco pode estar com defeito.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+    {
+      id: "185", name: "Ana", gender: "male",
+      brokenPart: "Geral", diagnosticText: "O teste do clipe isola a fonte. Se ela ligar e mantiver o cooler girando, o curto est\u00e1 na \nplaca-m\u00e3e. Se ela desarmar sozinha, a fonte est\u00e1 com defeito.",
+      dialogue: "\"O PC liga por 2 segundos, os coolers giram e depois ele desliga totalmente sozinho.\" O  atendente suspeita de curto-circuito. Qual \u00e9 o procedimento padr\u00e3o na bancada para isolar se o defeito  est\u00e1 na fonte de alimenta\u00e7\u00e3o ou na placa-m\u00e3e?",
+      options: [
+        { text: "Fazer o teste do clipe de papel (jampear o fio verde ao pret...", outcomeText: "O teste do clipe isola a fonte. Se ela ligar e mantiver o cooler girando, o curto est\u00e1 na \nplaca-m\u00e3e. Se ela desarmar sozinha, a fonte est\u00e1 com defeito.", moneyChange: 150, repChange: 20, emotion: "happy" },
+        { text: "Desconectar o cabo de rede para ver se o PC estabiliza.", outcomeText: "Erro na manuten\u00e7\u00e3o! O teste do clipe isola a fonte. Se ela ligar e mantiver o cooler girando, o curto est\u00e1 na \nplaca-m\u00e3e. Se ela desarmar sozinha, a fonte est\u00e1 com defeito.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Trocar a mem\u00f3ria RAM para ver se o curto para.", outcomeText: "Erro na manuten\u00e7\u00e3o! O teste do clipe isola a fonte. Se ela ligar e mantiver o cooler girando, o curto est\u00e1 na \nplaca-m\u00e3e. Se ela desarmar sozinha, a fonte est\u00e1 com defeito.", moneyChange: -50, repChange: -15, emotion: "angry" },
+        { text: "Desligar o monitor e verificar a tomada.", outcomeText: "Erro na manuten\u00e7\u00e3o! O teste do clipe isola a fonte. Se ela ligar e mantiver o cooler girando, o curto est\u00e1 na \nplaca-m\u00e3e. Se ela desarmar sozinha, a fonte est\u00e1 com defeito.", moneyChange: -50, repChange: -15, emotion: "angry" },
+      ]
+    },
+
+    {
       id: "1", name: "Karen", gender: "female",
       brokenPart: "Bateria", 
       diagnosticText: "O notebook da Karen está completamente sem carga e o cabo do carregador parece não transmitir energia.",

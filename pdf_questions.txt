@@ -1,0 +1,404 @@
+1. Cliente: "Meu notebook não liga de jeito nenhum depois de uma queda de energia aqui em casa."
+Atendente: "Entendi o susto. Qual é o nosso primeiro passo lógico e seguro antes de abrir o 
+equipamento?
+A. Abrir o notebook imediatamente para testar a placa-mãe com um multímetro.
+B. Conectar o carregador em outra tomada e testar com um carregador compatível e funcional. 
+C. Dizer ao cliente que a placa-mãe queimou e cobrar o valor mais alto de imediato.
+D. Pedir para o cliente deixar o notebook e voltar em uma semana sem fazer perguntas.
+Letra B: O primeiro passo na triagem é sempre verificar os periféricos mais básicos. Cabos partidos ou
+tomadas com defeito são os vilões mais comuns e fáceis de diagnosticar.)
+2. Cliente: "Meu computador de mesa está com um cheiro estranho de queimado e não dá vídeo."
+Atendente: "Abri o seu gabinete e encontrei uma lagartixa alojada dentro da fonte, causando um curto. 
+O que eu devo fazer agora?"
+A. Retirar o animal com uma pinça, limpar a fonte com álcool isopropílico e ligar o PC novamente.
+B. Desligar o PC da tomada, descartar a fonte danificada e verificar se houve danos em outros 
+componentes.
+C. Continuar os testes com a fonte para ver se o cheiro de queimado passa.
+D. Colocar a fonte no sol para secar antes de voltar a utilizar no gabinete.
+Letra B: A segurança vem em primeiro lugar. A fonte sofreu um curto-circuito e deve ser substituída 
+para evitar danos catastróficos ao restante do hardware.
+3. Cliente: "Meu HD externo não é reconhecido e ele tem todas as fotos da minha família! Estou 
+desesperado."
+Atendente: "Por favor, acalme-se, faremos o possível. Qual é a conduta técnica imediata para tentar 
+resgatar esses dados?"
+A. Formatar o HD rapidamente para ver se ele volta a funcionar e depois tentar recuperar as fotos.
+B. Dizer que ele perdeu tudo e que você não pode fazer absolutamente nada.
+C. Conectar o HD a um ambiente seguro (live-cd/dock) e tentar softwares de recuperação forense ou 
+diagnosticar falha física.
+D. Abrir o HD no meio da loja para ver o disco por dentro e tentar consertar manualmente com uma 
+chave de fenda.
+Letra C: O atendimento empático é tão importante quanto a técnica. Aplicar métodos que não 
+sobrescrevam os dados é o caminho correto para recuperar os arquivos.
+4. Cliente: "Meu computador de jogos trava e reinicia sozinho sempre que eu começo uma partida 
+pesada."
+Atendente: "Monitorei as taxas do sistema e notei que o processador atinge 100°C rapidamente. Qual é 
+a causa e a ação corretiva?"
+A. O sistema operacional Windows está corrompido; é necessário formatar e reinstalar o sistema.
+B. A placa de vídeo está com defeito de fábrica; você deve aconselhar o cliente a comprar uma nova 
+placa.
+C. Falha no sistema de refrigeração (cooler solto ou pasta seca): deve-se limpar o dissipador, reaplicar 
+pasta térmica e checar o fan.
+D. O monitor do cliente não suporta a taxa de atualização do jogo, causando o superaquecimento do 
+PC.
+Letra C: Processadores modernos possuem proteção térmica e desligam o PC para não queimar 
+quando atingem temperaturas críticas devido à dissipação ineficiente.
+5. Cliente: "Derrubei um copo de café no teclado do meu MacBook! Desliguei ele na hora e trouxe 
+correndo."
+Atendente: "Ótimo que desligou rápido. O que eu NÃO posso fazer de forma alguma ao recebê-lo na 
+bancada?"
+A. Desconectar a bateria imediatamente ao abrir o equipamento.
+B. Limpar a placa com álcool isopropílico e escova antiestática para remover resíduos e evitar 
+corrosão.
+C. Ligar o notebook na tomada ou pressionar o botão de ligar para verificar se a tela ainda funciona 
+antes de abrir.
+D. Colocar a placa-mãe em uma cuba ultrassônica com solução de limpeza específica para eletrônicos.
+Letra C: Ligar um equipamento com resíduos de líquido condutivo (como café com açúcar) pode 
+causar um curto imediato, fritando componentes que poderiam ser salvos.
+6. Cliente: "Minha placa-mãe de desktop não dá nenhum sinal de vida, nem acende leds."
+Atendente: "Ao medir a resistência na linha principal de 12V do conector ATX com o multímetro, 
+encontrei 0 ohms em relação ao terra. O que isso aponta?"
+A. Um curto-circuito severo na linha de 12V, muito provavelmente causado por um MOSFET de alta 
+em fuga na fase do VRM.
+B. A fonte de alimentação está em modo de proteção (standby) e precisa apenas de um reset de energia.
+C. A memória RAM está em curto, o que desarmou a placa e zerou a resistência do circuito de 12V.
+D. O processador está funcionando em seu modo de economia de energia extremo, consumindo toda a 
+corrente disponível.
+Letra A: Resistência tendendo a zero significa que a linha de alimentação está em contato direto com o
+terra. MOSFETs em curto são os maiores suspeitos nessas situações.
+7. Cliente: "Meu computador liga, os coolers rodam rápidos, mas a tela fica preta e ele fica apitando."
+Atendente: "Identifiquei que é erro de memória. Já limpei os contatos e slots, testei outros pentes bons 
+e continua igual. Qual o próximo passo?"
+A. Injetar tensão na linha de alimentação principal ou de terminação do slot de memória para verificar 
+curto ou falha de chaveamento.
+B. Realizar a atualização do BIOS da placa-mãe através de um gravador externo (ch341a).
+C. Substituir a bateria da CMOS por uma nova.
+D. Trocar a placa de vídeo dedicada.
+Letra A: A comunicação entre a RAM e o processador exige tensões específicas. Se o circuito 
+regulador local falhou, a placa não reconhecerá a memória por mais que você a limpe.
+8. Cliente: "Sinto que meu PC perde rendimento e dá umas travadas do nada no meio do uso."
+Atendente: "O processador está reduzindo o clock por segurança (throttling), mas ele próprio está frio. 
+O termômetro mostrou os VRMs fervendo. O que ocorre?"
+A. Os MOSFETs estão sofrendo perda de eficiência (thermal runaway) ou o circuito está 
+sobrecarregado por degradação ou projeto ruim.
+B. A pasta térmica do processador ressecou e o calor está escapando da CPU para os indutores do 
+VRM.
+C. A placa-mãe está em curto-circuito devido a um parafuso solto na carcaça.
+D. Os capacitores do VRM estão explodindo, o que causa uma queda de energia limpa para o 
+processador.
+Letra A: O circuito regulador de tensão superaquece ao entregar corrente ao processador. Os 
+componentes de potência têm perda de eficiência térmica que faz a placa reduzir o clock para esfriar.
+09. Cliente: "Quero uma análise exata se a energia que alimenta meus componentes está limpa e sem 
+oscilações perigosas."
+Atendente: "Perfeito. Para medir com precisão a ondulação (ripple) de alta frequência nas linhas 
+reguladas da placa-mãe, o que devo usar?"
+A. Um osciloscópio configurado em acoplamento AC (Alternate Current) com a ponta de prova 
+aterrada próxima ao componente.
+B. Um multímetro digital configurado para medir tensão contínua (DC) em milivolts.
+C. Um testador de fonte ATX ligado diretamente nos pinos do cabo de 24
+pinos.
+D. Uma placa de diagnóstico POST PCI-Express inserida no slot.
+Letra A: O acoplamento AC filtra a tensão contínua (DC) e permite focar apenas na variação 
+(ondulação/ruído) da tensão, o que é ideal para analisar a qualidade da energia.
+10. Cliente: "Levei meu PC em outro lugar, disseram que era a BIOS, mas ele continua sem dar vídeo."
+Atendente: "Coloquei uma placa de diagnóstico na sua placa-mãe e ela trava direto no código inicial 
+'00' (ou 'CO'). O que esse código costuma indicar?"
+A. Falha fatal antes ou durante o início do POST, frequentemente indicando que o processador não está
+executando o código básico.
+B. O sistema concluiu o POST com sucesso e está pronto para inicializar o sistema operacional.
+C. Erro claro na placa de vídeo, indicando que ela foi desconectada.
+D. A bateria da CMOS está descarregada, exigindo apenas a troca e reset da configuração.
+Letra A: Os códigos 00 ou CO costumam ser os primeiros da inicialização. Geralmente significam que
+o processador está morto, sem alimentação, ou o chip da BIOS está corrompido e não inicializa.
+11. Cliente: "Fui tentar ligar meu computador hoje de manhã e ele não dá nenhum sinal de vida. Ontem
+desligou normal."
+Atendente: "As tensões primárias de 3.3V e 5V estão na placa, mas ela não starta. Qual sinal no Super 
+I/O monitoramos para ver se o botão power funciona?"
+A. A tensão VCORE do processador, pois sem ela o Super I/O entra em proteção imediata.
+B. O sinal de Clock gerado pelo cristal de 32kHz, que se estiver ausente trava o RTC (Real Time 
+Clock).
+C. O sinal de Power Button (ON_OFF#) chegando ao pino do SIO e chaveando para nível lógico baixo 
+(OV) ao apertar o botão.
+D. A tensão da bateria da CMOS, visto que o SIO requer 12V para inicializar o circuito.
+Letra C: O sinal do botão precisa chegar ao pino do SIO e ir a nível lógico baixo (OV) quando 
+pressionado, indicando ao chip que o usuário solicitou a inicialização da placa.
+12. Cliente: "Estava usando meu notebook e de repente deu um
+estalo e ele apagou tudo. Agora o LED da fonte original fica piscando quando plugo nele."
+Atendente: "Isso acontece porque a linha principal (19V) entrou em curto. Qual é a técnica mais segura
+para achar o componente culpado sem queimar a placa?"
+A. Substituir o fusível de entrada por um de maior amperagem para forçar a queima do componente em
+curto.
+B. Injetar uma tensão baixa (1V a 2V) com limitação de corrente na linha de 19V e achar o componente
+que ferve usando álcool isopropílico ou câmera térmica.
+C. Medir a continuidade de todos os capacitores da placa-mãe usando o multímetro na escala de diodos.
+D. Aplicar solda em todos os terminais dos MOSFETs da linha de 19V para refazer possíveis soldas 
+frias.
+Letra B: Injetar uma tensão baixa e segura com limitação de corrente permite que apenas o 
+componente em curto dissipe energia em forma de calor, revelando sua exata localização.
+13. Cliente: "Meu computador liga e gira os coolers bem rápido, mas a tela fica preta. Um amigo me 
+disse que pode ser a BIOS corrompida."
+Atendente: "Pode ser sim. Vou usar um gravador externo (CH341A) para regravar o chip de BIOS SPI. 
+Qual procedimento eu NUNCA posso esquecer antes de gravar o arquivo novo?"
+A. Ligar a placa em curto nos pinos do Clear CMOS enquanto o gravador estiver conectado via clipe 
+pomona.
+B. Fazer o backup (leitura e salvamento no computador) do conteúdo original completo que está 
+gravado no chip.
+C. Injetar 5V diretamente no pino 8 (VCC) para apagar a memória do chip antes de colocá-lo no 
+gravador.
+D. Remover o chip da placa-mãe e banhá-lo em álcool isopropílico para limpeza eletrostática.
+Letra B: O backup é crucial em qualquer manutenção de firmware. Se o arquivo novo não funcionar 
+ou não for o correto do modelo da placa, você consegue restaurar o chip ao estado original.
+14. Cliente: "Minha placa-mãe está desarmando a fonte assim que eu tento ligar o PC. O que pode ser?"
+Atendente: "Suspeito de um MOSFET de alta (High-Side) em curto no VRM do processador. Ao tirar 
+ele da placa e medir com o multímetro, o que confirma o defeito?"
+A. Uma resistência próxima a O ohms (continuidade acusando curto) entre os pinos de Dreno e Source,
+independente da polaridade.
+B. Uma queda de tensionamento de 0.5V (escala de diodo) se a ponta preta estiver no Dreno e a 
+vermelha no Source.
+C. Resistência infinita (circuito aberto) nos dois sentidos de medição.
+D. Uma resistência de 10 Megaohms, pois a queima de semicondutores sempre resulta em alta 
+resistência.
+Letra A: O MOSFET em curto perde sua capacidade de chaveamento elétrico e vira um "fio" direto, 
+permitindo que a tensão passe sem controle, gerando o curto detectado pelo multímetro.
+15. Cliente: "Meu computador liga, mas não dá vídeo nenhum. Já troquei memória, placa de vídeo, 
+processador e nada resolve."
+Atendente: "A bateria de 3V está boa, mas notei com o osciloscópio que o cristal de 32.768 kHz do 
+circuito RTC não está oscilando. Qual é o diagnóstico provável?"
+A. O processador está com defeito de fábrica e deve ser substituído.
+B. O próprio cristal de 32.768 kHz está defeituoso ou há falha nos pequenos capacitores cerâmicos de 
+desacoplamento do circuito RTC.
+C. A bateria da CMOS está invertida, bloqueando o envio de dados para o circuito gerador de clock.
+D. O circuito regulador de tensão (VRM) da placa de vídeo dedicada está em
+curto.
+Letra B: Como a alimentação de 3V chega perfeitamente mas a frequência de tempo não é gerada para
+o Chipset (PCH), o cristal ressonador ou seus componentes de filtro falharam.
+16. Cliente: "Meu computador liga as luzes, os coolers giram, mas não dá vídeo e desliga sozinho após 
+alguns segundos."
+Atendente: "Esse comportamento indica uma falha no sistema de inicialização por falta de energia 
+estável. Qual é a ação recomendada para resolver esse problema?"
+A. Testar e substituir a fonte de alimentação por uma de qualidade e potência adequada.
+B. Limpar a poeira da placa de vídeo.
+C. Formatar o disco rígido (HD).
+D. Trocar a memória RAM.
+Letra A: Quando a fonte de alimentação está defeituosa ou não entrega a potência necessária 
+(especialmente durante o pico de inicialização), o PC liga os LEDs e ventiladores, mas falha no 
+processo de POST e desliga.
+17. Cliente: "O computador emite uma série de bipes contínuos ao ser ligado, a tela fica preta e nada 
+acontece."
+Atendente: "Esses bipes são códigos de erro emitidos pela placa-mãe. Qual é o diagnóstico mais 
+provável e a primeira intervenção?"
+A. O processador está queimado.
+B. Problema na memória RAM. Desligue o PC, retire os módulos, limpe os contatos com borracha 
+branca e recoloque-os.
+C. O monitor está desligado ou com defeito.
+D. A bateria da placa-mãe está descarregada.
+Letra B: A placa-mãe utiliza sequências de bipes para alertar sobre falhas de hardware crítico. Bipes 
+contínuos ou múltiplos bipes curtos costumam indicar que a memória RAM está mal encaixada ou com
+os contatos sujos.
+18. Cliente: "Meu computador demora mais de 5 minutos para ligar, e quando abro os programas, eles 
+travam e demoram muito para responder." Atendente: "Essa lentidão generalizada é típica de um 
+componente de armazenamento desgastado. O que você recomenda para resolver definitivamente esse 
+problema?"
+A. Substituir o HD antigo por um SSD e instalar o sistema operacional nele.
+B. Trocar a memória RAM por uma de menor frequência.
+C. Desconectar a placa de vídeo.
+D. Limpar os coolers e substituir a pasta térmica.
+Letra A; Os discos rígidos tradicionais (HDs) possuem partes mecânicas limitadas e costumam ficar 
+muito lentos com o tempo. Um SSD (Solid State Drive) é muito mais rápido, reduzindo o tempo de 
+boot e abertura de programas.
+19. Cliente: "Meu computador funciona bem por algumas horas, mas depois desliga sozinho do nada, 
+especialmente quando estou jogando." Atendente: "Esses desligamentos em momentos de uso intenso 
+são um mecanismo de proteção. Qual é a causa raiz mais comum?"
+A. Corrupção do sistema operacional Windows.
+B. Superaquecimento do processador por acúmulo de poeira ou pasta térmica ressecada. 
+C. Falha no mouse ou teclado.
+D. Conexão incorreta do cabo de rede.
+LETRA B; Quando o processador aquece acima do limite seguro, a placa-mãe desliga o PC 
+imediatamente para evitar a queima do componente. Isso é resolvido limpando o cooler e trocando a 
+pasta térmica.
+20. Cliente: "Quando ligo meu PC, a tela fica cheia de linhas verticais estranhas, quadriculados 
+coloridos e chuviscos."
+Atendente: "Esses padrões incorretos na tela são conhecidos como artefatos visuais. Qual componente 
+é o principal suspeito desse defeito?"
+A. O processador (CPU).
+B. A bateria da placa-mãe.
+C. A placa de vídeo (GPU) ou suas memórias.
+D. O monitor.
+Letra C; Linhas na tela, chuviscos e quadriculados são os sintomas clássicos de defeito físico ou 
+superaquecimento na placa de vídeo (processador gráfico ou seus módulos de memória).
+21. Cliente: "Toda vez que eu tiro o computador da tomada, ele perde a data e a hora, e eu preciso 
+configurar a BIOS novamente."
+Atendente: "O relógio interno e as configurações básicas precisam de energia constante. O que está 
+causando essa perda de memória?"
+A. O sistema operacional Windows corrompido.
+B. Os cabos SATA do HD danificados.
+C. A fonte de alimentação perdendo potência.
+D. A bateria da placa-mãe (modelo CR2032) está descarregada.
+Letra D; Existe uma pequena pilha redonda instalada na placa-mãe. A sua única função é fornecer 
+energia para manter as configurações da BIOS e o relógio ativos quando o PC é desligado da tomada.
+22. Cliente: "Instalei um SSD novinho no meu computador, mas ele continua inicializando pelo HD 
+antigo."
+Atendente: "O computador está dando prioridade para o HD antigo. Onde e como você deve alterar 
+isso?"
+A. Nas configurações de "Personalização" do Windows.
+B. No Gerenciador de Dispositivos.
+C. Acessar a BIOS/UEFI pressionando a tecla correspondente ao ligar o PC e alterar a prioridade de 
+inicialização (Boot Order).
+D. Desconectar o cabo de vídeo.
+Letra C; A BIOS/UEFI é o sistema básico da placa-mãe. Ao pressionar a tecla correta (geralmente 
+Delete ou F2) antes do Windows carregar, você pode definir qual disco o computador vai ler primeiro.
+23. Cliente: "O computador liga, os coolers giram, os LEDs acendem, mas o monitor diz 'Sem sinal' e 
+no aparece imagem."
+Atendente: "Esse é um problema clássico de falta de vídeo. Qual destas ações é a mais indicada para 
+começar o diagnóstico?"
+A. Verificar se o cabo de vídeo está bem conectado ao monitor e à placa de vídeo, e verificar a memória
+RAM.
+B. Substituir o processador.
+C. Desinstalar a placa de rede.
+D. Formatar o SSD.
+Letra A; A falta de sinal no monitor pode ser causada por um cabo de vídeo solto ou mal encaixado, 
+ou por falhas de comunicação interna, como mau contato nos módulos de memória RAM.
+24. Cliente: "Meu PC simplesmente não liga nada, não acende nenhuma luz e sinto um leve cheiro de 
+queimado."
+Como técnico, após abrir o gabinete, você identifica capacitores estufados e vazando na placa-mãe. 
+Qual abordagem técnica e comercial você deve utilizar com o cliente?
+A. Dizer que o problema é na tomada e sugerir trocar o estabilizador para ver se o PC volta a ligar.
+B. Informar que a placa-mãe está em curto, mas como é uma peça velha, o cliente deve jogar o PC fora 
+e comprar um novo.
+C. Explicar o defeito dos capacitores, propor a substituição da placa-mãe e discutir o custo- benefício 
+de aproveitar as peças atuais.
+D. Afirmar que o defeito é apenas no processador e tentar vendê-lo para o cliente imediatamente.
+Letra C; A melhor abordagem é transparente e consultiva. Você explica o defeito (capacitores), mostra
+a peça danificada para gerar confiança, e negocia a substituição da placa-mãe, avaliando se as outras 
+peças ainda podem ser aproveitadas.
+25. Cliente: "Quero colocar uma placa de vídeo gamer super moderna, mas meu computador tem uma 
+fonte de 400W genérica."
+Como técnico, qual deve ser o seu posicionamento na negociação?
+A. Dizer que a fonte de 400W aguenta tranquilamente a nova placa de vídeo para fechar a venda o mais
+rápido possível.
+B. Explicar o risco de usar a fonte atual, calcular o consumo da nova placa e negociar uma fonte de 
+550W ou 650W com PFC Ativo.
+C. Recusar a instalação da placa de vídeo e dizer que ele deve comprar um console de videogame no 
+lugar.
+D. Sugerir que ele compre apenas mais memória RAM para compensar a fonte fraca.
+Letra B; A segurança do equipamento deve vir em primeiro lugar. Você educa o cliente sobre a 
+importância de uma fonte de qualidade (PFC Ativo) para proteger o investimento dele na placa de 
+vídeo, garantindo uma venda com maior valor agregado.
+26. Cliente: "Meu computador congela enquanto jogo e apresenta uma tela azul. O diagnóstico mostrou
+que um dos pentes de Memória RAM está com defeito."
+O cliente pediu para trocar apenas o pente defeituoso, mas você percebe que ele tem um pente de 8GB 
+operando sozinho. O que propor?
+A. Trocar apenas o pente defeituoso por um idêntico e ignorar o resto, pois o cliente pediu 
+especificamente por isso.
+B. Dizer que o computador vai queimar se ele não comprar 32GB de memória nova e trocar tudo.
+C. Substituir o pente defeituoso por garantia/peça nova e sugerir a compra de um segundo pente 
+idêntico para ativar o Dual Channel.
+D. Informar que a tela azul indica problema no HD e ignorar o pente de memória ruim.
+Letra C; Você resolve o problema imediato do cliente (o defeito) e oferece uma solução de melhoria de
+performance (Dual Channel), agregando valor ao atendimento técnico com uma sugestão construtiva e 
+vantajosa.
+27. Cliente: "Meu PC demora uns 10 minutos para ligar, e o HD fica sempre em 100%. Quero trocar 
+por um SSD, mas tenho muito medo de perder meus arquivos e fotos de familia."
+Como você conduz a negociação e o serviço de migração de dados?
+A. Explicar o processo de clonagem do HD para o SSD, garantindo que nenhum arquivo seja perdido, e
+cobrar pelo serviço de transferência.
+B. Avisar que é um processo perigoso, recusar o serviço e sugerir que ele tente fazer a cópia sozinho em
+casa.
+C. Vender o SSD, apagando o HD antigo para garantir velocidade máxima e pedindo para o cliente 
+buscar os arquivos na nuvem.
+D. Dizer que HDs de 100% não tem conserto, remover o HD e instalar o SSD sem fazer backup ou 
+clonagem.
+LETRA A; A clonagem de disco transfere o sistema e todos os arquivos exatamente como estavam. 
+Oferecer essa garantia acalma o cliente, valoriza o seu serviço e garante a venda do SSD com a mão de 
+obra embutida.
+28. Cliente: "O meu computador desliga sozinho do nada. Às vezes é enquanto estou jogando, outras 
+vezes quando só estou navegando na internet."
+Após analisar na bancada, você descobre que a fonte de alimentação está entregando tensões incorretas 
+(como 11.2V na linha de 12V). Qual é o diagnóstico e negociação?
+A. O problema é a Memória RAM, deve-se limpar os contatos e cobrar uma taxa de formatação do 
+sistema.
+B. Diagnosticar falha na fonte (incapaz de segurar a tensão) e negociar a substituição imediata da fonte 
+por uma nova de confiança.
+C. Diagnosticar problema na placa de vídeo, pois ela é a única responsável pelo desligamento do PC.
+D. Dizer que a vida útil do gabinete chegou ao fim e que ele deve pagar por um novo gabinete com 
+mais ventoinhas.
+LETRA B; A fonte está falhando em manter os níveis de tensão estáveis, o que causa os 
+desligamentos repentinos. A solução correta é apresentar o defeito e vender uma nova fonte.
+29. Cliente: "Liguei o computador hoje e ele começou a emitir uma série de bipes contínuos, a tela 
+ficou preta e não iniciou."
+O cliente está preocupado que o PC tenha morrido. Qual é o diagnóstico para esse caso na bancada?
+A. A placa-mãe descarregou e precisa apenas de uma nova bateria CR2032 para voltar a dar video.
+B. Os bipes são códigos de erro da BIOS. Isso costuma indicar problemas com os módulos de memória 
+RAM ou com a placa de vídeo.
+C. A fonte de alimentação queimou a placa de rede e a placa de som ao mesmo tempo, emitindo o alerta
+sonoro.
+D. O processador superaqueceu antes de ligar e está travando o sistema de som da placa- mãe.
+LETRA B; A placa-mãe avisa sobre falhas de hardware crítico através de bipes sonoros. Bipes 
+contínuos geralmente apontam para ausência, mau contato ou defeito na memória RAM ou placa de 
+vídeo.
+30. Cliente: "Comprei um pente de memória novo de 8GB, idêntico ao que eu já tinha, e instalei no PC 
+sozinho. Porém, o Windows mostra que só tenho 8GB disponíveis no total."
+O cliente acha que foi enganado pela loja onde comprou a memória. O que você deve verificar e 
+explicar?
+A. Dizer que a placa-mãe queimou e que ele precisa comprar outra e um novo processador para ler a 
+memória.
+B. Confirmar que o pente de 8GB está com defeito e cobrar pelo dobro de memória nova.
+C. Explicar que pode ser mau contato no slot, sujeira, ou que a memória não foi encaixada até travar.
+D. Dizer que a fonte de alimentação está fraca e por isso não consegue energizar o novo pente de 
+memória.
+LETRA C; Em muitos casos, o módulo fica sem ser lido simplesmente por mau contato ou por não ter 
+sido encaixado corretamente. Orientar o cliente e realizar o teste de limpeza e encaixe resolve o 
+problema sem custo adicional. 
+31. Cliente: "Instalei um SSD M.2 NVMe super rápido na minha placa-mãe, instalei no slot correto, 
+mas o Windows não o reconhece de jeito nenhum."
+Como técnico, qual é o possível diagnóstico para esse conflito de hardware?
+A. Explicar que o slot M.2 da placa-mãe pode suportar apenas o padrão SATA, enquanto o SSD 
+comprado é NVMe.
+B. Informar que a fonte precisa ser mais potente para reconhecer o SSD.
+C. Dizer que é necessário formatar o processador na BIOS para habilitar o SSD NVMe. Incorreto. O 
+processador não é formatado. Esse termo não existe no contexto e não soluciona o problema de 
+compatibilidade entre placa-mãe e o formato do SSD.
+D. Afirmar que o Windows precisa ser desinstalado e reinstalado do zero na BIOS antes de reconhecer 
+qualquer disco.
+LETRA A; Esse é um erro de compatibilidade comum. Existem slots M.2 nas placas-mãe que operam
+apenas sob o protocolo SATA, enquanto os SSDs NVMe exigem canais PCle. Ofereça a troca do SSD 
+ou a adaptação com adaptador Pcle.
+32. Cliente: "Meu PC está muito lento para abrir pastas, copiar arquivos e, às vezes, trava 
+completamente ao tentar salvar um documento."
+Técnico: "Essa lentidão extrema associada a travamentos ao ler/escrever dados nos leva a suspeitar de 
+qual peça?"
+A. Setores defeituosos (bad blocks) no disco rígido ou falha de leitura/escrita no SSD.
+B. Teclado travando o sistema
+C. BIOS desatualizada.
+D. Cooler do processador em alta rotação.
+LETRA A; Quando o HD ou SSD está com problemas físicos ou grande desgaste, o sistema demora 
+muito para acessar os dados (leitura) ou para salvá-los (escrita), causando congelamentos severos.
+33. Cliente: "O computador não liga nada, nem os coolers giram. Abri o gabinete e sinto um leve cheiro
+de queimado."
+Técnico: "Entendo. Em situações de pane elétrica total com odor de queimado, qual peça costuma ser a 
+principal suspeita?"
+A. Falha no sistema operacional.
+B. Falta de atualização de drivers.
+C. Mouse em curto-circuito.
+D. Curto-circuito na placa-mãe, possivelmente devido a capacitores estufados ou falha no VRM.
+LETRA D; Quando há ausência total de energia combinada com cheiro de queimado, a falha 
+geralmente está no circuito regulador de tensão (VRM) da placa-mãe ou no rompimento/queima de 
+capacitores.
+34. Cliente: "Meu PC está dando a mensagem 'Reboot and Select proper Boot device' e não entra no 
+Windows." O atendente verifica os cabos, entra na BIOS e nota que nenhum disco de armazenamento é
+reconhecido. Qual intervenção deve ser feita?
+A. Atualizar a placa de vídeo para reconhecer o disco.
+B. Checar se o HD ou SSD está desconectado e verificar a ordem de boot na BIOS.
+C. Limpar os coolers para resfriar o sistema e permitir o boot.
+D. Trocar a fonte de alimentação, pois ela bloqueia o reconhecimento dos discos.
+LETRA B; Quando a BIOS não encontra nenhum dispositivo de boot, os cabos de dados/energia 
+podem estar soltos, ou o disco pode estar com defeito.
+35. Cliente: "O PC liga por 2 segundos, os coolers giram e depois ele desliga totalmente sozinho." O 
+atendente suspeita de curto-circuito. Qual é o procedimento padrão na bancada para isolar se o defeito 
+está na fonte de alimentação ou na placa-mãe?
+A. Fazer o teste do clipe de papel (jampear o fio verde ao preto) na fonte de alimentação para verificar 
+se ela desarma sozinha.
+B. Desconectar o cabo de rede para ver se o PC estabiliza.
+C. Trocar a memória RAM para ver se o curto para.
+D. Desligar o monitor e verificar a tomada.
+LETRA A; O teste do clipe isola a fonte. Se ela ligar e mantiver o cooler girando, o curto está na 
+placa-mãe. Se ela desarmar sozinha, a fonte está com defeito.
